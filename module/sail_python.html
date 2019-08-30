@@ -90,6 +90,8 @@
 <li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sail_cpp.html">SAIL C++ API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SAIL Python API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-function">Basic function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-type">Data type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-handle">sail.Handle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-iomode">sail.IOMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-tensor">sail.Tensor</a></li>
@@ -171,7 +173,29 @@
             
   <div class="section" id="sail-python-api">
 <h1>SAIL Python API<a class="headerlink" href="#sail-python-api" title="Permalink to this headline">¶</a></h1>
-<p>SAIL 使用 pybind11 封装了一套 python 接口, 支持python3.5。</p>
+<p>SAIL use “pybind11” to wrap python interfaces, support python3.5.</p>
+<div class="section" id="basic-function">
+<h2>Basic function<a class="headerlink" href="#basic-function" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_available_tpu_num</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the number of available TPUs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tpu_num : int</span>
+<span class="sd">        Number of available TPUs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-type">
+<h2>Data type<a class="headerlink" href="#data-type" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data type for float32</span>
+<span class="n">sail</span><span class="o">.</span><span class="n">Dtype</span><span class="o">.</span><span class="n">BM_FLOAT32</span>
+<span class="c1"># Data type for int8</span>
+<span class="n">sail</span><span class="o">.</span><span class="n">Dtype</span><span class="o">.</span><span class="n">BM_INT8</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="sail-handle">
 <h2>sail.Handle<a class="headerlink" href="#sail-handle" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">tpu_id</span><span class="p">):</span>
@@ -183,7 +207,7 @@
 <span class="sd">        create handle with tpu Id</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="k">def</span> <span class="nf">free_ptr</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">free</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; free handle</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
@@ -206,7 +230,7 @@
 <h2>sail.Tensor<a class="headerlink" href="#sail-tensor" title="Permalink to this headline">¶</a></h2>
 <p><strong>1). Tensor</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">array_data</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Constructor allocates device memory of the tensor.</span>
 
 <span class="sd">    Parameters</span>
@@ -217,15 +241,21 @@
 <span class="sd">        Tensor ndarray data</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">array_shape</span><span class="p">):</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">own_sys_data</span><span class="p">,</span> <span class="n">own_dev_data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Constructor allocates system memory and device memory of the tensor.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    handle : sail.Handle</span>
 <span class="sd">        Handle instance</span>
-<span class="sd">    array_shape : tuple</span>
-<span class="sd">        Tensor init shape</span>
+<span class="sd">    shape : tuple</span>
+<span class="sd">        Tensor shape</span>
+<span class="sd">    dytpe : sail.Dtype</span>
+<span class="sd">        Data type</span>
+<span class="sd">    own_sys_data : bool</span>
+<span class="sd">        Indicator of whether own system memory</span>
+<span class="sd">    own_dev_data : bool</span>
+<span class="sd">        Indicator of whether own device memory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -243,7 +273,86 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>3). sync_s2d</strong></p>
+<p><strong>3). data</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">data</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get system data of the tensor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : numpy.array</span>
+<span class="sd">        System data of the tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>4). update_data</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Update system data of the tensor. The data size should not exceed</span>
+<span class="sd">        the tensor size, and the tensor shape will not be changed.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : numpy.array</span>
+<span class="sd">        Data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>5). dtype</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dtype</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get data type of the tensor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dtype : sail.Dtype</span>
+<span class="sd">        Data type of the tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>6). reshape</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Reset shape of the tensor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -------</span>
+<span class="sd">    shape : list</span>
+<span class="sd">        New shape of the tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>7). own_sys_data</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">own_sys_data</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Judge if the tensor owns data pointer in system memory.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    judge_ret : bool</span>
+<span class="sd">        True for owns data pointer in system memory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>8). own_dev_data</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">own_dev_data</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Judge if the tensor owns data in device memory.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    judge_ret : bool</span>
+<span class="sd">        True for owns data in device memory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>9). sync_s2d</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sync_s2d</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Copy data from system memory to device memory.</span>
@@ -260,7 +369,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>4). sync_d2s</strong></p>
+<p><strong>10). sync_d2s</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sync_d2s</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Copy data from device memory to system memory.</span>
@@ -282,34 +391,41 @@
 <h2>sail.Engine<a class="headerlink" href="#sail-engine" title="Permalink to this headline">¶</a></h2>
 <p><strong>1). Engine</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_dir</span><span class="p">,</span> <span class="n">tpus</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Constructor using default input shapes.</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">tpu_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Constructor does not load bmodel.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    context_dir : str</span>
-<span class="sd">        The path of algorithm bmodel</span>
-<span class="sd">    tpus : str</span>
-<span class="sd">        Ids of TPUS to be used, split by comma. Eg.: &quot;0,1&quot; for</span>
-<span class="sd">        TPU 0 and TPU 1, &quot;all&quot; for all available TPUs</span>
+<span class="sd">    tpu_id : int</span>
+<span class="sd">        TPU ID. You can use bm-smi to see available IDs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">,</span> <span class="n">tpu_id</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Constructor loads bmodel from file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bmodel_path : str</span>
+<span class="sd">        Path to bmodel</span>
+<span class="sd">    tpu_id : int</span>
+<span class="sd">        TPU ID. You can use bm-smi to see available IDs</span>
 <span class="sd">    mode : sail.IOMode</span>
 <span class="sd">        Specify the input/output tensors are in system memory</span>
 <span class="sd">        or device memory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_file</span><span class="p">,</span> <span class="n">bmodel_byte_size</span><span class="p">,</span> <span class="n">tpus</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_bytes</span><span class="p">,</span> <span class="n">bmodel_size</span><span class="p">,</span> <span class="n">tpu_id</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Constructor using default input shapes with bmodel which</span>
 <span class="sd">    loaded in memory</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    bmodel_file : file</span>
-<span class="sd">        The file stream of bmodel</span>
-<span class="sd">    bmodel_byte_size : int</span>
+<span class="sd">    bmodel_bytes : bytes</span>
+<span class="sd">        Bytes of  bmodel in system memory</span>
+<span class="sd">    bmodel_size : int</span>
 <span class="sd">        Bmodel byte size</span>
-<span class="sd">    tpus : str</span>
-<span class="sd">        Ids of TPUS to be used, split by comma. Eg.: &quot;0,1&quot; for</span>
-<span class="sd">        TPU 0 and TPU 1, &quot;all&quot; for all available TPUs</span>
+<span class="sd">    tpu_id : int</span>
+<span class="sd">        TPU ID. You can use bm-smi to see available IDs</span>
 <span class="sd">    mode : sail.IOMode</span>
 <span class="sd">        Specify the input/output tensors are in system memory</span>
 <span class="sd">        or device memory</span>
@@ -317,10 +433,47 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>2). get_graph_names</strong></p>
+<p><strong>2). get_handle</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_handle</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Load bmodel from file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    handle: sail.Handle</span>
+<span class="sd">       Handle instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>3). load</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Load bmodel from file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bmodel_path : str</span>
+<span class="sd">        Path to bmodel</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">bmodel_bytes</span><span class="p">,</span> <span class="n">bmodel_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Load bmodel from file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bmodel_bytes : bytes</span>
+<span class="sd">        Bytes of  bmodel in system memory</span>
+<span class="sd">    bmodel_size : int</span>
+<span class="sd">        Bmodel byte size</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>4). get_graph_names</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_graph_names</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot; Get all graph names in the loaded context.</span>
+    <span class="sd">&quot;&quot;&quot; Get all graph names in the loaded bmodels.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -330,7 +483,20 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>3). get_input_names</strong></p>
+<p><strong>5). graph_is_dynamic</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">graph_is_dynamic</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Jugde if the graph is dynamic.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    judge_ret : int</span>
+<span class="sd">        0 for dynamic and 1 for static</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>6). get_input_names</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_input_names</span><span class="p">(</span><span class="n">graph_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Get all input tensor names of the specified graph.</span>
@@ -348,7 +514,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>4). get_output_names</strong></p>
+<p><strong>7). get_output_names</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_output_names</span><span class="p">(</span><span class="n">graph_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Get all output tensor names of the specified graph.</span>
@@ -366,48 +532,28 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>5). get_handle</strong></p>
+<p><strong>8). get_max_input_shapes</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_handle</span><span class="p">(</span><span class="n">tpu_id</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Get Handle instance of the specified tpu_id.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    tpu_id : int</span>
-<span class="sd">        Specified tpu Id</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    handle : sail.Handle</span>
-<span class="sd">        Get the bm handle instance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>6). get_max_input_shapes</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_max_input_shapes</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">is_total</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_max_input_shapes</span><span class="p">(</span><span class="n">graph_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Get max shapes of input tensors in a graph.</span>
-<span class="sd">    For static models, the max shape is the static shape and it should not be</span>
-<span class="sd">    changed. While for dynamic models, the tensor shape should be smaller than</span>
-<span class="sd">    or equal to the max shape.</span>
+<span class="sd">        For static models, the max shape is fixed and it should not be changed.</span>
+<span class="sd">        For dynamic models, the tensor shape should be smaller than or equal to</span>
+<span class="sd">        the max shape.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    graph_name : str</span>
 <span class="sd">        The specified graph name</span>
-<span class="sd">    is_total : bool</span>
-<span class="sd">        True for total specified tpus; False for a single one</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    max_shapes : dict {str : list}</span>
-<span class="sd">        The max shape of the input_tensors</span>
+<span class="sd">        Max shape of the input tensors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>7). get_input_shape</strong></p>
+<p><strong>9). get_input_shape</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_input_shape</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Get the shape of an input tensor in a graph.</span>
@@ -427,7 +573,28 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>8). get_output_shape</strong></p>
+<p><strong>10). get_max_output_shapes</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_max_output_shapes</span><span class="p">(</span><span class="n">graph_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get max shapes of input tensors in a graph.</span>
+<span class="sd">        For static models, the max shape is fixed and it should not be changed.</span>
+<span class="sd">        For dynamic models, the tensor shape should be smaller than or equal to</span>
+<span class="sd">        the max shape.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        The specified graph name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    max_shapes : dict {str : list}</span>
+<span class="sd">        Max shape of the output tensors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>11). get_output_shape</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_output_shape</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Get the shape of an output tensor in a graph.</span>
@@ -447,10 +614,50 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>9). process</strong></p>
+<p><strong>12). get_input_scale</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_input_scale</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot; Get scale of an input tensor. Only used for int8 models.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        The specified graph name</span>
+<span class="sd">    tensor_name : str</span>
+<span class="sd">        The specified output tensor name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scale: float32</span>
+<span class="sd">        Scale of the input tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>13). get_output_scale</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_output_scale</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot; Get scale of an output tensor. Only used for int8 models.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        The specified graph name</span>
+<span class="sd">    tensor_name : str</span>
+<span class="sd">        The specified output tensor name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scale: float32</span>
+<span class="sd">        Scale of the output tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>14). process</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_tensors</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Do network inference</span>
+    <span class="sd">&quot;&quot;&quot; Inference with provided system data of input tensors.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -458,6 +665,24 @@
 <span class="sd">        The specified graph name</span>
 <span class="sd">    input_tensors : dict {str : numpy.array}</span>
 <span class="sd">        Data of all input tensors in system memory</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    output_tensors : dict {str : numpy.array}</span>
+<span class="sd">        Data of all output tensors in system memory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_tensors</span><span class="p">,</span> <span class="n">output_tensors</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Inference with provided input and output tensors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        The specified graph name</span>
+<span class="sd">    input_tensors : dict {str : sail.Tensor}</span>
+<span class="sd">        Input tensors managed by user</span>
+<span class="sd">    output_tensors : dict {str : sail.Tensor}</span>
+<span class="sd">        Output tensors managed by user</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>

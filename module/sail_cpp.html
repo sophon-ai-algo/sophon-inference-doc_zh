@@ -89,6 +89,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SAIL C++ API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-function">Basic function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-type">Data type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#handle">Handle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tensor">Tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#iomode">IOMode</a></li>
@@ -171,10 +173,37 @@
             
   <div class="section" id="sail-c-api">
 <h1>SAIL C++ API<a class="headerlink" href="#sail-c-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-function">
+<h2>Basic function<a class="headerlink" href="#basic-function" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). get_available_tpu_num</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the number of available TPUs.
+
+@return Number of available TPUs.
+
+int get_available_tpu_num();
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="data-type">
+<h2>Data type<a class="headerlink" href="#data-type" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). bm_data_type_t</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">bm_data_type_t</span> <span class="p">{</span>
+  <span class="n">BM_FLOAT32</span><span class="p">,</span>    <span class="c1">// float32</span>
+  <span class="n">BM_INT8</span>        <span class="c1">// int8</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
 <div class="section" id="handle">
 <h2>Handle<a class="headerlink" href="#handle" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt><strong>1). Handle 构造函数</strong></dt>
+<dt><strong>1). Handle Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor using existed bm_handle_t.
 
 @param handle A bm_handle_t
@@ -183,7 +212,7 @@ Handle(bm_handle_t handle);
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). Handle 构造函数</strong></dt>
+<dt><strong>2). Handle Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor with device id.
 
 @param dev_id Device id
@@ -192,19 +221,19 @@ Handle(int dev_id);
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). get_ptr</strong></dt>
+<dt><strong>3). data</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get inner bm_handle_t.
 
 @return Inner bm_handle_t
 
-bm_handle_t get_ptr();
+bm_handle_t data();
 </pre></div>
 </div>
 </dd>
-<dt><strong>4). get_ptr</strong></dt>
+<dt><strong>4). free</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Free inner bm_handle_t.
 
-void free_ptr();
+void free();
 </pre></div>
 </div>
 </dd>
@@ -213,91 +242,31 @@ void free_ptr();
 <div class="section" id="tensor">
 <h2>Tensor<a class="headerlink" href="#tensor" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt><strong>1). Tensor 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor only allocates system memory of the tensor.
-
-@param shape Shape of the tensor
-
-Tensor(const std::vector&lt;int&gt;&amp; shape);
-</pre></div>
-</div>
-</dd>
-<dt><strong>2). Tensor 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor allocates system memory and device memory of the tensor.
-
-@param handle   Handle instance
-@param shape    Shape of the tensor
-
-Tensor(
-    Handle                  handle,
-    const std::vector&lt;int&gt;&amp; shape);
-</pre></div>
-</div>
-</dd>
-<dt><strong>3). Tensor 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor only allocates device memory of the tensor.
-
-@param handle   Handle instance
-@param shape    Shape of the tensor
-@param bytes    Bytes of data
-
-Tensor(
-  Handle                  handle,
-  const std::vector&lt;int&gt;&amp; shape,
-  int                     bytes);
-</pre></div>
-</div>
-</dd>
-<dt><strong>4). Tensor 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor wrapper existied device memory.
-
-@param handle   Handle instance
-@param shape    Shape of the tensor
-@param data     Pointer of device memory.
-
-Tensor(
-    Handle                  handle,
-    const std::vector&lt;int&gt;&amp; shape,
-    bm_device_mem_t*        data);
-</pre></div>
-</div>
-</dd>
-<dt><strong>5). Tensor 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Common constructor.\n
+<dt><strong>1). Tensor Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Common constructor.
 @detail
  case 0: only allocate system memory
-         (NULL, shape, true, false, NULL, NULL) \n
+         (handle, shape, dtype, true, false)
  case 1: only allocate device memory
-         (p_handle, shape, false, true, NULL, NULL) \n
+         (handle, shape, dtype, false, true)
  case 2: allocate system memory and device memory
-         (p_handle, shape, true, true, NULL, NULL) \n
- case 3: use outer data and dev_mem
-         (p_handle, shape, false, false, data, dev_mem) \n
+         (handle, shape, dtype, true, true)
 
 @param handle       Handle instance
 @param shape        Shape of the tensor
-@param own_sys_data Indicator of whether own the data pointer in system
-                    memory. Allocate and free the pointer if it is true
-@param own_dev_data Indicator of whether own the device memory struct.
-                    Allocate and free the struct if it is true. The data
-                    in device memory will be Allocated and freed if not
-                    only allocate system memory for the tensor
-@param data         Data pointer in system memory of the tensor. Set NULL
-                    if own_sys_data is false
-@param dev_mem_     Pointer of device memory struct. Set NULL if
-                    own_dev_data is false
+@param own_sys_data Indicator of whether own system memory.
+@param own_dev_data Indicator of whether own device memory.
 
-Tensor(
+explicit Tensor(
     Handle                  handle,
     const std::vector&lt;int&gt;&amp; shape,
+    bm_data_type_t          dtype,
     bool                    own_sys_data,
-    bool                    own_dev_data,
-    Dtype*                  data,
-    bm_device_mem_t*        dev_mem_);
+    bool                    own_dev_data);
 </pre></div>
 </div>
 </dd>
-<dt><strong>6). Tensor 复制构造函数</strong></dt>
+<dt><strong>2). Tensor Copy Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy constructor.
 
 @param tensor A Tensor instance
@@ -306,7 +275,7 @@ Tensor(const Tensor&amp; tensor);
 </pre></div>
 </div>
 </dd>
-<dt><strong>7). Tensor 赋值函数</strong></dt>
+<dt><strong>3). Tensor Assign Function</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Assignment function.
 
 @param tensor A Tensor instance
@@ -316,7 +285,7 @@ Tensor&amp; operator=(const Tensor&amp; tensor);
 </pre></div>
 </div>
 </dd>
-<dt><strong>8). shape</strong></dt>
+<dt><strong>4). shape</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get shape of the tensor.
 
 @return Shape of the tensor
@@ -325,7 +294,16 @@ const std::vector&lt;int&gt;&amp; shape() const;
 </pre></div>
 </div>
 </dd>
-<dt><strong>9). reshape</strong></dt>
+<dt><strong>5). dtype</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of the tensor.
+
+@return Data type of the tensor
+
+void reshape(const std::vector&lt;int&gt;&amp; shape);
+</pre></div>
+</div>
+</dd>
+<dt><strong>5). reshape</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset shape of the tensor.
 
 @param shape Shape of the tensor
@@ -334,34 +312,34 @@ void reshape(const std::vector&lt;int&gt;&amp; shape);
 </pre></div>
 </div>
 </dd>
-<dt><strong>10). own_sys_data</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the tensor owns data pointer in system memory.
+<dt><strong>6). own_sys_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the tensor owns data in system memory.
 
-@return True for owns data pointer in system memory.
+@return True for owns data in system memory.
 
 bool own_sys_data();
 </pre></div>
 </div>
 </dd>
-<dt><strong>11). own_dev_data</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the tensor owns data pointer in device memory.
+<dt><strong>7). own_dev_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the tensor owns data in device memory.
 
-@return True for owns data pointer in device memory.
+@return True for owns data in device memory.
 
 bool own_dev_data();
 </pre></div>
 </div>
 </dd>
-<dt><strong>12). sys_data</strong></dt>
+<dt><strong>8). sys_data</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data pointer in system memory of the tensor.
 
 @return Data pointer in system memory of the tensor
 
-Dtype* sys_data();
+void* sys_data();
 </pre></div>
 </div>
 </dd>
-<dt><strong>13). dev_data</strong></dt>
+<dt><strong>9). dev_data</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get pointer to device memory of the tensor.
 
 @return Pointer to device memory of the tensor
@@ -370,16 +348,19 @@ bm_device_mem_t* dev_data();
 </pre></div>
 </div>
 </dd>
-<dt><strong>14). reset_sys_data</strong></dt>
+<dt><strong>10). reset_sys_data</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset data pointer in system memory of the tensor.
 
-@param data Data pointer in system memory of the tensor
+@param data  Data pointer in system memory of the tensor
+@param shape Shape of the data
 
-void reset_sys_data(Dtype* data);
+void reset_sys_data(
+    viod*              data,
+    std::vector&lt;int&gt;&amp; shape);
 </pre></div>
 </div>
 </dd>
-<dt><strong>15). reset_dev_data</strong></dt>
+<dt><strong>11). reset_dev_data</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset pointer to device memory of the tensor.
 
 @param data Pointer to device memory
@@ -388,14 +369,14 @@ void reset_dev_data(bm_device_mem_t* data);
 </pre></div>
 </div>
 </dd>
-<dt><strong>16). sync_s2d</strong></dt>
+<dt><strong>12). sync_s2d</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from system memory to device memory.
 
 void sync_s2d();
 </pre></div>
 </div>
 </dd>
-<dt><strong>17). sync_s2d</strong></dt>
+<dt><strong>13). sync_s2d</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from system memory to device memory with specified size.
 
 @param size Byte size to be copied
@@ -404,14 +385,14 @@ void sync_s2d(int size);
 </pre></div>
 </div>
 </dd>
-<dt><strong>18). sync_d2s</strong></dt>
+<dt><strong>14). sync_d2s</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from device memory to system memory.
 
 void sync_d2s();
 </pre></div>
 </div>
 </dd>
-<dt><strong>19). sync_d2s</strong></dt>
+<dt><strong>15). sync_d2s</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from device memory to system memory with specified size.
 
 @param size Byte size to be copied
@@ -420,21 +401,10 @@ void sync_d2s(int size);
 </pre></div>
 </div>
 </dd>
-<dt><strong>20). copy_to</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from this tensor to another.
+<dt><strong>16). free</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Free system and device memroy of the tensor.
 
-@param dst Destination tensor to copy data to.
-
-bool copy_to(Tensor&amp; dst);
-</pre></div>
-</div>
-</dd>
-<dt><strong>21). copy_from</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from a source tensor to this one.
-
-@param src Source tensor to copy data from.
-
-bool copy_from(Tensor&amp; src);
+void free();
 </pre></div>
 </div>
 </dd>
@@ -464,41 +434,47 @@ bool copy_from(Tensor&amp; src);
 <div class="section" id="engine">
 <h2>Engine<a class="headerlink" href="#engine" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt><strong>1). Engine 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor using default input shapes.
+<dt><strong>1). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor does not load bmodel.
 
-@param context_dir Context directory path generated by BMCompiler
-@param tpus        Ids of TPUS to be used, split by comma. Eg.: &quot;0,1&quot; for
-                   TPU 0 and TPU 1, &quot;all&quot; for all available TPUs
+@param tpu_id TPU ID. You can use bm-smi to see available IDs.
+
+Engine(int tpu_id);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor loads bmodel from file.
+
+@param bmodel_path Path to bmodel
+@param tpu_id      TPU ID. You can use bm-smi to see available IDs.
 @param mode        Specify the input/output tensors are in system memory
                    or device memory
-
 Engine(
-    const std::string&amp; context_dir,
-    const std::string&amp; tpus,
+    const std::string&amp; bmodel_path,
+    int                tpu_id,
     IOMode             mode);
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). Engine 构造函数</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor which loads bmodel from system memory.
+<dt><strong>3). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor loads bmodel from system memory.
 
 @param bmodel_ptr  Pointer to bmodel in system memory
-@param bmodel_size Size of bmodel in system memory
-@param tpus        Ids of TPUS to be used, split by comma. Eg.: &quot;0,1&quot; for
-                   TPU 0 and TPU 1, &quot;all&quot; for all available TPUs
+@param bmodel_size Byte size of bmodel in system memory
+@param tpu_id      TPU ID. You can use bm-smi to see available IDs.
 @param mode        Specify the input/output tensors are in system memory
                    or device memory
 
 Engine(
-    const void*        bmodel_ptr,
-    size_t             bmodel_size,
-    const std::string&amp; tpus,
-    IOMode             mode);
+    const void* bmodel_ptr,
+    size_t      bmodel_size,
+    int         tpu_id,
+    IOMode      mode);
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). Engine 复制构造函数</strong></dt>
+<dt><strong>4). Engine Copy Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy constructor.
 
 @param other An other Engine instance.
@@ -507,7 +483,7 @@ Engine(const Engine&amp; other);
 </pre></div>
 </div>
 </dd>
-<dt><strong>4). Engine 复制构造函数</strong></dt>
+<dt><strong>5). Engine Assign Function</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Assignment function.
 
 @param other An other Engine instance.
@@ -517,8 +493,42 @@ Engine&lt;Dtype&gt;&amp; operator=(const Engine&amp; other);
 </pre></div>
 </div>
 </dd>
-<dt><strong>5). get_graph_names</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all graph names in the loaded context.
+<dt><strong>6). get_handle</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get Handle instance.
+
+@return Handle instance
+
+Handle get_handle();
+</pre></div>
+</div>
+</dd>
+<dt><strong>7). load</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Load bmodel from file.
+
+@param bmodel_path Path to bmodel
+@return Program state
+    @retval true  Success
+    @retval false Failure
+
+bool load(const std::string&amp; bmodel_path);
+</pre></div>
+</div>
+</dd>
+<dt><strong>8). load</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Load bmodel from system memory.
+
+@param bmodel_ptr  Pointer to bmodel in system memory
+@param bmodel_size Byte size of bmodel in system memory
+@return Program state
+    @retval true  Success
+    @retval false Failure
+
+bool load(const void* bmodel_ptr, size_t bmodel_size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>9). get_graph_names</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all graph names in the loaded bomodels.
 
 @return All graph names
 
@@ -526,7 +536,17 @@ std::vector&lt;std::string&gt; get_graph_names();
 </pre></div>
 </div>
 </dd>
-<dt><strong>6). get_input_names</strong></dt>
+<dt><strong>10). graph_is_dynamic</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Jugde if the graph is dynamic.
+
+@param graph_name The specified graph name
+@return 0 for dynamic and 1 for static
+
+bool graph_is_dynamic(const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>11). get_input_names</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all input tensor names of the specified graph.
 
 @param graph_name The specified graph name
@@ -536,7 +556,7 @@ std::vector&lt;std::string&gt; get_input_names(const std::string&amp; graph_name
 </pre></div>
 </div>
 </dd>
-<dt><strong>7). get_output_names</strong></dt>
+<dt><strong>12). get_output_names</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all output tensor names of the specified graph.
 
 @param graph_name The specified graph name
@@ -546,64 +566,22 @@ std::vector&lt;std::string&gt; get_output_names(const std::string&amp; graph_nam
 </pre></div>
 </div>
 </dd>
-<dt><strong>8). is_input_batch_size_equal</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if batch size of all input tensors are equal.
-
-@param input_shapes All input tensor shapes
-@batch_size         Batch size to return
-
-@return True if batch size of all input tensors are equal
-
-bool is_input_batch_size_equal(
-    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes,
-    int&amp;                                     batch_size);
-</pre></div>
-</div>
-</dd>
-<dt><strong>9). set_input_shape</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Set input tensor shapes when running dynamic models with
-       synchronous mode.
-
-The input tensor shapes may change between batches when running dynamic
-models. New input shapes should be set before inference. Note that this
-function is for synchronous mode.
-
-@param graph_name   The specified graph name
-@param input_shapes Specified shapes of all input tensors of the graph
-
-void set_input_shape(
-    const std::string&amp;                       graph_name,
-    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes);
-</pre></div>
-</div>
-</dd>
-<dt><strong>10). get_handle</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get Handle instance.
-
-@return Handle instance
-
-Handle get_handle(int tpu_id);
-</pre></div>
-</div>
-</dd>
-<dt><strong>11). get_max_input_shapes</strong></dt>
+<dt><strong>13). get_max_input_shapes</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of input tensors in a graph.
 
-For static models, the max shape is the static shape and it should not be
-changed. While for dynamic models, the tensor shape should be smaller than
-or equal to the max shape.
+For static models, the max shape is fixed and it should not be changed.
+For dynamic models, the tensor shape should be smaller than or equal to
+the max shape.
 
 @param graph_name The specified graph name
-@param is_total   True for total specified tpus; False for a single one
-@return The max shape of the tensor
+@return Max shape of input tensors
 
 std::map&lt;std::string, std::vector&lt;int&gt;&gt; get_max_input_shapes(
-    const std::string&amp; graph_name,
-    bool               is_total);
+    const std::string&amp; graph_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>12). get_input_shape</strong></dt>
+<dt><strong>14). get_input_shape</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an input tensor in a graph.
 
 @param graph_name  The specified graph name
@@ -616,7 +594,22 @@ std::vector&lt;int&gt; get_input_shape(
 </pre></div>
 </div>
 </dd>
-<dt><strong>13). get_output_shape</strong></dt>
+<dt><strong>15). get_max_output_shapes</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of output tensors in a graph.
+
+For static models, the max shape is fixed and it should not be changed.
+For dynamic models, the tensor shape should be smaller than or equal to
+the max shape.
+
+@param graph_name The specified graph name
+@return Max shape of output tensors
+
+std::map&lt;std::string, std::vector&lt;int&gt;&gt; get_max_output_shapes(
+    const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>16). get_output_shape</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an output tensor in a graph.
 
 @param graph_name  The specified graph name
@@ -629,89 +622,128 @@ std::vector&lt;int&gt; get_output_shape(
 </pre></div>
 </div>
 </dd>
-<dt><strong>14). get_input_tensor_sys</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the data pointer in the system memory of the input tensor.
+<dt><strong>17). get_input_scale</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an input tensor. Only used for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
-@return The data pointer in the system memory of the input tensor
+@return Scale of the input tensor
 
-Dtype* get_input_tensor_sys(
+float get_input_scale(
     const std::string&amp; graph_name,
     const std::string&amp; tensor_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>15). get_output_tensor_sys</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the data pointer in the system memory of the output tensor.
+<dt><strong>18). get_output_scale</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an output tensor. Only used for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
-@return The data pointer in the system memory of the output tensor
-@note It&#39;s static models or synchronous mode
+@return Scale of the output tensor
 
-Dtype* get_output_tensor_sys(
+float get_output_scale(
     const std::string&amp; graph_name,
     const std::string&amp; tensor_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>16). get_input_tensor_dev_mem</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the device memory of the input tensor with synchronous mode.
+<dt><strong>19). reshape</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reshape input tensor for dynamic models.
+
+The input tensor shapes may change when running dynamic models.
+New input shapes should be set before inference.
+
+@param graph_name   The specified graph name
+@param input_shapes Specified shapes of all input tensors of the graph
+@return 0 for success and 1 for failure
+
+int reshape(
+    const std::string&amp;                       graph_name,
+    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes);
+</pre></div>
+</div>
+</dd>
+<dt><strong>20). get_input_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified input tensor.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
-@return The device memory of the input tensor
+@return The specified input tensor
 
-bm_device_mem_t* get_input_tensor_dev_mem(
+Tensor* get_input_tensor(
     const std::string&amp; graph_name,
     const std::string&amp; tensor_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>17). get_input_tensor_dev</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the input tensor which only owns the device memory with
-       synchronous mode.
+<dt><strong>21). get_output_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified output tensor.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
-@return A Tensor instance which only owns the device memory of the tensor.
+@return The specified output tensor
 
-Tensor&lt;Dtype&gt; get_input_tensor_dev(
+Tensor* get_output_tensor(
     const std::string&amp; graph_name,
     const std::string&amp; tensor_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>18). get_output_tensor_dev_mem</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the device memory of the output tensor with synchronous mode.
+<dt><strong>22). scale_input_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale input tensor for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
-@return The device memory of the output tensor
+@param data        Pointer to float data to be scaled
 
-bm_device_mem_t* get_output_tensor_dev_mem(
+void scale_input_tensor(
     const std::string&amp; graph_name,
-    const std::string&amp; tensor_name);
+    const std::string&amp; tensor_name,
+    float*             data);
 </pre></div>
 </div>
 </dd>
-<dt><strong>19). get_output_tensor_dev</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the output tensor which only owns the device memory with
-       synchronous mode.
+<dt><strong>23). scale_output_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale output tensor for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
-@return A Tensor instance which only owns the device memory of the tensor.
+@param data        Pointer to float data to be scaled
 
-Tensor&lt;Dtype&gt; get_output_tensor_dev(
+void scale_output_tensor(
     const std::string&amp; graph_name,
-    const std::string&amp; tensor_name);
+    const std::string&amp; tensor_name,
+    float*             data);
 </pre></div>
 </div>
 </dd>
-<dt><strong>20). process</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Do inference with synchronous mode.
+<dt><strong>24). scale_fp32_to_int8</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from float32 to int8. Only used for int8 models.
+
+@param src   Poniter to float32 data
+@param dst   Poniter to int8 data
+@param scale Value of scale
+@param size  Size of data
+
+void scale_fp32_to_int8(float* src, int8_t* dst, float scale, int size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>25). scale_fp32_to_int8</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from int8 to float32. Only used for int8 models.
+
+@param src   Poniter to int8 data
+@param dst   Poniter to float32 data
+@param scale Value of scale
+@param size  Size of data
+
+void scale_int8_to_fp32(int8_t* src, float* dst, float scale, int size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>26). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with builtin input and output tensors.
 
 @param graph_name The specified graph name
 
@@ -719,31 +751,31 @@ void process(const std::string&amp; graph_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>21). process</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Do inference with synchronous mode with provided input tensors
+<dt><strong>27). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input tensors.
 
-@param graph_name The specified graph name
-@input_shapes     Shapes of all input tensors
-@input_tensors    Data pointers of all input tensors in system meory
+@param graph_name    The specified graph name
+@param input_shapes  Shapes of all input tensors
+@param input_tensors Data pointers of all input tensors in system meory
+@param scale         Indicator of multiply scale for input tensors or not
 
 void process(
     const std::string&amp;                       graph_name,
     std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes,
-    std::map&lt;std::string, Dtype*&gt;&amp;           input_tensors);
+    std::map&lt;std::string, void*&gt;&amp;            input_tensors);
 </pre></div>
 </div>
 </dd>
-<dt><strong>22). reset_input_tensors</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset data pointers of input tensors in system memory.
+<dt><strong>28). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors.
 
-@param graph_name    The specified graph name
-@param input_shapes  Shapes of all input tensors
-@param input_tensors Data pointers in system meory for all input tensors
+@input Input tensors
+@output Output tensors
 
-void reset_input_tensors(
-    const std::string&amp;                       graph_name,
-    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes,
-    std::map&lt;std::string, Dtype*&gt;&amp;           input_tensors);
+void process(
+    const std::string&amp;              graph_name,
+    std::map&lt;std::string, Tensor*&gt;&amp; input,
+    std::map&lt;std::string, Tensor*&gt;&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -752,7 +784,7 @@ void reset_input_tensors(
 <div class="section" id="bmdnn">
 <h2>Bmdnn<a class="headerlink" href="#bmdnn" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt><strong>1). Bmdnn 构造函数</strong></dt>
+<dt><strong>1). Bmdnn Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
 
 explicit Bmdnn(Handle handle);
@@ -766,7 +798,7 @@ explicit Bmdnn(Handle handle);
 @param output Output tensor
 @return 0 for success and other for failure
 
-int sigmoid(Tensor&lt;float&gt;&amp; input, Tensor&lt;float&gt;&amp; output);
+int sigmoid(Tensor&amp; input, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -777,7 +809,7 @@ int sigmoid(Tensor&lt;float&gt;&amp; input, Tensor&lt;float&gt;&amp; output);
 @param output Output tensor
 @return 0 for success and other for failure
 
-int tanh(Tensor&lt;float&gt;&amp; input, Tensor&lt;float&gt;&amp; output);
+int tanh(Tensor&amp; input, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -788,7 +820,7 @@ int tanh(Tensor&lt;float&gt;&amp; input, Tensor&lt;float&gt;&amp; output);
 @param output Output tensor
 @return 0 for success and other for failure
 
-int softmax(Tensor&lt;float&gt;&amp; input, Tensor&lt;float&gt;&amp; output);
+int softmax(Tensor&amp; input, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -801,7 +833,7 @@ int softmax(Tensor&lt;float&gt;&amp; input, Tensor&lt;float&gt;&amp; output);
 @param output         Output tensor
 @return 0 for success and other for failure
 
-int relu(Tensor&lt;float&gt;&amp; input, float negative_slope, Tensor&lt;float&gt;&amp; output);
+int relu(Tensor&amp; input, float negative_slope, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -815,10 +847,10 @@ int relu(Tensor&lt;float&gt;&amp; input, float negative_slope, Tensor&lt;float&g
 @return 0 for success and other for failure
 
 int matmul(
-    Tensor&lt;float&gt;&amp; input,
-    Tensor&lt;float&gt;&amp; weight,
-    Tensor&lt;float&gt;&amp; bias,
-    Tensor&lt;float&gt;&amp; output);
+    Tensor&amp; input,
+    Tensor&amp; weight,
+    Tensor&amp; bias,
+    Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -831,9 +863,9 @@ int matmul(
 @return 0 for success and other for failure
 
 int add(
-    Tensor&lt;float&gt;&amp; input_a,
-    Tensor&lt;float&gt;&amp; input_b,
-    Tensor&lt;float&gt;&amp; output);
+    Tensor&amp; input_a,
+    Tensor&amp; input_b,
+    Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -846,9 +878,9 @@ int add(
 @return 0 for success and other for failure
 
 int sub(
-    Tensor&lt;float&gt;&amp; input_a,
-    Tensor&lt;float&gt;&amp; input_b,
-    Tensor&lt;float&gt;&amp; output);
+    Tensor&amp; input_a,
+    Tensor&amp; input_b,
+    Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -861,9 +893,9 @@ int sub(
 @return 0 for success and other for failure
 
 int mul(
-    Tensor&lt;float&gt;&amp; input_a,
-    Tensor&lt;float&gt;&amp; input_b,
-    Tensor&lt;float&gt;&amp; output);
+    Tensor&amp; input_a,
+    Tensor&amp; input_b,
+    Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -876,9 +908,9 @@ int mul(
 @return 0 for success and other for failure
 
 int div(
-    Tensor&lt;float&gt;&amp; input_a,
-    Tensor&lt;float&gt;&amp; input_b,
-    Tensor&lt;float&gt;&amp; output);
+    Tensor&amp; input_a,
+    Tensor&amp; input_b,
+    Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -887,7 +919,7 @@ int div(
 <div class="section" id="bmcv">
 <h2>Bmcv<a class="headerlink" href="#bmcv" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt><strong>1). Bmcv 构造函数</strong></dt>
+<dt><strong>1). Bmcv Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
 
 @param handle A Handle instance
@@ -903,9 +935,7 @@ Bmcv(Handle handle);
 @param output Output image
 @return 0 for success and other for failure
 
-int resize(
-    Tensor&lt;float&gt;&amp;             input,
-    Tensor&lt;float&gt;&amp;             output);
+int resize(Tensor&amp; input, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -918,11 +948,7 @@ int resize(
 @param left   Start point most left from original image
 @return 0 for success and other for failure
 
-int crop(
-    Tensor&lt;float&gt;&amp;             input,
-    Tensor&lt;float&gt;&amp;             output,
-    int                        top,
-    int                        left);
+int crop(Tensor&amp; input, Tensor&amp; output, int top, int left);
 </pre></div>
 </div>
 </dd>
@@ -934,10 +960,7 @@ int crop(
 @param ouput    Data of BGR
 @return 0 for success and other for failure
 
-int yuv2bgr(
-    Tensor&lt;float&gt;&amp;             input_y,
-    Tensor&lt;float&gt;&amp;             input_uv,
-    Tensor&lt;float&gt;&amp;             output);
+int yuv2bgr(Tensor&amp; input_y, Tensor&amp; input_uv, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -959,18 +982,18 @@ int yuv2bgr(
 @return 0 for success and other for failure
 
 int crop_resize_norm(
-    Tensor&lt;float&gt;&amp;             input,
-    Tensor&lt;float&gt;&amp;             output,
-    int                        top,
-    int                        left,
-    int                        crop_height,
-    int                        crop_width,
-    float                      scale_b,
-    float                      bias_b,
-    float                      scale_g,
-    float                      bias_g,
-    float                      scale_r,
-    float                      bias_r);
+    Tensor&amp; input,
+    Tensor&amp; output,
+    int     top,
+    int     left,
+    int     crop_height,
+    int     crop_width,
+    float   scale_b,
+    float   bias_b,
+    float   scale_g,
+    float   bias_g,
+    float   scale_r,
+    float   bias_r);
 </pre></div>
 </div>
 </dd>
@@ -988,14 +1011,14 @@ int crop_resize_norm(
 @return 0 for success and other for failure
 
 int resize_norm(
-    Tensor&lt;float&gt;&amp;             input,
-    Tensor&lt;float&gt;&amp;             output,
-    float                      scale_b,
-    float                      bias_b,
-    float                      scale_g,
-    float                      bias_g,
-    float                      scale_r,
-    float                      bias_r);
+    Tensor&amp; input,
+    Tensor&amp; output,
+    float   scale_b,
+    float   bias_b,
+    float   scale_g,
+    float   bias_g,
+    float   scale_r,
+    float   bias_r);
 </pre></div>
 </div>
 </dd>
@@ -1006,9 +1029,7 @@ int resize_norm(
 @param output Output image
 @return 0 for success and other for failure
 
-int transpose(
-    Tensor&lt;float&gt;&amp;             input,
-    Tensor&lt;float&gt;&amp;             output);
+int transpose(Tensor&amp; input, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>
@@ -1019,9 +1040,7 @@ int transpose(
 @param output Output image
 @return 0 for success and other for failure
 
-int bgrsplit(
-    Tensor&lt;float&gt;&amp;             input,
-    Tensor&lt;float&gt;&amp;             output);
+int bgrsplit(Tensor&amp; input, Tensor&amp; output);
 </pre></div>
 </div>
 </dd>

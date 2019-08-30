@@ -1,7 +1,31 @@
 SAIL Python API
 ===============
 
-SAIL 使用 pybind11 封装了一套 python 接口, 支持python3.5。
+SAIL use "pybind11" to wrap python interfaces, support python3.5.
+
+Basic function
+_____
+
+.. code-block:: python
+
+        def get_available_tpu_num():
+            """ Get the number of available TPUs.
+
+            Returns
+            -------
+            tpu_num : int
+                Number of available TPUs
+            """
+
+Data type
+_____
+
+.. code-block:: python
+        
+        # Data type for float32
+        sail.Dtype.BM_FLOAT32
+        # Data type for int8
+        sail.Dtype.BM_INT8
 
 sail.Handle
 ___________
@@ -17,7 +41,7 @@ ___________
             create handle with tpu Id
         """
 
-    def free_ptr():
+    def free():
         """ free handle
         """
 
@@ -42,7 +66,7 @@ ___________
 
     .. code-block:: python
 
-        def __init__(handle, array_data):
+        def __init__(handle, data):
             """ Constructor allocates device memory of the tensor.
 
             Parameters
@@ -53,15 +77,21 @@ ___________
                 Tensor ndarray data
             """
 
-        def __init__(handle, array_shape):
+        def __init__(handle, shape, dtype, own_sys_data, own_dev_data):
             """ Constructor allocates system memory and device memory of the tensor.
 
             Parameters
             ----------
             handle : sail.Handle
                 Handle instance
-            array_shape : tuple
-                Tensor init shape
+            shape : tuple
+                Tensor shape
+            dytpe : sail.Dtype
+                Data type
+            own_sys_data : bool
+                Indicator of whether own system memory 
+            own_dev_data : bool
+                Indicator of whether own device memory 
             """
 
 **2). shape**
@@ -77,7 +107,86 @@ ___________
                 Shape of the tensor
             """
 
-**3). sync_s2d**
+**3). data**
+
+    .. code-block:: python
+
+        def data():
+            """ Get system data of the tensor.
+
+            Returns
+            -------
+            data : numpy.array
+                System data of the tensor
+            """
+
+**4). update_data**            
+
+    .. code-block:: python
+
+        def update_data(data):
+            """ Update system data of the tensor. The data size should not exceed
+                the tensor size, and the tensor shape will not be changed. 
+
+            Parameters
+            -------
+            data : numpy.array
+                Data.
+            """
+
+**5). dtype**
+
+    .. code-block:: python
+
+        def dtype():
+            """ Get data type of the tensor.
+
+            Returns
+            -------
+            dtype : sail.Dtype
+                Data type of the tensor
+            """
+
+**6). reshape**            
+
+    .. code-block:: python
+
+        def reshape(shape):
+            """ Reset shape of the tensor. 
+
+            Parameters
+            -------
+            shape : list
+                New shape of the tensor
+            """
+
+**7). own_sys_data**
+
+    .. code-block:: python
+
+        def own_sys_data():
+            """ Judge if the tensor owns data pointer in system memory.
+
+            Returns
+            -------
+            judge_ret : bool
+                True for owns data pointer in system memory.
+            """
+
+**8). own_dev_data**
+
+    .. code-block:: python
+
+        def own_dev_data():
+            """ Judge if the tensor owns data in device memory.
+
+            Returns
+            -------
+            judge_ret : bool
+                True for owns data in device memory.
+            """
+
+**9). sync_s2d**
 
     .. code-block:: python
 
@@ -94,7 +203,7 @@ ___________
                 Byte size to be copied
             """
 
-**4). sync_d2s**
+**10). sync_d2s**
 
     .. code-block:: python
 
@@ -118,45 +227,89 @@ ___________
 
     .. code-block:: python
 
-        def __init__(bmodel_dir, tpus, mode):
-            """ Constructor using default input shapes.
+        def __init__(tpu_id):
+            """ Constructor does not load bmodel.
 
             Parameters
             ----------
-            context_dir : str
-                The path of algorithm bmodel
-            tpus : str
-                Ids of TPUS to be used, split by comma. Eg.: "0,1" for
-                TPU 0 and TPU 1, "all" for all available TPUs
+            tpu_id : int
+                TPU ID. You can use bm-smi to see available IDs
+            """
+
+        def __init__(bmodel_path, tpu_id, mode):
+            """ Constructor loads bmodel from file.
+
+            Parameters
+            ----------
+            bmodel_path : str
+                Path to bmodel
+            tpu_id : int
+                TPU ID. You can use bm-smi to see available IDs
             mode : sail.IOMode
                 Specify the input/output tensors are in system memory
                 or device memory
             """
 
-        def __init__(bmodel_file, bmodel_byte_size, tpus, mode):
+        def __init__(bmodel_bytes, bmodel_size, tpu_id, mode):
             """ Constructor using default input shapes with bmodel which
             loaded in memory
 
             Parameters
             ----------
-            bmodel_file : file
-                The file stream of bmodel
-            bmodel_byte_size : int
+            bmodel_bytes : bytes
+                Bytes of  bmodel in system memory
+            bmodel_size : int
                 Bmodel byte size
-            tpus : str
-                Ids of TPUS to be used, split by comma. Eg.: "0,1" for
-                TPU 0 and TPU 1, "all" for all available TPUs
+            tpu_id : int
+                TPU ID. You can use bm-smi to see available IDs
             mode : sail.IOMode
                 Specify the input/output tensors are in system memory
                 or device memory
             """
 
-**2). get_graph_names**
+**2). get_handle**
+
+    .. code-block:: python
+
+        def get_handle():
+            """ Load bmodel from file.
+
+            Returns
+            -------
+            handle: sail.Handle
+               Handle instance
+            """
+
+**3). load**
+
+    .. code-block:: python
+    
+        def load(bmodel_path):
+            """ Load bmodel from file.
+
+            Parameters
+            ----------
+            bmodel_path : str
+                Path to bmodel
+            """
+
+        def load(bmodel_bytes, bmodel_size):
+            """ Load bmodel from file.
+
+            Parameters
+            ----------
+            bmodel_bytes : bytes
+                Bytes of  bmodel in system memory
+            bmodel_size : int
+                Bmodel byte size
+            """
+
+**4). get_graph_names**
 
     .. code-block:: python
 
         def get_graph_names():
-            """ Get all graph names in the loaded context.
+            """ Get all graph names in the loaded bmodels.
 
             Returns
             -------
@@ -164,7 +317,20 @@ ___________
                 Graph names list in loaded context
             """
 
-**3). get_input_names**
+**5). graph_is_dynamic**
+
+    .. code-block:: python
+
+        def graph_is_dynamic():
+            """ Jugde if the graph is dynamic. 
+
+            Returns
+            -------
+            judge_ret : int
+                0 for dynamic and 1 for static 
+            """
+
+**6). get_input_names**
 
     .. code-block:: python
 
@@ -182,7 +348,7 @@ ___________
                 All the input tensor names of the graph
             """
 
-**4). get_output_names**
+**7). get_output_names**
 
     .. code-block:: python
 
@@ -200,48 +366,28 @@ ___________
                 All the output tensor names of the graph
             """
 
-**5). get_handle**
+**8). get_max_input_shapes**
 
     .. code-block:: python
 
-        def get_handle(tpu_id):
-            """ Get Handle instance of the specified tpu_id.
-
-            Parameters
-            ----------
-            tpu_id : int
-                Specified tpu Id
-
-            Returns
-            -------
-            handle : sail.Handle
-                Get the bm handle instance
-            """
-
-**6). get_max_input_shapes**
-
-    .. code-block:: python
-
-        def get_max_input_shapes(graph_name, is_total):
+        def get_max_input_shapes(graph_name):
             """ Get max shapes of input tensors in a graph.
-            For static models, the max shape is the static shape and it should not be
-            changed. While for dynamic models, the tensor shape should be smaller than
-            or equal to the max shape.
+                For static models, the max shape is fixed and it should not be changed.
+                For dynamic models, the tensor shape should be smaller than or equal to
+                the max shape.
 
             Parameters
             ----------
             graph_name : str
                 The specified graph name
-            is_total : bool
-                True for total specified tpus; False for a single one
 
             Returns
             -------
             max_shapes : dict {str : list}
-                The max shape of the input_tensors
+                Max shape of the input tensors
             """
 
-**7). get_input_shape**
+**9). get_input_shape**
 
     .. code-block:: python
 
@@ -261,7 +407,28 @@ ___________
                 The shape of the tensor
             """
 
-**8). get_output_shape**
+**10). get_max_output_shapes**
+
+    .. code-block:: python
+
+        def get_max_output_shapes(graph_name):
+            """ Get max shapes of input tensors in a graph.
+                For static models, the max shape is fixed and it should not be changed.
+                For dynamic models, the tensor shape should be smaller than or equal to
+                the max shape.
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+
+            Returns
+            -------
+            max_shapes : dict {str : list}
+                Max shape of the output tensors
+            """
+
+**11). get_output_shape**
 
     .. code-block:: python
 
@@ -281,12 +448,52 @@ ___________
                 The shape of the tensor
             """
 
-**9). process**
+**12). get_input_scale** 
+
+    .. code-block:: python
+
+        def get_input_scale(graph_name, tensor_name)
+            """ Get scale of an input tensor. Only used for int8 models. 
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+            tensor_name : str
+                The specified output tensor name
+
+            Returns
+            -------
+            scale: float32
+                Scale of the input tensor
+            """
+
+**13). get_output_scale** 
+
+    .. code-block:: python
+
+        def get_output_scale(graph_name, tensor_name)
+            """ Get scale of an output tensor. Only used for int8 models.
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+            tensor_name : str
+                The specified output tensor name
+
+            Returns
+            -------
+            scale: float32
+                Scale of the output tensor
+            """
+
+**14). process**
 
     .. code-block:: python
 
         def process(graph_name, input_tensors):
-            """ Do network inference
+            """ Inference with provided system data of input tensors.
 
             Parameters
             ----------
@@ -294,6 +501,24 @@ ___________
                 The specified graph name
             input_tensors : dict {str : numpy.array}
                 Data of all input tensors in system memory
+
+            Returns
+            -------
+            output_tensors : dict {str : numpy.array}
+                Data of all output tensors in system memory
+            """
+
+        def process(graph_name, input_tensors, output_tensors):
+            """ Inference with provided input and output tensors.
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+            input_tensors : dict {str : sail.Tensor}
+                Input tensors managed by user
+            output_tensors : dict {str : sail.Tensor}
+                Output tensors managed by user
             """
 
 sail.Bmdnn
