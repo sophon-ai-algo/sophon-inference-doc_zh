@@ -1,45 +1,14 @@
 C++ Samples
 ===========
 
-YoloV3
-________
+Run resnet
+__________
 
-**简介**
+该示例程序位于 "${sophon-inference}/samples/cpp/run_resnet" 目录下。
 
-本示例程序将 caffe 版 yolov3 转换成bmodel，并使用 SAIL 的 C++ 接口进行推理。
+该示例程序实现对 “转化为bmodel的resnet模型” 进行推理，
+支持 INT8 与 FP32 精度，可以部署在 PCIE 和 SOC 模式上。
 
-1). 在x86环境下，下载并转换模型。
-    .. code-block:: shell
-
-        # download and convert yolov3 caffe model
-        ./download_convert_model.sh
-
-2). PCIE 模式下进行编译和运行。
-    .. code-block:: shell
-
-        # compile
-        ./BuildPCIE.sh
-
-        # run
-        ./build/bin/run_yolov3_caffe ./tmp/ ./yolov3.ini
+详见目录下的 README.md。
 
 
-3). SOC 模式下, 须在x86进行交叉编译，拷贝到设备上再运行。
-    .. code-block:: shell
-
-        # compile
-        ./BuildCMODEL.sh
-
-        # cp build/bin/run_yolov3_caffe && tmp && yolov3.ini to SA3/SE3
-
-        # run
-        ./run_yolov3_caffe ./tmp/ ./yolov3.ini
-
-4). CMODEL 模式下进行编译和运行。
-    .. code-block:: shell
-
-        # compile
-        ./BuildCMODEL.sh
-
-        # run
-        ./build/bin/run_yolov3_caffe ./tmp/ ./yolov3.ini
