@@ -177,12 +177,12 @@
 AutoSplit 源码位于 “module/auto_split/” 目录下，目前支持 tensorflow/mxnet。
 我们在 “auto_split.api” 中提供了两个函数，它们分别是：</p>
 <ul class="simple">
-<li>split：</li>
+<li><p>split：</p></li>
 </ul>
 <p>将需要部署的模型自动切分成若干子模型，
 把子模型保存至指定目录并将相关参数保存至目录下的 graph_infos.json 文件中。</p>
 <ul class="simple">
-<li>convert：</li>
+<li><p>convert：</p></li>
 </ul>
 <p>解析指定目录下的 graph_infos.json 文件，将目录下所有可在 TPU 上部署的模型编译为 bmodel。</p>
 <div class="section" id="graph-infos-json">
@@ -202,29 +202,29 @@ ssd_mobilenet_v2_coco_2018_03_29
 <p>graph_infos.json 文件中包含了子模型的信息。
 包括：</p>
 <ul class="simple">
-<li>graphs：</li>
+<li><p>graphs：</p></li>
 </ul>
 <p>一个列表，其中每个元素中都包含了一个子模型的 “输入名称(inputs)”、“输出名称(outputs)”、“运行设备(cpu或tpu)”、“模型路径信息(model_info)”，
 如果运行设备为 tpu，那么还会包含 bmodel 所在的路径(context_dir)。</p>
 <ul class="simple">
-<li>tensors：</li>
+<li><p>tensors：</p></li>
 </ul>
 <p>包含了所有子模型的输入和输出张量的信息，这些张量分为三类：“input”、“output”、“intermediate”，
 其中 “input”、“output” 表示该张量是原始模型的输入输出，而 “intermediate” 表示该张量是切分后产生的中间张量。</p>
 <ul class="simple">
-<li>graph_num：</li>
+<li><p>graph_num：</p></li>
 </ul>
 <p>切分后子模型的数量。</p>
 <ul class="simple">
-<li>platform：</li>
+<li><p>platform：</p></li>
 </ul>
 <p>原始模型所基于的深度学习框架，目前支持 tensorflow 和 mxnet。</p>
 <ul class="simple">
-<li>dynamic：</li>
+<li><p>dynamic：</p></li>
 </ul>
 <p>动态代表模型的输入张量是尺寸是可变的，如果是动态的，那么 tensors 中的尺寸信息为最大的尺寸。</p>
 <ul class="simple">
-<li>layout：</li>
+<li><p>layout：</p></li>
 </ul>
 <p>原始模型的 layout，NHWC 或者 NCHW。</p>
 <p>下面展示了上图中的 graph_infos.json 中的内容：</p>

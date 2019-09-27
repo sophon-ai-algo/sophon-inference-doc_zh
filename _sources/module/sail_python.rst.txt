@@ -21,11 +21,13 @@ Data type
 _____
 
 .. code-block:: python
-        
+
         # Data type for float32
         sail.Dtype.BM_FLOAT32
         # Data type for int8
         sail.Dtype.BM_INT8
+        # Data type for uint8
+        sail.Dtype.BM_UINT8
 
 sail.Handle
 ___________
@@ -74,7 +76,7 @@ ___________
             handle : sail.Handle
                 Handle instance
             array_data : numpy.array
-                Tensor ndarray data
+                Tensor ndarray data, dtype can be np.float32, np.int8 or np.uint8
             """
 
         def __init__(handle, shape, dtype, own_sys_data, own_dev_data):
@@ -89,9 +91,9 @@ ___________
             dytpe : sail.Dtype
                 Data type
             own_sys_data : bool
-                Indicator of whether own system memory 
+                Indicator of whether own system memory
             own_dev_data : bool
-                Indicator of whether own device memory 
+                Indicator of whether own device memory
             """
 
 **2). shape**
@@ -107,26 +109,42 @@ ___________
                 Shape of the tensor
             """
 
-**3). data**
+**3). as_numpy**
 
     .. code-block:: python
 
-        def data():
+        def asnumpy():
             """ Get system data of the tensor.
 
             Returns
             -------
             data : numpy.array
-                System data of the tensor
+                System data of the tensor, dtype can be np.float32, np.int8
+            or np.uint8 with respective to the dtype of the tensor.
             """
 
-**4). update_data**            
+        def asnumpy(shape):
+            """ Get system data of the tensor.
+
+            Parameters
+            ----------
+            shape : tuple
+                Tensor shape want to get
+
+            Returns
+            -------
+            data : numpy.array
+                System data of the tensor, dtype can be np.float32, np.int8
+            or np.uint8 with respective to the dtype of the tensor.
+            """
+
+**4). update_data**
 
     .. code-block:: python
 
         def update_data(data):
             """ Update system data of the tensor. The data size should not exceed
-                the tensor size, and the tensor shape will not be changed. 
+                the tensor size, and the tensor shape will not be changed.
 
             Parameters
             -------
@@ -147,12 +165,12 @@ ___________
                 Data type of the tensor
             """
 
-**6). reshape**            
+**6). reshape**
 
     .. code-block:: python
 
         def reshape(shape):
-            """ Reset shape of the tensor. 
+            """ Reset shape of the tensor.
 
             Parameters
             -------
@@ -283,7 +301,7 @@ ___________
 **3). load**
 
     .. code-block:: python
-    
+
         def load(bmodel_path):
             """ Load bmodel from file.
 
@@ -322,12 +340,12 @@ ___________
     .. code-block:: python
 
         def graph_is_dynamic():
-            """ Jugde if the graph is dynamic. 
+            """ Jugde if the graph is dynamic.
 
             Returns
             -------
             judge_ret : int
-                0 for dynamic and 1 for static 
+                0 for dynamic and 1 for static
             """
 
 **6). get_input_names**
@@ -448,12 +466,52 @@ ___________
                 The shape of the tensor
             """
 
-**12). get_input_scale** 
+**12). get_input_dtype**
+
+    .. code-block:: python
+
+        def get_input_dtype(graph_name, tensor_name)
+            """ Get scale of an input tensor. Only used for int8 models.
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+            tensor_name : str
+                The specified output tensor name
+
+            Returns
+            -------
+            scale: sail.Dtype
+                Data type of the input tensor
+            """
+
+**13). get_output_dtype**
+
+    .. code-block:: python
+
+        def get_output_dtype(graph_name, tensor_name)
+            """ Get scale of an output tensor. Only used for int8 models.
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+            tensor_name : str
+                The specified output tensor name
+
+            Returns
+            -------
+            scale: sail.Dtype
+                Data type of the output tensor
+            """
+
+**14). get_input_scale**
 
     .. code-block:: python
 
         def get_input_scale(graph_name, tensor_name)
-            """ Get scale of an input tensor. Only used for int8 models. 
+            """ Get scale of an input tensor. Only used for int8 models.
 
             Parameters
             ----------
@@ -468,7 +526,7 @@ ___________
                 Scale of the input tensor
             """
 
-**13). get_output_scale** 
+**15). get_output_scale**
 
     .. code-block:: python
 
@@ -488,7 +546,7 @@ ___________
                 Scale of the output tensor
             """
 
-**14). process**
+**16). process**
 
     .. code-block:: python
 
@@ -519,345 +577,5 @@ ___________
                 Input tensors managed by user
             output_tensors : dict {str : sail.Tensor}
                 Output tensors managed by user
-            """
-
-sail.Bmdnn
-__________
-
-**1). Bmdnn**
-
-    .. code-block:: python
-
-        def __init__(handle):
-            """ Bmdnn constructor
-
-            Parameters
-            ----------
-            handle : sail.Handle
-                handle instance
-            """
-
-**2). sigmoid**
-
-    .. code-block:: python
-
-        def sigmoid(input, output):
-            """ Sigmoid operation.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input tensor
-            output : sail.Tensor
-                Output tensor
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**3). tanh**
-
-    .. code-block:: python
-
-        def tanh(input, output):
-            """ Tanh operation.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input tensor
-            output : sail.Tensor
-                Output tensor
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**4). softmax**
-
-    .. code-block:: python
-
-        def softmax(input, output):
-            """ Softmax operation.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input tensor
-            output : sail.Tensor
-                Output output
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**5). relu**
-
-    .. code-block:: python
-
-        def relu(input, output):
-            """ Relu operation.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input tensor
-            output : sail.Tensor
-                Output tensor
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**6). matmul**
-
-    .. code-block:: python
-
-        def matmul(input, weight, bias, output):
-            """ Matrix multiplication plus bias.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input tensor
-            weight : sail.Tensor
-                Weight tensor
-            bias : sail.Tensor
-                Bias tensor
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**7). add**
-
-    .. code-block:: python
-
-        def add(input_a, input_b, output):
-            """ Addition operation, output = input_a + input_b.
-
-            Parameters
-            ----------
-            input_a : sail.Tensor
-                Input tensor A
-            input_b : sail.Tensor
-                Input tensor B
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**8). sub**
-
-    .. code-block:: python
-
-        def sub(input_a, input_b, output):
-            """ Subtraction operation, output = input_a - input_b.
-
-            Parameters
-            ----------
-            input_a : sail.Tensor
-                Input tensor A
-            input_b : sail.Tensor
-                Input tensor B
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**9). mul**
-
-    .. code-block:: python
-
-        def mul(input_a, input_b, output):
-            """ Multiplication operation, output = input_a * input_b.
-
-            Parameters
-            ----------
-            input_a : sail.Tensor
-                Input tensor A
-            input_b : sail.Tensor
-                Input tensor B
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**10). div**
-
-    .. code-block:: python
-
-        def mul(input_a, input_b, output):
-            """ Division operation, output = input_a / input_b.
-
-            Parameters
-            ----------
-            input_a : sail.Tensor
-                Input tensor A
-            input_b : sail.Tensor
-                Input tensor B
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-
-sail.Bmcv
-_________
-
-**1). Bmcv**
-
-    .. code-block:: python
-
-        def __init__(handle):
-            """ Bmcv constructor
-
-            Parameters
-            ----------
-            handle : sail.Handle
-                handle instance
-            """
-
-**2). resize**
-
-    .. code-block:: python
-
-        def resize(input, output):
-            """ Resize an image with interpolation of INTER_NEAREST.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input image data
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**3). crop**
-
-    .. code-block:: python
-
-        def crop(input, output, top, left):
-            """ Crop an image.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input image data
-            output : sail.Tensor
-                Output image data
-            top : int
-                Start point most top from original image
-            left : int
-                Start point most left from original image
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**4). resize_norm**
-
-    .. code-block:: python
-
-        def resize_norm(input, output, scale_b, bias_b,
-                        scale_g, bias_g, scale_r, bias_g):
-            """ Resize an image and do normalizition.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input image data
-            output : sail.Tensor
-                Output image data
-            scale_b : float
-                Scale factor for channel b
-            bias_b : float
-                Bias for channel b
-            scale_g : float
-                Scale factor for channel g
-            bias_g ： float
-                Bias for channel g
-            scale_r : float
-                Scale factor for channel r
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**5). transpose**
-
-    .. code-block:: python
-
-        def transpose(input, output):
-            """ Transpose an image.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input image data
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
-            """
-
-**6). bgrsplit**
-
-    .. code-block:: python
-
-        def bgrsplit(input, output):
-            """Convert packed BGR image data to BGR planar data format.
-
-            Parameters
-            ----------
-            input : sail.Tensor
-                Input image data
-            output : sail.Tensor
-                Output image data
-
-            Returns
-            -------
-            status : int
-                0 for success and other for failure
             """
 

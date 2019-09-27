@@ -96,8 +96,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#sail-iomode">sail.IOMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-tensor">sail.Tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-engine">sail.Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sail-bmdnn">sail.Bmdnn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sail-bmcv">sail.Bmcv</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="autosplit.html">AutoSplit</a></li>
@@ -193,6 +191,8 @@
 <span class="n">sail</span><span class="o">.</span><span class="n">Dtype</span><span class="o">.</span><span class="n">BM_FLOAT32</span>
 <span class="c1"># Data type for int8</span>
 <span class="n">sail</span><span class="o">.</span><span class="n">Dtype</span><span class="o">.</span><span class="n">BM_INT8</span>
+<span class="c1"># Data type for uint8</span>
+<span class="n">sail</span><span class="o">.</span><span class="n">Dtype</span><span class="o">.</span><span class="n">BM_UINT8</span>
 </pre></div>
 </div>
 </div>
@@ -238,7 +238,7 @@
 <span class="sd">    handle : sail.Handle</span>
 <span class="sd">        Handle instance</span>
 <span class="sd">    array_data : numpy.array</span>
-<span class="sd">        Tensor ndarray data</span>
+<span class="sd">        Tensor ndarray data, dtype can be np.float32, np.int8 or np.uint8</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">own_sys_data</span><span class="p">,</span> <span class="n">own_dev_data</span><span class="p">):</span>
@@ -273,15 +273,31 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>3). data</strong></p>
+<p><strong>3). as_numpy</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">data</span><span class="p">():</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">asnumpy</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Get system data of the tensor.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    data : numpy.array</span>
-<span class="sd">        System data of the tensor</span>
+<span class="sd">        System data of the tensor, dtype can be np.float32, np.int8</span>
+<span class="sd">    or np.uint8 with respective to the dtype of the tensor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">asnumpy</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get system data of the tensor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shape : tuple</span>
+<span class="sd">        Tensor shape want to get</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : numpy.array</span>
+<span class="sd">        System data of the tensor, dtype can be np.float32, np.int8</span>
+<span class="sd">    or np.uint8 with respective to the dtype of the tensor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -614,7 +630,47 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>12). get_input_scale</strong></p>
+<p><strong>12). get_input_dtype</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_input_dtype</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot; Get scale of an input tensor. Only used for int8 models.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        The specified graph name</span>
+<span class="sd">    tensor_name : str</span>
+<span class="sd">        The specified output tensor name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scale: sail.Dtype</span>
+<span class="sd">        Data type of the input tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>13). get_output_dtype</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_output_dtype</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot; Get scale of an output tensor. Only used for int8 models.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        The specified graph name</span>
+<span class="sd">    tensor_name : str</span>
+<span class="sd">        The specified output tensor name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scale: sail.Dtype</span>
+<span class="sd">        Data type of the output tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>14). get_input_scale</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_input_scale</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot; Get scale of an input tensor. Only used for int8 models.</span>
@@ -634,7 +690,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>13). get_output_scale</strong></p>
+<p><strong>15). get_output_scale</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_output_scale</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">tensor_name</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot; Get scale of an output tensor. Only used for int8 models.</span>
@@ -654,7 +710,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>14). process</strong></p>
+<p><strong>16). process</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_tensors</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Inference with provided system data of input tensors.</span>
@@ -683,345 +739,6 @@
 <span class="sd">        Input tensors managed by user</span>
 <span class="sd">    output_tensors : dict {str : sail.Tensor}</span>
 <span class="sd">        Output tensors managed by user</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-<div class="section" id="sail-bmdnn">
-<h2>sail.Bmdnn<a class="headerlink" href="#sail-bmdnn" title="Permalink to this headline">¶</a></h2>
-<p><strong>1). Bmdnn</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Bmdnn constructor</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    handle : sail.Handle</span>
-<span class="sd">        handle instance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>2). sigmoid</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Sigmoid operation.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input tensor</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output tensor</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>3). tanh</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Tanh operation.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input tensor</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output tensor</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>4). softmax</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Softmax operation.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input tensor</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output output</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>5). relu</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">relu</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Relu operation.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input tensor</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output tensor</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>6). matmul</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">matmul</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Matrix multiplication plus bias.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input tensor</span>
-<span class="sd">    weight : sail.Tensor</span>
-<span class="sd">        Weight tensor</span>
-<span class="sd">    bias : sail.Tensor</span>
-<span class="sd">        Bias tensor</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>7). add</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Addition operation, output = input_a + input_b.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input_a : sail.Tensor</span>
-<span class="sd">        Input tensor A</span>
-<span class="sd">    input_b : sail.Tensor</span>
-<span class="sd">        Input tensor B</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>8). sub</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Subtraction operation, output = input_a - input_b.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input_a : sail.Tensor</span>
-<span class="sd">        Input tensor A</span>
-<span class="sd">    input_b : sail.Tensor</span>
-<span class="sd">        Input tensor B</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>9). mul</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Multiplication operation, output = input_a * input_b.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input_a : sail.Tensor</span>
-<span class="sd">        Input tensor A</span>
-<span class="sd">    input_b : sail.Tensor</span>
-<span class="sd">        Input tensor B</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>10). div</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Division operation, output = input_a / input_b.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input_a : sail.Tensor</span>
-<span class="sd">        Input tensor A</span>
-<span class="sd">    input_b : sail.Tensor</span>
-<span class="sd">        Input tensor B</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-<div class="section" id="sail-bmcv">
-<h2>sail.Bmcv<a class="headerlink" href="#sail-bmcv" title="Permalink to this headline">¶</a></h2>
-<p><strong>1). Bmcv</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Bmcv constructor</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    handle : sail.Handle</span>
-<span class="sd">        handle instance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>2). resize</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Resize an image with interpolation of INTER_NEAREST.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input image data</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>3). crop</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">left</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Crop an image.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input image data</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-<span class="sd">    top : int</span>
-<span class="sd">        Start point most top from original image</span>
-<span class="sd">    left : int</span>
-<span class="sd">        Start point most left from original image</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>4). resize_norm</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resize_norm</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">scale_b</span><span class="p">,</span> <span class="n">bias_b</span><span class="p">,</span>
-                <span class="n">scale_g</span><span class="p">,</span> <span class="n">bias_g</span><span class="p">,</span> <span class="n">scale_r</span><span class="p">,</span> <span class="n">bias_g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Resize an image and do normalizition.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input image data</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-<span class="sd">    scale_b : float</span>
-<span class="sd">        Scale factor for channel b</span>
-<span class="sd">    bias_b : float</span>
-<span class="sd">        Bias for channel b</span>
-<span class="sd">    scale_g : float</span>
-<span class="sd">        Scale factor for channel g</span>
-<span class="sd">    bias_g ： float</span>
-<span class="sd">        Bias for channel g</span>
-<span class="sd">    scale_r : float</span>
-<span class="sd">        Scale factor for channel r</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>5). transpose</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Transpose an image.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input image data</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>6). bgrsplit</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bgrsplit</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert packed BGR image data to BGR planar data format.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    input : sail.Tensor</span>
-<span class="sd">        Input image data</span>
-<span class="sd">    output : sail.Tensor</span>
-<span class="sd">        Output image data</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    status : int</span>
-<span class="sd">        0 for success and other for failure</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
