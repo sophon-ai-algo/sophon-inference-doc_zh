@@ -356,7 +356,18 @@ ______
 
         std::vector<std::string> get_graph_names();
 
-**10). graph_is_dynamic**
+**10). set_io_mode**
+    .. code-block:: c++
+        @brief Set IOMode for a graph.
+
+        @param graph_name The specified graph name
+        @param mode The specified IOMode
+
+        void set_io_mode(
+          const std::string& graph_name,
+          IOMode             mode);
+
+**11). graph_is_dynamic**
     .. code-block:: c++
 
         @brief Jugde if the graph is dynamic.
@@ -366,7 +377,7 @@ ______
 
         bool graph_is_dynamic(const std::string& graph_name);
 
-**11). get_input_names**
+**12). get_input_names**
     .. code-block:: c++
 
         @brief Get all input tensor names of the specified graph.
@@ -376,7 +387,7 @@ ______
 
         std::vector<std::string> get_input_names(const std::string& graph_name);
 
-**12). get_output_names**
+**13). get_output_names**
     .. code-block:: c++
 
         @brief Get all output tensor names of the specified graph.
@@ -386,7 +397,7 @@ ______
 
         std::vector<std::string> get_output_names(const std::string& graph_name);
 
-**13). get_max_input_shapes**
+**14). get_max_input_shapes**
     .. code-block:: c++
 
         @brief Get max shapes of input tensors in a graph.
@@ -401,7 +412,7 @@ ______
         std::map<std::string, std::vector<int>> get_max_input_shapes(
             const std::string& graph_name);
 
-**14). get_input_shape**
+**15). get_input_shape**
     .. code-block:: c++
 
         @brief Get the shape of an input tensor in a graph.
@@ -414,7 +425,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**15). get_max_output_shapes**
+**16). get_max_output_shapes**
     .. code-block:: c++
 
         @brief Get max shapes of output tensors in a graph.
@@ -429,7 +440,7 @@ ______
         std::map<std::string, std::vector<int>> get_max_output_shapes(
             const std::string& graph_name);
 
-**16). get_output_shape**
+**17). get_output_shape**
     .. code-block:: c++
 
         @brief Get the shape of an output tensor in a graph.
@@ -442,7 +453,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**17). get_input_dtype**
+**18). get_input_dtype**
     .. code-block:: c++
 
         @brief Get data type of an input tensor. Refer to bmdef.h as following.
@@ -465,7 +476,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**18). get_output_dtype**
+**19). get_output_dtype**
     .. code-block:: c++
 
         @brief Get data type of an output tensor. Refer to bmdef.h as following.
@@ -488,7 +499,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**19). get_input_scale**
+**20). get_input_scale**
     .. code-block:: c++
 
         @brief Get scale of an input tensor. Only used for int8 models.
@@ -501,7 +512,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**20). get_output_scale**
+**21). get_output_scale**
     .. code-block:: c++
 
         @brief Get scale of an output tensor. Only used for int8 models.
@@ -514,7 +525,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**21). reshape**
+**22). reshape**
     .. code-block:: c++
 
         @brief Reshape input tensor for dynamic models.
@@ -530,7 +541,7 @@ ______
             const std::string&                       graph_name,
             std::map<std::string, std::vector<int>>& input_shapes);
 
-**22). get_input_tensor**
+**23). get_input_tensor**
     .. code-block:: c++
 
         @brief Get the specified input tensor.
@@ -543,7 +554,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**23). get_output_tensor**
+**24). get_output_tensor**
     .. code-block:: c++
 
         @brief Get the specified output tensor.
@@ -556,7 +567,7 @@ ______
             const std::string& graph_name,
             const std::string& tensor_name);
 
-**24). scale_input_tensor**
+**25). scale_input_tensor**
     .. code-block:: c++
 
         @brief Scale input tensor for int8 models.
@@ -570,7 +581,7 @@ ______
             const std::string& tensor_name,
             float*             data);
 
-**25). scale_output_tensor**
+**26). scale_output_tensor**
     .. code-block:: c++
 
         @brief Scale output tensor for int8 models.
@@ -585,7 +596,7 @@ ______
             float*             data);
 
 
-**26). scale_fp32_to_int8**
+**27). scale_fp32_to_int8**
     .. code-block:: c++
 
         @brief Scale data from float32 to int8. Only used for int8 models.
@@ -597,7 +608,7 @@ ______
 
         void scale_fp32_to_int8(float* src, int8_t* dst, float scale, int size);
 
-**27). scale_fp32_to_int8**
+**28). scale_int8_to_fp32**
     .. code-block:: c++
 
         @brief Scale data from int8 to float32. Only used for int8 models.
@@ -609,7 +620,7 @@ ______
 
         void scale_int8_to_fp32(int8_t* src, float* dst, float scale, int size);
 
-**28). process**
+**29). process**
     .. code-block:: c++
 
         @brief Inference with builtin input and output tensors.
@@ -618,7 +629,7 @@ ______
 
         void process(const std::string& graph_name);
 
-**29). process**
+**30). process**
     .. code-block:: c++
 
         @brief Inference with provided input tensors.
@@ -633,7 +644,7 @@ ______
             std::map<std::string, std::vector<int>>& input_shapes,
             std::map<std::string, void*>&            input_tensors);
 
-**30). process**
+**31). process**
     .. code-block:: c++
 
         @brief Inference with provided input and output tensors.
@@ -645,3 +656,331 @@ ______
             const std::string&              graph_name,
             std::map<std::string, Tensor*>& input,
             std::map<std::string, Tensor*>& output);
+
+**32). process**
+    .. code-block:: c++
+
+        @brief Inference with provided input and output tensors and input shapes.
+
+        @input        Input tensors
+        @input_shapes Real input tensor shapes
+        @output       Output tensors
+
+        void process(
+            const std::string&                       graph_name,
+            std::map<std::string, Tensor*>&          input,
+            std::map<std::string, std::vector<int>>& input_shapes,
+            std::map<std::string, Tensor*>&          output);
+
+Decoder
+_____
+
+**1). Decoder Constructor**
+    .. code-block:: c++
+
+        @brief Constructor.
+
+        @param file_path Path or rtsp url to the video/image file.
+
+        Decoder(const std::string& file_path);
+
+**2). is_opened**
+    .. code-block:: c++
+
+        @brief Judge if the source is opened successfully.
+
+        @return True if the source is opened successfully
+
+        bool is_opened();
+
+**3). read**
+    .. code-block:: c++
+
+        @brief Read a bm_image from the Decoder.
+
+        @param handle A bm_handle_t instance
+        @param image Reference of bm_image to be read to
+        @return 0 for success and 1 for failure
+
+        int read(Handle& handle, bm_image& image);
+
+Bmcv
+_____
+
+**1). Bmcv Constructor**
+    .. code-block:: c++
+
+        @brief Constructor.
+
+        @param handle A Handle instance
+
+        explicit Bmcv(Handle handle);
+
+**2). bm_image_to_tensor**
+    .. code-block:: c++
+
+        @brief Convert bm_image to tensor.
+
+        @param img      Input image
+        @param tensor   Output tensor
+
+        void bm_image_to_tensor (bm_image &img, Tensor &tensor);
+
+**3). tensor_to_bm_image**
+    .. code-block:: c++
+
+        @brief Convert tensor to bm_image.
+
+        @param tensor   Input tensor
+        @param img      Output image
+
+        void tensor_to_bm_image (Tensor &tensor, bm_image &img);
+
+**4). crop_and_resize**
+    .. code-block:: c++
+
+        @brief Crop then resize an image.
+
+        @param input    Input image
+        @param output   Output image
+        @param crop_x0  Start point x of the crop window
+        @param crop_y0  Start point y of the crop window
+        @param crop_w   Width of the crop window
+        @param crop_h   Height of the crop window
+        @param resize_w Target width
+        @param resize_h Target height
+        @return 0 for success and other for failure
+
+        int crop_and_resize(
+            bm_image                     &input,
+            bm_image                     &output,
+            int                          crop_x0,
+            int                          crop_y0,
+            int                          crop_w,
+            int                          crop_h,
+            int                          resize_w,
+            int                          resize_h);
+
+**5). crop**
+    .. code-block:: c++
+
+        @brief Crop an image with given window.
+
+        @param input    Input image
+        @param output   Output image
+        @param crop_x0  Start point x of the crop window
+        @param crop_y0  Start point y of the crop window
+        @param crop_w   Width of the crop window
+        @param crop_h   Height of the crop window
+        @return 0 for success and other for failure
+
+        int crop(
+            bm_image                     &input,
+            bm_image                     &output,
+            int                          crop_x0,
+            int                          crop_y0,
+            int                          crop_w,
+            int                          crop_h);
+
+**6). resize**
+    .. code-block:: c++
+
+        @brief Resize an image with interpolation of INTER_NEAREST.
+
+        @param input    Input image
+        @param output   Output image
+        @param resize_w Target width
+        @param resize_h Target height
+        @return 0 for success and other for failure
+
+        int resize(
+            bm_image                     &input,
+            bm_image                     &output,
+            int                          resize_w,
+            int                          resize_h);
+
+**7). vpp_crop_and_resize**
+    .. code-block:: c++
+
+        @brief Crop then resize an image using vpp.
+
+        @param input    Input image
+        @param output   Output image
+        @param crop_x0  Start point x of the crop window
+        @param crop_y0  Start point y of the crop window
+        @param crop_w   Width of the crop window
+        @param crop_h   Height of the crop window
+        @param resize_w Target width
+        @param resize_h Target height
+        @return 0 for success and other for failure
+
+        int vpp_crop_and_resize(
+            bm_image                     &input,
+            bm_image                     &output,
+            int                          crop_x0,
+            int                          crop_y0,
+            int                          crop_w,
+            int                          crop_h,
+            int                          resize_w,
+            int                          resize_h);
+
+**8). vpp_crop**
+    .. code-block:: c++
+
+        @brief Crop an image with given window using vpp.
+
+        @param input    Input image
+        @param output   Output image
+        @param crop_x0  Start point x of the crop window
+        @param crop_y0  Start point y of the crop window
+        @param crop_w   Width of the crop window
+        @param crop_h   Height of the crop window
+        @return 0 for success and other for failure
+
+        int vpp_crop(
+            bm_image                     &input,
+            bm_image                     &output,
+            int                          crop_x0,
+            int                          crop_y0,
+            int                          crop_w,
+            int                          crop_h);
+
+**9). vpp_resize**
+    .. code-block:: c++
+
+        @brief Resize an image with interpolation of INTER_NEAREST using vpp.
+
+        @param input    Input image
+        @param output   Output image
+        @param resize_w Target width
+        @param resize_h Target height
+        @return 0 for success and other for failure
+
+        int vpp_resize(
+            bm_image                     &input,
+            bm_image                     &output,
+            int                          resize_w,
+            int                          resize_h);
+
+**10). warp**
+    .. code-block:: c++
+
+        @brief Applies an affine transformation to an image.
+
+        @param input    Input image
+        @param output   Output image
+        @param matrix   2x3 transformation matrix
+        @return 0 for success and other for failure
+
+        int warp(
+            bm_image                           &input,
+            bm_image                           &output,
+            const std::pair<
+              std::tuple<float, float, float>,
+              std::tuple<float, float, float>> &matrix);
+
+**11). convert_to**
+    .. code-block:: c++
+
+        @brief Applies a linear transformation to an image.
+
+        @param input    Input image
+        @param output   Output image
+        @param matrix   (a0, b0), (a1, b1), (a2, b2) factors
+        @return 0 for success and other for failure
+
+        int convert_to(
+            bm_image                     &input,
+            bm_image                     &output,
+            const std::tuple<
+              std::pair<float, float>,
+              std::pair<float, float>,
+              std::pair<float, float>>   &alpha_beta);
+
+**12). yuv2bgr**
+    .. code-block:: c++
+
+        @brief Convert an image from YUV to BGR.
+
+        @param input    Input image
+        @param output   Output image
+        @return 0 for success and other for failure
+
+        int yuv2bgr(
+            bm_image                     &input,
+            bm_image                     &output);
+
+**13). vpp_convert**
+    .. code-block:: c++
+
+        @brief Convert an image to BGR PLANAR format using vpp.
+
+        @param input    Input image
+        @param output   Output image
+        @return 0 for success and other for failure
+
+        int vpp_convert(
+            bm_image &input,
+            bm_image &output
+        );
+
+**14). convert**
+    .. code-block:: c++
+
+        @brief Convert an image to BGR PLANAR format.
+
+        @param input    Input image
+        @param output   Output image
+        @return 0 for success and other for failure
+
+        int convert(
+            bm_image &input,
+            bm_image &output
+        );
+
+**15). rectangle**
+    .. code-block:: c++
+
+        @brief Draw a rectangle on input image.
+
+        @param image      Input image
+        @param x0         Start point x of rectangle
+        @param y0         Start point y of rectangle
+        @param w          Width of rectangle
+        @param h          Height of rectangle
+        @param color      Color of rectangle
+        @param thickness  Thickness of rectangle
+        @return 0 for success and other for failure
+
+        int rectangle(
+            bm_image                        &image,
+            int                             x0,
+            int                             y0,
+            int                             w,
+            int                             h,
+            const std::tuple<int, int, int> &color,
+            int                             thickness=1
+        );
+
+**16). imwrite**
+    .. code-block:: c++
+
+        @brief Save the image to the specified file.
+
+        @param filename   Name of the file
+        @param image      Image to be saved
+        @return 0 for success and other for failure
+
+        int imwrite(
+            const std::string &filename,
+            bm_image          &image
+        );
+
+**17). get_handle**
+    .. code-block:: c++
+
+        @brief Get Handle instance.
+
+        @return Handle instance
+
+        Handle get_handle();

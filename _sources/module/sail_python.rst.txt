@@ -109,7 +109,7 @@ ___________
                 Shape of the tensor
             """
 
-**3). as_numpy**
+**3). asnumpy**
 
     .. code-block:: python
 
@@ -290,7 +290,7 @@ ___________
     .. code-block:: python
 
         def get_handle():
-            """ Load bmodel from file.
+            """ Get Handle instance.
 
             Returns
             -------
@@ -335,7 +335,20 @@ ___________
                 Graph names list in loaded context
             """
 
-**5). graph_is_dynamic**
+**5). set_io_mode**
+
+    .. code-block:: python
+
+        def set_io_mode(mode):
+            """ Set IOMode for a graph.
+
+            Parameters
+            ----------
+            mode : sail.IOMode
+                Specified io mode
+            """
+
+**6). graph_is_dynamic**
 
     .. code-block:: python
 
@@ -348,7 +361,7 @@ ___________
                 0 for dynamic and 1 for static
             """
 
-**6). get_input_names**
+**7). get_input_names**
 
     .. code-block:: python
 
@@ -366,7 +379,7 @@ ___________
                 All the input tensor names of the graph
             """
 
-**7). get_output_names**
+**8). get_output_names**
 
     .. code-block:: python
 
@@ -384,7 +397,7 @@ ___________
                 All the output tensor names of the graph
             """
 
-**8). get_max_input_shapes**
+**9). get_max_input_shapes**
 
     .. code-block:: python
 
@@ -405,7 +418,7 @@ ___________
                 Max shape of the input tensors
             """
 
-**9). get_input_shape**
+**10). get_input_shape**
 
     .. code-block:: python
 
@@ -425,7 +438,7 @@ ___________
                 The shape of the tensor
             """
 
-**10). get_max_output_shapes**
+**11). get_max_output_shapes**
 
     .. code-block:: python
 
@@ -446,7 +459,7 @@ ___________
                 Max shape of the output tensors
             """
 
-**11). get_output_shape**
+**12). get_output_shape**
 
     .. code-block:: python
 
@@ -466,7 +479,7 @@ ___________
                 The shape of the tensor
             """
 
-**12). get_input_dtype**
+**13). get_input_dtype**
 
     .. code-block:: python
 
@@ -486,7 +499,7 @@ ___________
                 Data type of the input tensor
             """
 
-**13). get_output_dtype**
+**14). get_output_dtype**
 
     .. code-block:: python
 
@@ -506,7 +519,7 @@ ___________
                 Data type of the output tensor
             """
 
-**14). get_input_scale**
+**15). get_input_scale**
 
     .. code-block:: python
 
@@ -526,7 +539,7 @@ ___________
                 Scale of the input tensor
             """
 
-**15). get_output_scale**
+**16). get_output_scale**
 
     .. code-block:: python
 
@@ -546,7 +559,7 @@ ___________
                 Scale of the output tensor
             """
 
-**16). process**
+**17). process**
 
     .. code-block:: python
 
@@ -579,3 +592,446 @@ ___________
                 Output tensors managed by user
             """
 
+        def process(graph_name, input_tensors, input_shapes, output_tensors):
+            """ Inference with provided input and output tensors.
+
+            Parameters
+            ----------
+            graph_name : str
+                The specified graph name
+            input_tensors : dict {str : sail.Tensor}
+                Input tensors managed by user
+            input_shapes : dict {str : list}
+                Shapes of all input tensors
+            output_tensors : dict {str : sail.Tensor}
+                Output tensors managed by user
+            """
+
+sail.Decoder
+___________
+
+**1). Decoder**
+
+    .. code-block:: python
+
+        def __init__(file_path):
+            """ Constructor.
+
+            Parameters
+            ----------
+            file_path : str
+               Path or rtsp url to the video/image file
+            """
+
+**2). is_opened**
+
+    .. code-block:: python
+
+        def is_opened():
+            """ Judge if the source is opened successfully.
+
+            Returns
+            ----------
+            judge_ret : bool
+                True for success and False for failure
+            """
+
+**3). read**
+
+    .. code-block:: python
+
+        def read(handle, image):
+            """ Read an image from the Decoder.
+
+            Parameters
+            ----------
+            handle : sail.Handle
+                Handle instance
+            image : sail.BMImage
+                BMImage instance
+            Returns
+            ----------
+            judge_ret : int
+                0 for success and others for failure
+            """
+
+sail.Bmcv
+___________
+
+**1). Bmcv**
+
+    .. code-block:: python
+
+        def __init__(handle):
+            """ Constructor.
+
+            Parameters
+            ----------
+            handle : sail.Handle
+                Handle instance
+            """
+
+**2). bm_image_to_tensor**
+
+    .. code-block:: python
+
+        def bm_image_to_tensor(image, tensor):
+            """ Convert bm_image to tensor.
+
+            Parameters
+            ----------
+            image : sail.BMImage
+                BMImage instance
+            tensor : sail.Tensor
+                Tensor instance
+            """
+
+**3). tensor_to_bm_image**
+
+    .. code-block:: python
+
+        def tensor_to_bm_image(tensor, image):
+            """ Convert bm_image to tensor.
+
+            Parameters
+            ----------
+            tensor : sail.Tensor
+                Tensor instance
+            image : sail.BMImage
+                BMImage instance
+            """
+
+**4). crop_and_resize**
+
+    .. code-block:: python
+
+        def crop_and_resize(input, output, crop_x0, crop_y0, crop_w, crop_h, resize_w, resize_h):
+            """ Crop then resize an image.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            crop_x0 : int
+                Start point x of the crop window
+            crop_y0 : int
+                Start point y of the crop window
+            crop_w : int
+                Width of the crop window
+            crop_h : int
+                Height of the crop window
+            resize_w : int
+                Target width
+            resize_h : int
+                Target height
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**5). crop**
+
+    .. code-block:: python
+
+        def crop(input, output, crop_x0, crop_y0, crop_w, crop_h):
+            """ Crop an image with given window.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            crop_x0 : int
+                Start point x of the crop window
+            crop_y0 : int
+                Start point y of the crop window
+            crop_w : int
+                Width of the crop window
+            crop_h : int
+                Height of the crop window
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**6). resize**
+
+    .. code-block:: python
+
+        def resize(input, output, resize_w, resize_h):
+            """ Resize an image with interpolation of INTER_NEAREST.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            resize_w : int
+                Target width
+            resize_h : int
+                Target height
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**7). vpp_crop_and_resize**
+
+    .. code-block:: python
+
+        def vpp_crop_and_resize(input, output, crop_x0, crop_y0, crop_w, crop_h, resize_w, resize_h):
+            """ Crop then resize an image using vpp.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            crop_x0 : int
+                Start point x of the crop window
+            crop_y0 : int
+                Start point y of the crop window
+            crop_w : int
+                Width of the crop window
+            crop_h : int
+                Height of the crop window
+            resize_w : int
+                Target width
+            resize_h : int
+                Target height
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**8). vpp_crop**
+
+    .. code-block:: python
+
+        def vpp_crop(input, output, crop_x0, crop_y0, crop_w, crop_h):
+            """ Crop an image with given window using vpp.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            crop_x0 : int
+                Start point x of the crop window
+            crop_y0 : int
+                Start point y of the crop window
+            crop_w : int
+                Width of the crop window
+            crop_h : int
+                Height of the crop window
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**9). vpp_resize**
+
+    .. code-block:: python
+
+        def vpp_resize(input, output, resize_w, resize_h):
+            """ Resize an image with interpolation of INTER_NEAREST using vpp.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            resize_w : int
+                Target width
+            resize_h : int
+                Target height
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**10). warp**
+
+    .. code-block:: python
+
+        def warp(input, output, matrix):
+            """ Applies an affine transformation to an image.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            matrix: 2d list
+                2x3 transformation matrix
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**11). convert_to**
+
+    .. code-block:: python
+
+        def convert_to(input, output, alpha_beta):
+            """ Applies a linear transformation to an image.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+            alpha_beta: tuple
+                (a0, b0), (a1, b1), (a2, b2) factors
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**12). yuv2bgr**
+
+    .. code-block:: python
+
+        def yuv2bgr(input, output):
+            """ Convert an image from YUV to BGR.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**13). vpp_convert**
+
+    .. code-block:: python
+
+        def vpp_convert(input, output):
+            """ Convert an image to BGR PLANAR format using vpp.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**14). convert**
+
+    .. code-block:: python
+
+        def convert(input, output):
+            """ Convert an image to BGR PLANAR format.
+
+            Parameters
+            ----------
+            input : sail.BMImage
+                Input image
+            output : sail.BMImage
+                Output image
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**15). rectangle**
+
+    .. code-block:: python
+
+        def rectangle(image, x0, y0, w, h, color, thickness=1):
+            """ Draw a rectangle on input image.
+
+            Parameters
+            ----------
+            image : sail.BMImage
+                Input image
+            x0 : int
+                Start point x of rectangle
+            y0 : int
+                Start point y of rectangle
+            w : int
+                Width of rectangle
+            h : int
+                Height of rectangle
+            color : tuple
+                Color of rectangle
+            thickness : int
+                Thickness of rectangle
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**16). imwrite**
+
+    .. code-block:: python
+
+        def imwrite(file_name, image):
+            """ Save the image to the specified file.
+
+            Parameters
+            ----------
+            file_name : str
+                Name of the file
+            output : sail.BMImage
+                Image to be saved
+
+            Returns
+            ----------
+            process_status : int
+                0 for success and others for failure
+            """
+
+**17). get_handle**
+
+    .. code-block:: python
+
+        def get_handle():
+            """ Get Handle instance.
+
+            Returns
+            -------
+            handle: sail.Handle
+               Handle instance
+        """

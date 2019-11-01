@@ -5,63 +5,63 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
   <title>SAIL C++ API &mdash; SophonInference  documentation</title>
+  
 
+  
+  
+  
+  
 
-
-
-
-
-
-
+  
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-
-
+  
+    
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
-
+    
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
+    
 
-
-
+  
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="SAIL Python API" href="sail_python.html" />
-    <link rel="prev" title="SAIL" href="sail.html" />
+    <link rel="prev" title="SAIL" href="sail.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
-
+   
   <div class="wy-grid-for-nav">
-
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
 
-
-
+          
             <a href="../index.html" class="icon icon-home"> SophonInference
+          
 
-
-
+          
           </a>
 
+          
+            
+            
+          
 
-
-
-
-
-
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -70,16 +70,16 @@
   </form>
 </div>
 
-
+          
         </div>
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-
-
-
-
-
-
+          
+            
+            
+              
+            
+            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">图解 Sophon Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference 安装</a></li>
@@ -95,6 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#tensor">Tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#iomode">IOMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#engine">Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#decoder">Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmcv">Bmcv</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sail_python.html">SAIL Python API</a></li>
@@ -107,28 +109,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../demo/release_python.html">Python Samples</a></li>
 </ul>
 
-
-
+            
+          
         </div>
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-
+      
       <nav class="wy-nav-top" aria-label="top navigation">
-
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">SophonInference</a>
-
+        
       </nav>
 
 
       <div class="wy-nav-content">
-
+        
         <div class="rst-content">
-
-
+        
+          
 
 
 
@@ -147,28 +149,28 @@
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
-
+    
       <li><a href="../index.html">Docs</a> &raquo;</li>
-
+        
       <li>SAIL C++ API</li>
-
-
+    
+    
       <li class="wy-breadcrumbs-aside">
-
-
+        
+            
             <a href="../_sources/module/sail_cpp.rst.txt" rel="nofollow"> View page source</a>
-
-
+          
+        
       </li>
-
+    
   </ul>
 
-
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-
+            
   <div class="section" id="sail-c-api">
 <h1>SAIL C++ API<a class="headerlink" href="#sail-c-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="basic-function">
@@ -503,7 +505,8 @@ std::vector&lt;std::string&gt; get_graph_names();
 </pre></div>
 </div>
 </dd>
-<dt><strong>10). graph_is_dynamic</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Jugde if the graph is dynamic.
+<dt><strong>10). set_io_mode</strong></dt><dd></dd>
+<dt><strong>11). graph_is_dynamic</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Jugde if the graph is dynamic.
 
 @param graph_name The specified graph name
 @return 0 for dynamic and 1 for static
@@ -512,7 +515,7 @@ bool graph_is_dynamic(const std::string&amp; graph_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>11). get_input_names</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all input tensor names of the specified graph.
+<dt><strong>12). get_input_names</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all input tensor names of the specified graph.
 
 @param graph_name The specified graph name
 @return All the input tensor names of the graph
@@ -521,7 +524,7 @@ std::vector&lt;std::string&gt; get_input_names(const std::string&amp; graph_name
 </pre></div>
 </div>
 </dd>
-<dt><strong>12). get_output_names</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all output tensor names of the specified graph.
+<dt><strong>13). get_output_names</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all output tensor names of the specified graph.
 
 @param graph_name The specified graph name
 @return All the output tensor names of the graph
@@ -530,7 +533,7 @@ std::vector&lt;std::string&gt; get_output_names(const std::string&amp; graph_nam
 </pre></div>
 </div>
 </dd>
-<dt><strong>13). get_max_input_shapes</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of input tensors in a graph.
+<dt><strong>14). get_max_input_shapes</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of input tensors in a graph.
 
 For static models, the max shape is fixed and it should not be changed.
 For dynamic models, the tensor shape should be smaller than or equal to
@@ -544,7 +547,7 @@ std::map&lt;std::string, std::vector&lt;int&gt;&gt; get_max_input_shapes(
 </pre></div>
 </div>
 </dd>
-<dt><strong>14). get_input_shape</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an input tensor in a graph.
+<dt><strong>15). get_input_shape</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an input tensor in a graph.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -556,7 +559,7 @@ std::vector&lt;int&gt; get_input_shape(
 </pre></div>
 </div>
 </dd>
-<dt><strong>15). get_max_output_shapes</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of output tensors in a graph.
+<dt><strong>16). get_max_output_shapes</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of output tensors in a graph.
 
 For static models, the max shape is fixed and it should not be changed.
 For dynamic models, the tensor shape should be smaller than or equal to
@@ -570,7 +573,7 @@ std::map&lt;std::string, std::vector&lt;int&gt;&gt; get_max_output_shapes(
 </pre></div>
 </div>
 </dd>
-<dt><strong>16). get_output_shape</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an output tensor in a graph.
+<dt><strong>17). get_output_shape</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an output tensor in a graph.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -582,7 +585,7 @@ std::vector&lt;int&gt; get_output_shape(
 </pre></div>
 </div>
 </dd>
-<dt><strong>17). get_input_dtype</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of an input tensor. Refer to bmdef.h as following.
+<dt><strong>18). get_input_dtype</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of an input tensor. Refer to bmdef.h as following.
   typedef enum {
     BM_FLOAT32 = 0,
     BM_FLOAT16 = 1,
@@ -604,7 +607,7 @@ bm_data_type_t get_input_dtype(
 </pre></div>
 </div>
 </dd>
-<dt><strong>18). get_output_dtype</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of an output tensor. Refer to bmdef.h as following.
+<dt><strong>19). get_output_dtype</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of an output tensor. Refer to bmdef.h as following.
   typedef enum {
     BM_FLOAT32 = 0,
     BM_FLOAT16 = 1,
@@ -626,7 +629,7 @@ bm_data_type_t get_output_dtype(
 </pre></div>
 </div>
 </dd>
-<dt><strong>19). get_input_scale</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an input tensor. Only used for int8 models.
+<dt><strong>20). get_input_scale</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an input tensor. Only used for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -638,7 +641,7 @@ float get_input_scale(
 </pre></div>
 </div>
 </dd>
-<dt><strong>20). get_output_scale</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an output tensor. Only used for int8 models.
+<dt><strong>21). get_output_scale</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an output tensor. Only used for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -650,7 +653,7 @@ float get_output_scale(
 </pre></div>
 </div>
 </dd>
-<dt><strong>21). reshape</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reshape input tensor for dynamic models.
+<dt><strong>22). reshape</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reshape input tensor for dynamic models.
 
 The input tensor shapes may change when running dynamic models.
 New input shapes should be set before inference.
@@ -665,7 +668,7 @@ int reshape(
 </pre></div>
 </div>
 </dd>
-<dt><strong>22). get_input_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified input tensor.
+<dt><strong>23). get_input_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified input tensor.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -677,7 +680,7 @@ Tensor* get_input_tensor(
 </pre></div>
 </div>
 </dd>
-<dt><strong>23). get_output_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified output tensor.
+<dt><strong>24). get_output_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified output tensor.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -689,7 +692,7 @@ Tensor* get_output_tensor(
 </pre></div>
 </div>
 </dd>
-<dt><strong>24). scale_input_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale input tensor for int8 models.
+<dt><strong>25). scale_input_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale input tensor for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -702,7 +705,7 @@ void scale_input_tensor(
 </pre></div>
 </div>
 </dd>
-<dt><strong>25). scale_output_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale output tensor for int8 models.
+<dt><strong>26). scale_output_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale output tensor for int8 models.
 
 @param graph_name  The specified graph name
 @param tensor_name The specified tensor name
@@ -715,7 +718,7 @@ void scale_output_tensor(
 </pre></div>
 </div>
 </dd>
-<dt><strong>26). scale_fp32_to_int8</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from float32 to int8. Only used for int8 models.
+<dt><strong>27). scale_fp32_to_int8</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from float32 to int8. Only used for int8 models.
 
 @param src   Poniter to float32 data
 @param dst   Poniter to int8 data
@@ -726,7 +729,7 @@ void scale_fp32_to_int8(float* src, int8_t* dst, float scale, int size);
 </pre></div>
 </div>
 </dd>
-<dt><strong>27). scale_int8_to_fp32</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from int8 to float32. Only used for int8 models.
+<dt><strong>28). scale_int8_to_fp32</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from int8 to float32. Only used for int8 models.
 
 @param src   Poniter to int8 data
 @param dst   Poniter to float32 data
@@ -737,7 +740,7 @@ void scale_int8_to_fp32(int8_t* src, float* dst, float scale, int size);
 </pre></div>
 </div>
 </dd>
-<dt><strong>28). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with builtin input and output tensors.
+<dt><strong>29). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with builtin input and output tensors.
 
 @param graph_name The specified graph name
 
@@ -745,7 +748,7 @@ void process(const std::string&amp; graph_name);
 </pre></div>
 </div>
 </dd>
-<dt><strong>29). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input tensors.
+<dt><strong>30). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input tensors.
 
 @param graph_name    The specified graph name
 @param input_shapes  Shapes of all input tensors
@@ -759,7 +762,7 @@ void process(
 </pre></div>
 </div>
 </dd>
-<dt><strong>30). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors.
+<dt><strong>31). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors.
 
 @input Input tensors
 @output Output tensors
@@ -771,25 +774,336 @@ void process(
 </pre></div>
 </div>
 </dd>
+<dt><strong>32). process</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors and input shapes.
+
+@input        Input tensors
+@input_shapes Real input tensor shapes
+@output       Output tensors
+
+void process(
+    const std::string&amp;                       graph_name,
+    std::map&lt;std::string, Tensor*&gt;&amp;          input,
+    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes,
+    std::map&lt;std::string, Tensor*&gt;&amp;          output);
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="decoder">
+<h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt><strong>1). Decoder Constructor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
+
+@param file_path Path or rtsp url to the video/image file.
+
+Decoder(const std::string&amp; file_path);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). is_opened</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the source is opened successfully.
+
+@return True if the source is opened successfully
+
+bool is_opened();
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). read</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Read a bm_image from the Decoder.
+
+@param handle A bm_handle_t instance
+@param image Reference of bm_image to be read to
+@return 0 for success and 1 for failure
+
+int read(Handle&amp; handle, bm_image&amp; image);
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="bmcv">
+<h2>Bmcv<a class="headerlink" href="#bmcv" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt><strong>1). Bmcv Constructor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
+
+@param handle A Handle instance
+
+explicit Bmcv(Handle handle);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). bm_image_to_tensor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert bm_image to tensor.
+
+@param img      Input image
+@param tensor   Output tensor
+
+void bm_image_to_tensor (bm_image &amp;img, Tensor &amp;tensor);
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). tensor_to_bm_image</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert tensor to bm_image.
+
+@param tensor   Input tensor
+@param img      Output image
+
+void tensor_to_bm_image (Tensor &amp;tensor, bm_image &amp;img);
+</pre></div>
+</div>
+</dd>
+<dt><strong>4). crop_and_resize</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop then resize an image.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int crop_and_resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>5). crop</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop an image with given window.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@return 0 for success and other for failure
+
+int crop(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>6). resize</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Resize an image with interpolation of INTER_NEAREST.
+
+@param input    Input image
+@param output   Output image
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>7). vpp_crop_and_resize</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop then resize an image using vpp.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int vpp_crop_and_resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>8). vpp_crop</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop an image with given window using vpp.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@return 0 for success and other for failure
+
+int vpp_crop(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>9). vpp_resize</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Resize an image with interpolation of INTER_NEAREST using vpp.
+
+@param input    Input image
+@param output   Output image
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int vpp_resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>10). warp</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Applies an affine transformation to an image.
+
+@param input    Input image
+@param output   Output image
+@param matrix   2x3 transformation matrix
+@return 0 for success and other for failure
+
+int warp(
+    bm_image                           &amp;input,
+    bm_image                           &amp;output,
+    const std::pair&lt;
+      std::tuple&lt;float, float, float&gt;,
+      std::tuple&lt;float, float, float&gt;&gt; &amp;matrix);
+</pre></div>
+</div>
+</dd>
+<dt><strong>11). convert_to</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Applies a linear transformation to an image.
+
+@param input    Input image
+@param output   Output image
+@param matrix   (a0, b0), (a1, b1), (a2, b2) factors
+@return 0 for success and other for failure
+
+int convert_to(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    const std::tuple&lt;
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;&gt;   &amp;alpha_beta);
+</pre></div>
+</div>
+</dd>
+<dt><strong>12). yuv2bgr</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image from YUV to BGR.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int yuv2bgr(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output);
+</pre></div>
+</div>
+</dd>
+<dt><strong>13). vpp_convert</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image to BGR PLANAR format using vpp.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int vpp_convert(
+    bm_image &amp;input,
+    bm_image &amp;output
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>14). convert</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image to BGR PLANAR format.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int convert(
+    bm_image &amp;input,
+    bm_image &amp;output
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>15). rectangle</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Draw a rectangle on input image.
+
+@param image      Input image
+@param x0         Start point x of rectangle
+@param y0         Start point y of rectangle
+@param w          Width of rectangle
+@param h          Height of rectangle
+@param color      Color of rectangle
+@param thickness  Thickness of rectangle
+@return 0 for success and other for failure
+
+int rectangle(
+    bm_image                        &amp;image,
+    int                             x0,
+    int                             y0,
+    int                             w,
+    int                             h,
+    const std::tuple&lt;int, int, int&gt; &amp;color,
+    int                             thickness=1
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>16). imwrite</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Save the image to the specified file.
+
+@param filename   Name of the file
+@param image      Image to be saved
+@return 0 for success and other for failure
+
+int imwrite(
+    const std::string &amp;filename,
+    bm_image          &amp;image
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>17). get_handle</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get Handle instance.
+
+@return Handle instance
+
+Handle get_handle();
+</pre></div>
+</div>
+</dd>
 </dl>
 </div>
 </div>
 
 
            </div>
-
+           
           </div>
           <footer>
-
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-
+      
         <a href="sail_python.html" class="btn btn-neutral float-right" title="SAIL Python API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-
-
+      
+      
         <a href="sail.html" class="btn btn-neutral float-left" title="SAIL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-
+      
     </div>
-
+  
 
   <hr/>
 
@@ -799,7 +1113,7 @@ void process(
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -809,7 +1123,7 @@ void process(
     </section>
 
   </div>
-
+  
 
 
   <script type="text/javascript">
@@ -818,10 +1132,10 @@ void process(
       });
   </script>
 
-
-
-
-
+  
+  
+    
+   
 
 </body>
 </html>
