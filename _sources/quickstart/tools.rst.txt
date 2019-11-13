@@ -19,34 +19,5 @@
        get_bmodel -[h] [--save_path SAVE_PATH] arg
 
 
-**2).split_tf_model**
-
-该工具调用了 AutoSplit 模块提供的模型切分接口，可让您快速体验模型切分。
-
-使用方式：
-
-    .. code-block:: shell
-
-       split_tf_model  -p your tpu version, BM1682 or BM1684.
-                       -t target directory to save splitted models.
-                       -m model path
-                       -w weight path
-                       -d if dynamic, 0 for static or 1 for dynamic
-                       -n input tensor names, splitted by comma, x,x
-                       -s input tensor shapes, splitted by comma, (x,x,x,x),(x,x)
-                       -o output tensor names, splitted by comma, x,x
-
-
-**3).test_splitted_tf_model**
-
-该工具可以比对原始模型与切分后模型运行结果。
-
-使用方式：
-
-    .. code-block:: shell
-
-       test_splitted_tf_model -m input tfmodel path
-                              -s input submodel path
-                              -c 0 or 1, if using cmodel on x86
 
 

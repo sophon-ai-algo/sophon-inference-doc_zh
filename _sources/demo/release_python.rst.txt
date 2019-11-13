@@ -13,13 +13,4 @@ __________
 详见目录下的 README.md。
 
 
-Run faster rcnn tf
-__________________
-
-该示例程序位于 "${sophon-inference}/samples/python/run_fasterrcnn_resnet50_tf" 目录下。
-
-该示例程序使用 AutoSplit 和 AutoRunner 模块对 tensorflow fasterrcnn 模型进行部署，
-支持 FP32 精度，可以部署在 PCIE 和 SOC 模式上。
-
-详见目录下的 README.md。
 

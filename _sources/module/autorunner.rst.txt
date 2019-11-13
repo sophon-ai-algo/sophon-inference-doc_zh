@@ -1,75 +1,81 @@
 AutoRunner
 ==========
 
-AutoRunner 目前只支持 FP32 精度推理。
+AutoRunner only supports FP32 by now.
 
-AutoRunner 提供的接口可对通过 AutoSplit 切分生成的子模型进行推理。
-AutoRunner 的源码位于 “module/auto_runner/” 目录下，目前支持 tensorflow/mxnet。
-我们在 “auto_runner.api” 中提供了两个函数：
+Once you use AutoSplit to split and compile model, you can do inference through AutoRunner,
+without worrying about how to write the program to drive bmodel.
+The AutoRunner source codes are located in the "module/auto_runner/" directory and currently supports tensorflow/mxnet.
+We provide two functions in "auto_runner.api", which are:
 
 * load:
 
-解析指定目录下的 graph_infos.json 文件，顺序加载子模型，返回一个 Runner 的实例。
+Parse the "graph_infos.json" file in the specified directory,
+and load the submodels sequentially, return a Runner instance.
 
 * infer：
 
-使用传入的 Runner 实例与输入张量进行推理，返回推理结果。
+Use given Runner instance and input tensors to do inference sequentially.
 
-通常情况下 AutoRunner 需要和 AutoSplit 一起使用，但用户也可以手动切分并编译模型，
-只要将其按照 graph_infos.json 中所规定的形式保存即可。
+Usually AutoRunner needs to be used with AutoSplit,
+but users can also manually split and compile the model,
+as long as it is saved as specified in graph_infos.json.
 
 load
 ____
 
-该函数可以根据切分后模型目录下的 graph_infos.json 文件中的信息，对切分后的模型按顺序加载，获得对应的 Runner 实例。
-主要功能通过 Runner 类实现。
-**Runner** 在初始化时顺序加载 graph_infos.json 中 graphs 列表中的模型。如果 device 属性为 cpu，
-那么就调用原深度学习框架中的相关 api，根据 model_info 属性加载模型；
-如果 device 属性为 tpu，
-那么就调用 SAIL 的 engine 类，根据 context_dir 属性加载模型。
+This function can load the splitted submodels based on the information in the "graph_infos.json" file in the specified directory after splitting.
+The main function is implemented by the Runner class.
+**Runner** sequentially loads the submodels in the graphs list in "graph_infos.json" at initialization time. 
+If the device attribute of the submodel is cpu, 
+then the related api in the original deep learning framework is called, 
+and the model is loaded according to the model_info attribute;
+If the device attribute of the submodel is tpu, 
+then SAIL's engine class is called, and the model is loaded according to the context_dir attribute.
 
-函数说明如下，详见模块： **auto_deploy.common.base_runner** 和 **auto_deploy.runner** 。
+Description of fucntions is as follows.
+For details, refer to modules: **auto_deploy.common.base_runner** and **auto_deploy.runner**.
 
     .. code-block:: python
 
        @exception_wrapper(message="Met an Error when load model.")
        def load(folder, graphs_in_memory=None):
-           """ load all the subgraphs in a runner.
-
-           Args:
-             folder: Directory path that contains splitted models and 'graph_infos.json'.
-         
-             Format of 'graph_infos.json':
-             {
-               "graph_num": graph_numbmer,
-               "platform": "mxnet"
-               "layout": "NCHW"
-               "dynamic": False
-               "graphs": [
-                 {
-                   "device": "cpu",
-                   "inputs": list of input tensor names,
-                   "outputs": list of output tensor names,
-                   "model_info": {
-                     "json": json_file_path,
-                     "params": params_file_path
-                   }
+         """ load all the subgraphs in a runner.
+       
+         Args:
+           folder: Directory path that contains splitted models and 'graph_infos.json'.
+       
+           Format of 'graph_infos.json':
+           {
+             "graph_num": graph_numbmer,
+             "platform": "mxnet"
+             "layout": "NCHW"
+             "dynamic": False
+             "graphs": [
+               {
+                 "device": "cpu",
+                 "inputs": list of input tensor names,
+                 "outputs": list of output tensor names,
+                 "model_info": {
+                   "json": json_file_path,
+                   "params": params_file_path
                  }
-               ]
-               "tensors": [
-                 {
-                   "name": name,
-                   "shape": list for shape,
-                   "attr": "input" or "output" or "intermediate"
-                 }
-               ]
-             }
-             input_tensors: Input tensors. Format: {name: value}.
-             graphs_in_memory: A dict of graphs which already read in memory.
-         
-           Returns:
-             An instance of Runner.
-           """
+               }
+             ]
+             "tensors": [
+               {
+                 "name": name,
+                 "shape": list for shape,
+                 "attr": "input" or "output" or "intermediate"
+               }
+             ]
+           }
+           input_tensors: Input tensors. Format: {name: value}.
+           graphs_in_memory: A dict of graphs which already read in memory.
+       
+         Returns:
+           An instance of Runner.
+         """
 
 infer
 _____

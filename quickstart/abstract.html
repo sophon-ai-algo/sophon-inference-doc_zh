@@ -82,8 +82,8 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">图解 Sophon Inference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#bmnnsdk">BMNNSDK</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">模型部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmnnsdk">BMNNSDK</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">Sophon Inference</a></li>
 </ul>
 </li>
@@ -95,9 +95,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../module/sail.html">SAIL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module/sail_cpp.html">SAIL C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module/sail_python.html">SAIL Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../module/autosplit.html">AutoSplit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../module/autorunner.html">AutoRunner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../module/algokit.html">Algokit</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../demo/release_cpp.html">C++ Samples</a></li>
@@ -171,72 +168,59 @@
 <p>Sophon Inference 是基于比特大陆原创深度学习开发工具包 BMNNSDK 开发的一套开源工具，
 旨在帮助您快速地将模型部署于 Sophon TPU 上。(<a class="reference external" href="https://sophon.ai">https://sophon.ai</a>)</p>
 <img alt="../_images/sophon_inference.png" src="../_images/sophon_inference.png" />
-<p>上图展示了 Sophon Inference 的整体结构以及它与 BMNNSDK 的依赖关系。
-下面我们对上图中概念进行解释。</p>
-<div class="section" id="bmnnsdk">
-<h2>BMNNSDK<a class="headerlink" href="#bmnnsdk" title="Permalink to this headline">¶</a></h2>
-<p>BMNNSDK 是比特大陆原创的深度学习开发工具包，主要由BMDriver、BMCompiler、BMRuntime、BMDNN、BMCV、BMLib 等模块组成。
-其中：</p>
-<p><strong>BMDriver</strong>
-：是 Sophon TPU 的驱动程序，采用 “insmod” 的方式安装到您的操作系统内核中。</p>
-<p><strong>BMCompiler</strong>
-：是一组模型编译工具，它能将您训练好的深度学习模型编译成可被 Sophon TPU 加载并执行的指令，
-并将这些指令保存到一个后缀名为 “bmodel” 的文件中。</p>
-<p><strong>BMRuntime</strong>
-：提供的接口可以将 “bmodel” 文件加载到 Sophon TPU 上并驱动 TPU 芯片实现推理。</p>
-<p><strong>BMDNN</strong>
-：可以对 layer/operator 上驱动 TPU 芯片进行计算。</p>
-<p><strong>BMCV</strong>
-：可以驱动 TPU 进行图像处理。</p>
-<p><strong>BMLib</strong>
-：底层接口，与 TPU 内存交互。</p>
-<p>如果您还有关于BMNNSDK的任何疑问，请参考《NNToolChain用户手册》、《BMCV用户手册》。</p>
-</div>
+<p>上图展示了使用 Sophon Inference 将深度学习模型部署到 TPU 上的流程。
+下面我们将结合上图对一些基础概念进行解释。</p>
 <div class="section" id="id1">
 <h2>模型部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>模型部署包含模型离线编译与在线推理两个步骤。</p>
 <p><strong>a).离线编译</strong></p>
-<p>使用 BMCompiler 将深度学习模型编译为 TPU 指令并保存在 bmodel 文件中。</p>
-<p>BMCompiler 是一组模型编译工具，分别对应了不同的深度学习框架，
-目前的BMNNSDK中实现了4个编译工具用来支持4种深度学习框架。
-它们分别是 bmnetc(Caffe)、bmnett(Tensorflow)、bmnetp(Pytorch)、bmnetm(Mxnet)。</p>
-<p>如果TPU不支持模型中的个别OP，则需要将模型切分成多个子模型。
-其中部分子模型在TPU上运行，其余子模型在CPU上运行。
-目前支持对TensorFlow、MXNet的模型进行切分，提供python api。</p>
-<p>模型编译不须插卡，不依赖 BMNNSDK 中除 BMCompiler 外的其它模块。</p>
-<p>现在，我们的部分产品支持了 INT8 精度的推理，如果您需要用到 INT8 精度的推理，请首先使用相关工具对模型进行量化，在进行该离线编译的步骤。</p>
+<p>该过程对应的是上图中蓝色部分。
+假设用户已经获得了一个训练好的 FP32 精度的深度学习模型，
+那么用户可以直接使用 BMCompiler 将该模型编译为 bmodel，这样生成的 bmodel 可以使用 TPU 上的 FP32 算力进行推理。
+这里的 BMCompiler 是一个统称，它包含了四个前端工具，分别支持了四种深度学习框架框架。
+bmnetc(caffe)，bmnett(tensorflow)，bmnetm(mxnet)，bmnetp(pytorch)。</p>
+<p>用户如果希望使用 TPU 上的 INT8 算力进行推理，
+那么可以先使用 Quantization &amp; Calibration 工具将原始的 FP32 精度模型量化为 INT8 精度的模型，
+再使用 BMCompiler 中的 bmnetu 工具将生成的 int8_umodel 编译为 bmodel。</p>
+<p>bmodel 的生成不依赖 TPU，用户只需要按需求安装相应的 BMCompiler 和 Quantization &amp; Calibration 工具即可完成该步骤。
+理论上，一个深度学习模型，只要可以最终生成 bmodel，那么该 bmodel 就可以在 Sophon TPUs 上部署。</p>
 <p><strong>b).在线推理</strong></p>
-<p>使用 BMRuntime 中提供的接口加载 bmodel 文件至 TPU，
-并驱动 TPU 执行 bmodel 中的指令，完成推理。</p>
-<p>对于切分后需要在CPU上运行的子模型，将调用原框架的运行时。
-目前提供了将各子模型串通运行的python接口，未来将提供C++接口.</p>
-<p>若要实现在线推理过程，您至少需要安装 Sophon TPU、BMDriver、BMruntime。</p>
+<p>该过程对应的是上图中红色部分中从 input 到 output 的过程。
+用户可以基于 Sophon Inference 中的 SAIL 模块实现图像、视频的解码，张量的处理与运算以及 bmodel 的运算。</p>
+<p>该过程需要在安装 TPU 与 驱动的环境下进行。</p>
+</div>
+<div class="section" id="bmnnsdk">
+<h2>BMNNSDK<a class="headerlink" href="#bmnnsdk" title="Permalink to this headline">¶</a></h2>
+<p>BMNNSDK 是比特大陆原创的深度学习开发工具包，主要由 Quantization &amp; Calibration 工具、BMCompiler、BMDriver、BMLib、BMDecoder、BMCV、BMRuntime 等模块组成。
+其中：</p>
+<p><strong>Quantization &amp; Calibration 工具</strong>
+：是模型量化工具，它可以将您训练生成的 FP32 精度的模型量化为 INT8 精度的模型，
+可以实现上图中将 fp32_umodel 转化为 int8_umodel 的过程。</p>
+<p><strong>BMCompiler</strong>
+：是一组模型编译工具，它能将您训练好的深度学习模型编译成可被 Sophon TPU 加载并执行的指令集合，
+并将这些指令保存到一个后缀名为 “bmodel” 的文件中。工具支持直接将 FP32 的模型编译为 bmodel，
+也支持将经过 Quantization &amp; Calibration 工具量化生成的 INT8 模型编译为 bmodel。</p>
+<p><strong>BMDriver</strong>
+：是 Sophon TPU 的驱动程序，采用 “insmod” 的方式安装到您的操作系统内核中。</p>
+<p><strong>BMLib</strong>
+: 是一系列底层接口，主要管理主机内存与 TPU 内存之间的交互。</p>
+<p><strong>BMDecoder</strong>
+：提供了一系列的基于 TPU 的图像、视频编解码接口。</p>
+<p><strong>BMCV</strong>
+：提供了一系列的基于 TPU 的图像处理、张量计算接口。</p>
+<p><strong>BMRuntime</strong>
+：提供的接口可以将 “bmodel” 文件加载到 Sophon TPU 上并驱动 TPU 芯片实现推理。</p>
+<p>如果您还有关于BMNNSDK的任何疑问，请参考《NNToolChain用户手册》、《BMCV用户手册》。</p>
 </div>
 <div class="section" id="id2">
 <h2>Sophon Inference<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>Sophon Inference 包括上图中的 AutoSplit、AlgoKit、AutoRunner、SAIL。
+<p>Sophon Inference 目前主要包括上图中的 SAIL 模块。
 我们提供了python/c++的接口与示例程序，您可以根据您的需要选择合适的调用方式。</p>
-<p>针对使用python的用户，SophonInference 提供了SAIL、AutoDeploy、Algokit三个模块：</p>
 <p><strong>SAIL</strong>
-：对 BMNNSDK 中的 BMRuntime、BMCV、BMDNN、BMLib进行了封装，提供C++/Python接口，可用于
+：对 BMNNSDK 中的 BMLib、BMDecoder、BMCV、BMRuntime 进行了封装，提供C++/Python接口，可用于
 a).驱动 TPU 对经过编译后的深度学习模型进行推理;
 b).使用Sophon TPU做图像、视频处理;
 模型转化以及图像、视频处理的详细介绍请参考《NNToolChain用户文档》与《BMCV用户文档》。</p>
-<p><strong>AutoSplit</strong>
-：一键式的模型切分与编译工具，主要面向无法完整部署到Sophon TPU上的模型，提供Python接口，可自动化地：
-a).将原始模型切分为若干子模型;
-b).对其中可以部署到Sophon TPU上的子模型进行编译;
-目前支持tensorflow/mxnet。</p>
-<p><strong>AutoRunner</strong>
-：通常与 AutoSplit 一起使用，也可以单独使用。
-提供的接口可以实现切分后或编译后的子模型序列的推理, 目前只提供python接口，未来将提供C++接口。
-内部分别调用的特定深度学习框架的推理接口与 SAIL，分别实现 CPU 与 TPU 上的推理。
-目前支持 tensorflow/mxnet。</p>
-<p><strong>Algokit</strong>
-：面向应用部署的 python 算法框架，可用于：
-a). 应用代码编写的模板供用户参考;
-b). 基础算法框架，方便用户添加算法应用。
-目前提供了图像分类、检测、分割等计算机视觉领域的应用示例，依赖于 SAIL 和 AutoRunner 提供的模型部署相关的接口。</p>
 </div>
 </div>
 

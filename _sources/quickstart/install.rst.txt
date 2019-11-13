@@ -8,14 +8,14 @@ Sophon Inference 安装
 
 
 BMNNSDK支持以上两种运行模式，在应用接口上完全兼容，请根据产品形态和需求下载对应的BMNNSDK进行安装。
-需要注意的是，在 SOC 模式下，BMNNSDK 中不包含 BMCompiler 模块，
-您可在 PCIE 模式下使用 BMCompiler 完成模型的离线编译(不需要安装 SC3 加速卡)，
+需要注意的是，在 SOC 模式下，BMNNSDK 中不包含 Calibration_tools、BMCompiler 模块，
+您可在 PCIE 模式下使用 BMCompiler (and Calibration_tools) 完成模型的离线编译(不需要安装 SC3 加速卡)，
 编译生成的 bmodel 可以在 SOC 模式下加载并运行。
 
 目前 SophonInference 支持 PCIE 模式与SOC 模式。
 对于 SOC 模式，Sophon Inference 已经预装在 Sophon SE3 产品上，
-包含了 SAIL(cpp) 的头文件与链接库文件以及 SAIL、AutoRunner、Algokit(python3)等python模块。
-对于 PCIE 模式，我们也提供了 SAIL (cpp) 的头文件与链接库文件以及 SAIL、AutoSplit、AutoRunner、Algokit(python3) 等python模块。
+包含了 SAIL(cpp) 的头文件与链接库文件以及 SAIL_python 模块。
+对于 PCIE 模式，我们也提供了 SAIL (cpp) 的头文件与链接库文件以及 SAIL_python 模块。
 
 
 PCIE 模式

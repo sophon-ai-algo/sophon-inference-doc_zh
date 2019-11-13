@@ -1,105 +1,104 @@
 Algokit
 =======
 
-**Algokit** 是面向应用部署的 python 算法框架，
-目前提供了图像分类、检测、分割等计算机视觉领域的应用示例，用户可方便地添加自己的算法应用。
-**Algokit** 依赖于 SAIL 和 AutoRunner 提供的模型部署相关的接口。
+**Algokit** is a python module for sophon-inference application-oriented deployments that currently provides examples of computer vision applications such as image classification, detection, and segmentation.
+**Algokit** relies on the model deployment related interfaces provided by SAIL and AutoRunner.
 
-应用介绍
-________
+Introduction
+____________
 
-**Algokit** 中每个应用都是一个 algokit.engine.base_engine.BaseEngine 的子类的实例。
-应用的子类均实现在 algokit.algo_cv(计算机视觉)、algokit.algo_nlp(自然语言处理)、algokit.algo_speech(语音识别)
-这三个模块中。目前，我们已经提供了较为丰富的计算机视觉类应用。自然语言处理和语音识别的应用正在开发中。
-当前应用列表如下：
+Each application in **Algokit** is an instance of a subclass of algokit.engine.base_engine.BaseEngine.
+The subclasses are implemented under algokit.algo_cv, algokit.algo_nlp and algokit.algo_speech.
+By now, we have some computer vision applications under algokit.algo_cv.
+algo_nlp and algo_speech are still in development.
 
-* caffe 的通用图像分类模型
+Current application list is as follows:
+
+* Image classification using caffe model
 
 algokit.algo_cv.cls.general_classification.GeneralClassification
 
-* mxnet 的通用图像分类模型
+* Image classification using mxnet model
 
 algokit.algo_cv.cls.general_classification_mx.GeneralClassificationMX
 
-* pytorch 的通用图像分类模型
+* Image classification using pytorch model
 
 algokit.algo_cv.cls.general_classification_pt.GeneralClassificationPT
 
-* tensorflow 的通用图像分类模型
+* Image classification using tensorflow model
 
 algokit.algo_cv.cls.general_classification_tf.GeneralClassificationTF
 
-* caffe 的 fasterrcnn_vgg16 检测模型
+* Object detection of fasterrcnn_vgg16 using caffe model
 
 algokit.algo_cv.det.object_detection_fasterrcnn.ObjectDetectionFASTERRCNN
 
-* tensorflow 的 fasterrcnn_resnet50 检测模型
+* Object detection of fasterrcnn_resnet50 using tensorflow model
 
 algokit.algo_cv.det.object_detection_fasterrcnn_resnet50_tf.ObjectDetectionFASTERRCNNRESNET50TF
 
-* caffe 的 mobilenetssd 检测模型
+* Object detection of mobilenetssd using caffe model
 
 algokit.algo_cv.det.object_detection_mobilenetssd.ObjectDetectionMOBILENETSSD
 
-* caffe 的 mobilenetyolov3 检测模型
+* Object detection of mobilenetyolov3 using caffe model
 
 algokit.algo_cv.det.object_detection_mobilenetyolov3.ObjectDetectionMOBILENETYOLOV3
 
-* caffe 的 yolov3 检测模型
+* Object detection of yolov3 using caffe model
 
 algokit.algo_cv.det.object_detection_yolov3.ObjectDetectionYOLOV3
 
-* mxnet 的 yolov3 检测模型
+* Object detection of yolov3 using mxnet model
 
 algokit.algo_cv.det.object_detection_yolov3_mx.ObjectDetectionYOLOV3MX
 
-* caffe 的 mtcnn 检测模型
+* Face detection of mtcnn using caffe model
 
 algokit.algo_cv.det.face_detection_mtcnn.FaceDetectionMTCNN
 
-* caffe 的 ssh 检测模型
+* Face detection of ssh using caffe model
 
 algokit.algo_cv.det.face_detection_ssh.FaceDetectionSSH
 
-* tensorflow 的 mobilenetv2_deeplab_v3 分割模型
+* Segementation of mobilenetv2_deeplabv3 using tensorflow model
 
 algokit.algo_cv.seg.semantic_segmentation_deeplabv3_mobilenetv2_tf.SemanticSegmentationDEEPLABV3MOBILENETV2TF
 
 
-根据应用的类别与它们所依赖的模块，我们通过工厂类来统一创建应用，
-工厂类均实现在 algokit.algofactory 模块中，目前包括：
+We use factories to create aplication based on their categories and dependencies.
+While the factories are all under algokit.algofactory module.
+Current include:
 
-* 通用图像分类应用的工厂类
+* General Image classification
 
 algokit.algofactory.generalclassification_factory.GeneralClassifier
 
-* 常用目标检测应用的工厂类
+* Object detection
 
 algokit.algofactory.objectdetection_factory.ObjectDetector
 
-* 人脸检测应用的工厂类
+* Face Detection
 
 algokit.algofactory.facedetection_factory.FaceDetector
 
-* 使用了 auto_deploy 模块进行应用部署的工厂类
+* Applications using auto_deploy
 
 algokit.algofactory.autodeploy_factory.ObjectDetector
 
 algokit.algofactory.autodeploy_factory.SemanticSegment
 
 
-对于 SAIL， **Algokit** 实现了自己的 engine 模块，其内部封装了 SAIL 的 engine 类，
-实现了 bmodel 的加载和运行。”generalclassification_factory“、”objectdetection_factory“、
-”facedetection_factory“ 均依赖于 engine 模块驱动 TPU 加载并运行 bmodel。
-对于 AutoDeploy， **Algokit** 封装了其 split、convert、infer 函数，封装后实现了 ”autodeploy_factory“ 模块。
+For SAIL, **Algokit** implements its own engine, which encapsulates SAIL's engine class and implements bmodel loading and running.
+"generalclassification_factory", "objectdetection_factory" and "facedetection_factory" are all based on engine module to drive TPU for reasoning.
+For AutoDeploy, **Algokit** encapsulates its split, convert, and infer functions, and implements the "autodeploy_factory" module after encapsulation.
 
-应用添加
-________
+Add an application(e.g. mobilenetssd)
+_____________________________________
 
-用户可以参照 algokit 已经的实现的应用添加自己的应用，
-本小节将介绍如何添加自己的应用到 algokit 中。
 
-**1). 实现一个 BaseEngine 的子类**
+**1). Creates a new class for the specified algorithm**
 
     .. code-block:: python
 
@@ -130,7 +129,7 @@ ________
          """
          pass
 
-**2). 在对应的工厂类中添加分支**
+**2). Add corresponding branch in the algorithm factory**
 
     .. code-block:: python
 
@@ -152,7 +151,7 @@ ________
        if default_param is ObjDetModel.MOBILENETSSD:
          default_param = DEFAULT_MOBILENETSSD_PARAM
 
-**3). 在 algokit 中注册对应的应用类型**
+**3). Add a new algorithm type in algokit global config**
 
     .. code-block:: python
 
@@ -164,7 +163,7 @@ ________
          ...
          MOBILENETSSD = 'mobilenetssd'
 
-**4). 为新应用添加配置文件**
+**4). Add a new model description config file**
 
     .. code-block:: python
 

@@ -1,0 +1,1193 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SAIL C++ API &mdash; SophonInference  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> SophonInference
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/abstract.html">图解 Sophon Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/install.html">Sophon Inference 安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/reminds.html">注意事项</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/tools.html">常用工具介绍</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sail.html">SAIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sail_cpp.html">SAIL C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sail_python.html">SAIL Python API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../demo/release_cpp.html">C++ Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo/release_python.html">Python Samples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SophonInference</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>SAIL C++ API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/module/bk/sail_cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sail-c-api">
+<h1>SAIL C++ API<a class="headerlink" href="#sail-c-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-function">
+<h2>Basic function<a class="headerlink" href="#basic-function" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). get_available_tpu_num</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the number of available TPUs.
+
+@return Number of available TPUs.
+
+int get_available_tpu_num();
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="data-type">
+<h2>Data type<a class="headerlink" href="#data-type" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). bm_data_type_t</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">bm_data_type_t</span> <span class="p">{</span>
+  <span class="n">BM_FLOAT32</span><span class="p">,</span>     <span class="c1">// float32</span>
+  <span class="n">BM_FLOAT16</span><span class="p">,</span>     <span class="c1">// not supported for now</span>
+  <span class="n">BM_INT8</span><span class="p">,</span>        <span class="c1">// int8</span>
+  <span class="n">BM_UINT8</span>        <span class="c1">// unsigned int8</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="handle">
+<h2>Handle<a class="headerlink" href="#handle" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). Handle Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor using existed bm_handle_t.
+
+@param handle A bm_handle_t
+
+Handle(bm_handle_t handle);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). Handle Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor with device id.
+
+@param dev_id Device id
+
+Handle(int dev_id);
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get inner bm_handle_t.
+
+@return Inner bm_handle_t
+
+bm_handle_t data();
+</pre></div>
+</div>
+</dd>
+<dt><strong>4). free</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Free inner bm_handle_t.
+
+void free();
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="tensor">
+<h2>Tensor<a class="headerlink" href="#tensor" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). Tensor Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Common constructor.
+@detail
+ case 0: only allocate system memory
+         (handle, shape, dtype, true, false)
+ case 1: only allocate device memory
+         (handle, shape, dtype, false, true)
+ case 2: allocate system memory and device memory
+         (handle, shape, dtype, true, true)
+
+@param handle       Handle instance
+@param shape        Shape of the tensor
+@param own_sys_data Indicator of whether own system memory.
+@param own_dev_data Indicator of whether own device memory.
+
+explicit Tensor(
+    Handle                  handle,
+    const std::vector&lt;int&gt;&amp; shape,
+    bm_data_type_t          dtype,
+    bool                    own_sys_data,
+    bool                    own_dev_data);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). Tensor Copy Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy constructor.
+
+@param tensor A Tensor instance
+
+Tensor(const Tensor&amp; tensor);
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). Tensor Assign Function</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Assignment function.
+
+@param tensor A Tensor instance
+@return A Tensor instance
+
+Tensor&amp; operator=(const Tensor&amp; tensor);
+</pre></div>
+</div>
+</dd>
+<dt><strong>4). shape</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get shape of the tensor.
+
+@return Shape of the tensor
+
+const std::vector&lt;int&gt;&amp; shape() const;
+</pre></div>
+</div>
+</dd>
+<dt><strong>5). dtype</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of the tensor.
+
+@return Data type of the tensor
+
+void dtype();
+</pre></div>
+</div>
+</dd>
+<dt><strong>6). reshape</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset shape of the tensor.
+
+@param shape Shape of the tensor
+
+void reshape(const std::vector&lt;int&gt;&amp; shape);
+</pre></div>
+</div>
+</dd>
+<dt><strong>7). own_sys_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the tensor owns data in system memory.
+
+@return True for owns data in system memory.
+
+bool own_sys_data();
+</pre></div>
+</div>
+</dd>
+<dt><strong>8). own_dev_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the tensor owns data in device memory.
+
+@return True for owns data in device memory.
+
+bool own_dev_data();
+</pre></div>
+</div>
+</dd>
+<dt><strong>9). sys_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data pointer in system memory of the tensor.
+
+@return Data pointer in system memory of the tensor
+
+void* sys_data();
+</pre></div>
+</div>
+</dd>
+<dt><strong>10). dev_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get pointer to device memory of the tensor.
+
+@return Pointer to device memory of the tensor
+
+bm_device_mem_t* dev_data();
+</pre></div>
+</div>
+</dd>
+<dt><strong>11). reset_sys_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset data pointer in system memory of the tensor.
+
+@param data  Data pointer in system memory of the tensor
+@param shape Shape of the data
+
+void reset_sys_data(
+    viod*              data,
+    std::vector&lt;int&gt;&amp; shape);
+</pre></div>
+</div>
+</dd>
+<dt><strong>12). reset_dev_data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reset pointer to device memory of the tensor.
+
+@param data Pointer to device memory
+
+void reset_dev_data(bm_device_mem_t* data);
+</pre></div>
+</div>
+</dd>
+<dt><strong>13). sync_s2d</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from system memory to device memory.
+
+void sync_s2d();
+</pre></div>
+</div>
+</dd>
+<dt><strong>14). sync_s2d</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from system memory to device memory with specified size.
+
+@param size Byte size to be copied
+
+void sync_s2d(int size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>15). sync_d2s</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from device memory to system memory.
+
+void sync_d2s();
+</pre></div>
+</div>
+</dd>
+<dt><strong>16). sync_d2s</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy data from device memory to system memory with specified size.
+
+@param size Byte size to be copied
+
+void sync_d2s(int size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>17). free</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Free system and device memroy of the tensor.
+
+void free();
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="iomode">
+<h2>IOMode<a class="headerlink" href="#iomode" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). IOMode</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">IOMode</span> <span class="p">{</span>
+  <span class="c1">/// Input tensors are in system memory while output tensors are</span>
+  <span class="c1">/// in device memory.</span>
+  <span class="n">SYSI</span><span class="p">,</span>
+  <span class="c1">/// Input tensors are in device memory while output tensors are</span>
+  <span class="c1">/// in system memory.</span>
+  <span class="n">SYSO</span><span class="p">,</span>
+  <span class="c1">/// Both input and output tensors are in system memory.</span>
+  <span class="n">SYSIO</span><span class="p">,</span>
+  <span class="c1">/// Both input and output tensors are in device memory.</span>
+  <span class="n">DEVIO</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="engine">
+<h2>Engine<a class="headerlink" href="#engine" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor does not load bmodel.
+
+@param tpu_id TPU ID. You can use bm-smi to see available IDs.
+
+Engine(int tpu_id);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor loads bmodel from file.
+
+@param bmodel_path Path to bmodel
+@param tpu_id      TPU ID. You can use bm-smi to see available IDs.
+@param mode        Specify the input/output tensors are in system memory
+                   or device memory
+Engine(
+    const std::string&amp; bmodel_path,
+    int                tpu_id,
+    IOMode             mode);
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor loads bmodel from system memory.
+
+@param bmodel_ptr  Pointer to bmodel in system memory
+@param bmodel_size Byte size of bmodel in system memory
+@param tpu_id      TPU ID. You can use bm-smi to see available IDs.
+@param mode        Specify the input/output tensors are in system memory
+                   or device memory
+
+Engine(
+    const void* bmodel_ptr,
+    size_t      bmodel_size,
+    int         tpu_id,
+    IOMode      mode);
+</pre></div>
+</div>
+</dd>
+<dt><strong>4). Engine Copy Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Copy constructor.
+
+@param other An other Engine instance.
+
+Engine(const Engine&amp; other);
+</pre></div>
+</div>
+</dd>
+<dt><strong>5). Engine Assign Function</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Assignment function.
+
+@param other An other Engine instance.
+@return Reference of a Engine instance.
+
+Engine&lt;Dtype&gt;&amp; operator=(const Engine&amp; other);
+</pre></div>
+</div>
+</dd>
+<dt><strong>6). get_handle</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get Handle instance.
+
+@return Handle instance
+
+Handle get_handle();
+</pre></div>
+</div>
+</dd>
+<dt><strong>7). load</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Load bmodel from file.
+
+@param bmodel_path Path to bmodel
+@return Program state
+    @retval true  Success
+    @retval false Failure
+
+bool load(const std::string&amp; bmodel_path);
+</pre></div>
+</div>
+</dd>
+<dt><strong>8). load</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Load bmodel from system memory.
+
+@param bmodel_ptr  Pointer to bmodel in system memory
+@param bmodel_size Byte size of bmodel in system memory
+@return Program state
+    @retval true  Success
+    @retval false Failure
+
+bool load(const void* bmodel_ptr, size_t bmodel_size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>9). get_graph_names</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all graph names in the loaded bomodels.
+
+@return All graph names
+
+std::vector&lt;std::string&gt; get_graph_names();
+</pre></div>
+</div>
+</dd>
+<dt><strong>10). set_io_mode</strong></dt>
+<dd></dd>
+<dt><strong>11). graph_is_dynamic</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Jugde if the graph is dynamic.
+
+@param graph_name The specified graph name
+@return 0 for dynamic and 1 for static
+
+bool graph_is_dynamic(const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>12). get_input_names</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all input tensor names of the specified graph.
+
+@param graph_name The specified graph name
+@return All the input tensor names of the graph
+
+std::vector&lt;std::string&gt; get_input_names(const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>13). get_output_names</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get all output tensor names of the specified graph.
+
+@param graph_name The specified graph name
+@return All the output tensor names of the graph
+
+std::vector&lt;std::string&gt; get_output_names(const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>14). get_max_input_shapes</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of input tensors in a graph.
+
+For static models, the max shape is fixed and it should not be changed.
+For dynamic models, the tensor shape should be smaller than or equal to
+the max shape.
+
+@param graph_name The specified graph name
+@return Max shape of input tensors
+
+std::map&lt;std::string, std::vector&lt;int&gt;&gt; get_max_input_shapes(
+    const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>15). get_input_shape</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an input tensor in a graph.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return The shape of the tensor
+
+std::vector&lt;int&gt; get_input_shape(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>16). get_max_output_shapes</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get max shapes of output tensors in a graph.
+
+For static models, the max shape is fixed and it should not be changed.
+For dynamic models, the tensor shape should be smaller than or equal to
+the max shape.
+
+@param graph_name The specified graph name
+@return Max shape of output tensors
+
+std::map&lt;std::string, std::vector&lt;int&gt;&gt; get_max_output_shapes(
+    const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>17). get_output_shape</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the shape of an output tensor in a graph.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return The shape of the tensor
+
+std::vector&lt;int&gt; get_output_shape(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>18). get_input_dtype</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of an input tensor. Refer to bmdef.h as following.
+  typedef enum {
+    BM_FLOAT32 = 0,
+    BM_FLOAT16 = 1,
+    BM_INT8 = 2,
+    BM_UINT8 = 3,
+    BM_INT16 = 4,
+    BM_UINT16 = 5,
+    BM_INT32 = 6,
+    BM_UINT32 = 7
+  } bm_data_type_t;
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return Data type of the input tensor
+
+bm_data_type_t get_input_dtype(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>19). get_output_dtype</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get data type of an output tensor. Refer to bmdef.h as following.
+  typedef enum {
+    BM_FLOAT32 = 0,
+    BM_FLOAT16 = 1,
+    BM_INT8 = 2,
+    BM_UINT8 = 3,
+    BM_INT16 = 4,
+    BM_UINT16 = 5,
+    BM_INT32 = 6,
+    BM_UINT32 = 7
+  } bm_data_type_t;
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return Data type of the input tensor
+
+bm_data_type_t get_output_dtype(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>20). get_input_scale</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an input tensor. Only used for int8 models.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return Scale of the input tensor
+
+float get_input_scale(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>21). get_output_scale</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get scale of an output tensor. Only used for int8 models.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return Scale of the output tensor
+
+float get_output_scale(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>22). reshape</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Reshape input tensor for dynamic models.
+
+The input tensor shapes may change when running dynamic models.
+New input shapes should be set before inference.
+
+@param graph_name   The specified graph name
+@param input_shapes Specified shapes of all input tensors of the graph
+@return 0 for success and 1 for failure
+
+int reshape(
+    const std::string&amp;                       graph_name,
+    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes);
+</pre></div>
+</div>
+</dd>
+<dt><strong>23). get_input_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified input tensor.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return The specified input tensor
+
+Tensor* get_input_tensor(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>24). get_output_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the specified output tensor.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@return The specified output tensor
+
+Tensor* get_output_tensor(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>25). scale_input_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale input tensor for int8 models.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@param data        Pointer to float data to be scaled
+
+void scale_input_tensor(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name,
+    float*             data);
+</pre></div>
+</div>
+</dd>
+<dt><strong>26). scale_output_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale output tensor for int8 models.
+
+@param graph_name  The specified graph name
+@param tensor_name The specified tensor name
+@param data        Pointer to float data to be scaled
+
+void scale_output_tensor(
+    const std::string&amp; graph_name,
+    const std::string&amp; tensor_name,
+    float*             data);
+</pre></div>
+</div>
+</dd>
+<dt><strong>27). scale_fp32_to_int8</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from float32 to int8. Only used for int8 models.
+
+@param src   Poniter to float32 data
+@param dst   Poniter to int8 data
+@param scale Value of scale
+@param size  Size of data
+
+void scale_fp32_to_int8(float* src, int8_t* dst, float scale, int size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>28). scale_int8_to_fp32</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Scale data from int8 to float32. Only used for int8 models.
+
+@param src   Poniter to int8 data
+@param dst   Poniter to float32 data
+@param scale Value of scale
+@param size  Size of data
+
+void scale_int8_to_fp32(int8_t* src, float* dst, float scale, int size);
+</pre></div>
+</div>
+</dd>
+<dt><strong>29). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with builtin input and output tensors.
+
+@param graph_name The specified graph name
+
+void process(const std::string&amp; graph_name);
+</pre></div>
+</div>
+</dd>
+<dt><strong>30). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input tensors.
+
+@param graph_name    The specified graph name
+@param input_shapes  Shapes of all input tensors
+@param input_tensors Data pointers of all input tensors in system meory
+@param scale         Indicator of multiply scale for input tensors or not
+
+void process(
+    const std::string&amp;                       graph_name,
+    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes,
+    std::map&lt;std::string, void*&gt;&amp;            input_tensors);
+</pre></div>
+</div>
+</dd>
+<dt><strong>31). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors.
+
+@input Input tensors
+@output Output tensors
+
+void process(
+    const std::string&amp;              graph_name,
+    std::map&lt;std::string, Tensor*&gt;&amp; input,
+    std::map&lt;std::string, Tensor*&gt;&amp; output);
+</pre></div>
+</div>
+</dd>
+<dt><strong>32). process</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors and input shapes.
+
+@input        Input tensors
+@input_shapes Real input tensor shapes
+@output       Output tensors
+
+void process(
+    const std::string&amp;                       graph_name,
+    std::map&lt;std::string, Tensor*&gt;&amp;          input,
+    std::map&lt;std::string, std::vector&lt;int&gt;&gt;&amp; input_shapes,
+    std::map&lt;std::string, Tensor*&gt;&amp;          output);
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="decoder">
+<h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). Decoder Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
+
+@param file_path Path or rtsp url to the video/image file.
+
+Decoder(const std::string&amp; file_path);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). is_opened</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Judge if the source is opened successfully.
+
+@return True if the source is opened successfully
+
+bool is_opened();
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). read</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Read a bm_image from the Decoder.
+
+@param handle A bm_handle_t instance
+@param image Reference of bm_image to be read to
+@return 0 for success and 1 for failure
+
+int read(Handle&amp; handle, bm_image&amp; image);
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="bmcv">
+<h2>Bmcv<a class="headerlink" href="#bmcv" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). Bmcv Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
+
+@param handle A Handle instance
+
+explicit Bmcv(Handle handle);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). bm_image_to_tensor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert bm_image to tensor.
+
+@param img      Input image
+@param tensor   Output tensor
+
+void bm_image_to_tensor (bm_image &amp;img, Tensor &amp;tensor);
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). tensor_to_bm_image</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert tensor to bm_image.
+
+@param tensor   Input tensor
+@param img      Output image
+
+void tensor_to_bm_image (Tensor &amp;tensor, bm_image &amp;img);
+</pre></div>
+</div>
+</dd>
+<dt><strong>4). crop_and_resize</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop then resize an image.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int crop_and_resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>5). crop</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop an image with given window.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@return 0 for success and other for failure
+
+int crop(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>6). resize</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Resize an image with interpolation of INTER_NEAREST.
+
+@param input    Input image
+@param output   Output image
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>7). vpp_crop_and_resize</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop then resize an image using vpp.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int vpp_crop_and_resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>8). vpp_crop</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Crop an image with given window using vpp.
+
+@param input    Input image
+@param output   Output image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@return 0 for success and other for failure
+
+int vpp_crop(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>9). vpp_resize</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Resize an image with interpolation of INTER_NEAREST using vpp.
+
+@param input    Input image
+@param output   Output image
+@param resize_w Target width
+@param resize_h Target height
+@return 0 for success and other for failure
+
+int vpp_resize(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    int                          resize_w,
+    int                          resize_h);
+</pre></div>
+</div>
+</dd>
+<dt><strong>10). warp</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Applies an affine transformation to an image.
+
+@param input    Input image
+@param output   Output image
+@param matrix   2x3 transformation matrix
+@return 0 for success and other for failure
+
+int warp(
+    bm_image                           &amp;input,
+    bm_image                           &amp;output,
+    const std::pair&lt;
+      std::tuple&lt;float, float, float&gt;,
+      std::tuple&lt;float, float, float&gt;&gt; &amp;matrix);
+</pre></div>
+</div>
+</dd>
+<dt><strong>11). convert_to</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Applies a linear transformation to an image.
+
+@param input    Input image
+@param output   Output image
+@param matrix   (a0, b0), (a1, b1), (a2, b2) factors
+@return 0 for success and other for failure
+
+int convert_to(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output,
+    const std::tuple&lt;
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;&gt;   &amp;alpha_beta);
+</pre></div>
+</div>
+</dd>
+<dt><strong>12). yuv2bgr</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image from YUV to BGR.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int yuv2bgr(
+    bm_image                     &amp;input,
+    bm_image                     &amp;output);
+</pre></div>
+</div>
+</dd>
+<dt><strong>13). vpp_convert</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image to BGR PLANAR format using vpp.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int vpp_convert(
+    bm_image &amp;input,
+    bm_image &amp;output
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>14). convert</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image to BGR PLANAR format.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int convert(
+    bm_image &amp;input,
+    bm_image &amp;output
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>15). rectangle</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Draw a rectangle on input image.
+
+@param image      Input image
+@param x0         Start point x of rectangle
+@param y0         Start point y of rectangle
+@param w          Width of rectangle
+@param h          Height of rectangle
+@param color      Color of rectangle
+@param thickness  Thickness of rectangle
+@return 0 for success and other for failure
+
+int rectangle(
+    bm_image                        &amp;image,
+    int                             x0,
+    int                             y0,
+    int                             w,
+    int                             h,
+    const std::tuple&lt;int, int, int&gt; &amp;color,
+    int                             thickness=1
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>16). imwrite</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Save the image to the specified file.
+
+@param filename   Name of the file
+@param image      Image to be saved
+@return 0 for success and other for failure
+
+int imwrite(
+    const std::string &amp;filename,
+    bm_image          &amp;image
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>17). get_handle</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get Handle instance.
+
+@return Handle instance
+
+Handle get_handle();
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sophon
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

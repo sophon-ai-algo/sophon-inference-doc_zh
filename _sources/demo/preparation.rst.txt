@@ -1,8 +1,8 @@
-前言
-====
+Preface
+=======
 
-上一章中，我们对 BMNNSDK 与 Sophon Inference 的关系进行了梳理。
-在本章节，我们将带您运行 Sophon Inference 中的示例程序，即：
+In the previous chapter, we reviewed the relationship between BMNNSDK and Sophon Inference.
+In this section, we will walk you through the sample programs in Sophon Inference, namely:
 
 **C++ Samples Using BMNNSDK**
 
@@ -10,14 +10,14 @@
 
 **Python Samples (Algokit)**
 
-在此之前：
+Before this, please:
 
-a). 请确保您已正确安装了 BMNNSDK 并且运行 “bm-smi” 后可以正常显示设备。
-如没有，请参考《Sophon产品用户手册》。
+a). Make sure that you have properly installed BMNNSDK and that the device is displayed properly after running “bm-smi”.
+If not, please refer to the "Sophon Product User Manual".
 
-b). 请确认您已经完成 “1.2 Sophon Inference 编译” 步骤。
+b). Confirm that you have completed the "1.2 Sophon Inference Installation" step.
 
-c). 请执行脚本下载所需的图像、视频文件。
+c). Execute the script to download the required image and video files.
 
     .. code-block:: shell
 

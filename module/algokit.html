@@ -81,10 +81,10 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">图解 Sophon Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference 安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">注意事项</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/tools.html">常用工具介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">Introduction of  Sophon Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">Reminds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/tools.html">Useful Tools</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
@@ -93,8 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="autosplit.html">AutoSplit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autorunner.html">AutoRunner</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Algokit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">应用介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">应用添加</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-an-application-e-g-mobilenetssd">Add an application(e.g. mobilenetssd)</a></li>
 </ul>
 </li>
 </ul>
@@ -167,96 +167,94 @@
             
   <div class="section" id="algokit">
 <h1>Algokit<a class="headerlink" href="#algokit" title="Permalink to this headline">¶</a></h1>
-<p><strong>Algokit</strong> 是面向应用部署的 python 算法框架，
-目前提供了图像分类、检测、分割等计算机视觉领域的应用示例，用户可方便地添加自己的算法应用。
-<strong>Algokit</strong> 依赖于 SAIL 和 AutoRunner 提供的模型部署相关的接口。</p>
-<div class="section" id="id1">
-<h2>应用介绍<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p><strong>Algokit</strong> 中每个应用都是一个 algokit.engine.base_engine.BaseEngine 的子类的实例。
-应用的子类均实现在 algokit.algo_cv(计算机视觉)、algokit.algo_nlp(自然语言处理)、algokit.algo_speech(语音识别)
-这三个模块中。目前，我们已经提供了较为丰富的计算机视觉类应用。自然语言处理和语音识别的应用正在开发中。
-当前应用列表如下：</p>
+<p><strong>Algokit</strong> is a python module for sophon-inference application-oriented deployments that currently provides examples of computer vision applications such as image classification, detection, and segmentation.
+<strong>Algokit</strong> relies on the model deployment related interfaces provided by SAIL and AutoRunner.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Each application in <strong>Algokit</strong> is an instance of a subclass of algokit.engine.base_engine.BaseEngine.
+The subclasses are implemented under algokit.algo_cv, algokit.algo_nlp and algokit.algo_speech.
+By now, we have some computer vision applications under algokit.algo_cv.
+algo_nlp and algo_speech are still in development.</p>
+<p>Current application list is as follows:</p>
 <ul class="simple">
-<li><p>caffe 的通用图像分类模型</p></li>
+<li>Image classification using caffe model</li>
 </ul>
 <p>algokit.algo_cv.cls.general_classification.GeneralClassification</p>
 <ul class="simple">
-<li><p>mxnet 的通用图像分类模型</p></li>
+<li>Image classification using mxnet model</li>
 </ul>
 <p>algokit.algo_cv.cls.general_classification_mx.GeneralClassificationMX</p>
 <ul class="simple">
-<li><p>pytorch 的通用图像分类模型</p></li>
+<li>Image classification using pytorch model</li>
 </ul>
 <p>algokit.algo_cv.cls.general_classification_pt.GeneralClassificationPT</p>
 <ul class="simple">
-<li><p>tensorflow 的通用图像分类模型</p></li>
+<li>Image classification using tensorflow model</li>
 </ul>
 <p>algokit.algo_cv.cls.general_classification_tf.GeneralClassificationTF</p>
 <ul class="simple">
-<li><p>caffe 的 fasterrcnn_vgg16 检测模型</p></li>
+<li>Object detection of fasterrcnn_vgg16 using caffe model</li>
 </ul>
 <p>algokit.algo_cv.det.object_detection_fasterrcnn.ObjectDetectionFASTERRCNN</p>
 <ul class="simple">
-<li><p>tensorflow 的 fasterrcnn_resnet50 检测模型</p></li>
+<li>Object detection of fasterrcnn_resnet50 using tensorflow model</li>
 </ul>
 <p>algokit.algo_cv.det.object_detection_fasterrcnn_resnet50_tf.ObjectDetectionFASTERRCNNRESNET50TF</p>
 <ul class="simple">
-<li><p>caffe 的 mobilenetssd 检测模型</p></li>
+<li>Object detection of mobilenetssd using caffe model</li>
 </ul>
 <p>algokit.algo_cv.det.object_detection_mobilenetssd.ObjectDetectionMOBILENETSSD</p>
 <ul class="simple">
-<li><p>caffe 的 mobilenetyolov3 检测模型</p></li>
+<li>Object detection of mobilenetyolov3 using caffe model</li>
 </ul>
 <p>algokit.algo_cv.det.object_detection_mobilenetyolov3.ObjectDetectionMOBILENETYOLOV3</p>
 <ul class="simple">
-<li><p>caffe 的 yolov3 检测模型</p></li>
+<li>Object detection of yolov3 using caffe model</li>
 </ul>
 <p>algokit.algo_cv.det.object_detection_yolov3.ObjectDetectionYOLOV3</p>
 <ul class="simple">
-<li><p>mxnet 的 yolov3 检测模型</p></li>
+<li>Object detection of yolov3 using mxnet model</li>
 </ul>
 <p>algokit.algo_cv.det.object_detection_yolov3_mx.ObjectDetectionYOLOV3MX</p>
 <ul class="simple">
-<li><p>caffe 的 mtcnn 检测模型</p></li>
+<li>Face detection of mtcnn using caffe model</li>
 </ul>
 <p>algokit.algo_cv.det.face_detection_mtcnn.FaceDetectionMTCNN</p>
 <ul class="simple">
-<li><p>caffe 的 ssh 检测模型</p></li>
+<li>Face detection of ssh using caffe model</li>
 </ul>
 <p>algokit.algo_cv.det.face_detection_ssh.FaceDetectionSSH</p>
 <ul class="simple">
-<li><p>tensorflow 的 mobilenetv2_deeplab_v3 分割模型</p></li>
+<li>Segementation of mobilenetv2_deeplabv3 using tensorflow model</li>
 </ul>
 <p>algokit.algo_cv.seg.semantic_segmentation_deeplabv3_mobilenetv2_tf.SemanticSegmentationDEEPLABV3MOBILENETV2TF</p>
-<p>根据应用的类别与它们所依赖的模块，我们通过工厂类来统一创建应用，
-工厂类均实现在 algokit.algofactory 模块中，目前包括：</p>
+<p>We use factories to create aplication based on their categories and dependencies.
+While the factories are all under algokit.algofactory module.
+Current include:</p>
 <ul class="simple">
-<li><p>通用图像分类应用的工厂类</p></li>
+<li>General Image classification</li>
 </ul>
 <p>algokit.algofactory.generalclassification_factory.GeneralClassifier</p>
 <ul class="simple">
-<li><p>常用目标检测应用的工厂类</p></li>
+<li>Object detection</li>
 </ul>
 <p>algokit.algofactory.objectdetection_factory.ObjectDetector</p>
 <ul class="simple">
-<li><p>人脸检测应用的工厂类</p></li>
+<li>Face Detection</li>
 </ul>
 <p>algokit.algofactory.facedetection_factory.FaceDetector</p>
 <ul class="simple">
-<li><p>使用了 auto_deploy 模块进行应用部署的工厂类</p></li>
+<li>Applications using auto_deploy</li>
 </ul>
 <p>algokit.algofactory.autodeploy_factory.ObjectDetector</p>
 <p>algokit.algofactory.autodeploy_factory.SemanticSegment</p>
-<p>对于 SAIL， <strong>Algokit</strong> 实现了自己的 engine 模块，其内部封装了 SAIL 的 engine 类，
-实现了 bmodel 的加载和运行。”generalclassification_factory“、”objectdetection_factory“、
-”facedetection_factory“ 均依赖于 engine 模块驱动 TPU 加载并运行 bmodel。
-对于 AutoDeploy， <strong>Algokit</strong> 封装了其 split、convert、infer 函数，封装后实现了 ”autodeploy_factory“ 模块。</p>
+<p>For SAIL, <strong>Algokit</strong> implements its own engine, which encapsulates SAIL’s engine class and implements bmodel loading and running.
+“generalclassification_factory”, “objectdetection_factory” and “facedetection_factory” are all based on engine module to drive TPU for reasoning.
+For AutoDeploy, <strong>Algokit</strong> encapsulates its split, convert, and infer functions, and implements the “autodeploy_factory” module after encapsulation.</p>
 </div>
-<div class="section" id="id2">
-<h2>应用添加<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>用户可以参照 algokit 已经的实现的应用添加自己的应用，
-本小节将介绍如何添加自己的应用到 algokit 中。</p>
-<p><strong>1). 实现一个 BaseEngine 的子类</strong></p>
+<div class="section" id="add-an-application-e-g-mobilenetssd">
+<h2>Add an application(e.g. mobilenetssd)<a class="headerlink" href="#add-an-application-e-g-mobilenetssd" title="Permalink to this headline">¶</a></h2>
+<p><strong>1). Creates a new class for the specified algorithm</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># MobilenetSSD belong to CV detection algorithm</span>
 <span class="c1"># Create the new class in algokit/algo_cv/det</span>
@@ -287,7 +285,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>2). 在对应的工厂类中添加分支</strong></p>
+<p><strong>2). Add corresponding branch in the algorithm factory</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the new branch in algokit/algofactory/objectdetection_factory</span>
 <span class="c1"># 1. Add branch in create method</span>
@@ -309,7 +307,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>3). 在 algokit 中注册对应的应用类型</strong></p>
+<p><strong>3). Add a new algorithm type in algokit global config</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the new algorithm type in algokit/kitconfig</span>
 <span class="k">class</span> <span class="nc">ObjDetModel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -321,7 +319,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>4). 为新应用添加配置文件</strong></p>
+<p><strong>4). Add a new model description config file</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the new model description config file in algokit/engine/engineconfig</span>
 <span class="c1"># Create new json file: bm1682_mobilenetssd.json</span>

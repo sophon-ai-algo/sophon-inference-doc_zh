@@ -94,9 +94,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../module/sail.html">SAIL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module/sail_cpp.html">SAIL C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module/sail_python.html">SAIL Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../module/autosplit.html">AutoSplit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../module/autorunner.html">AutoRunner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../module/algokit.html">Algokit</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../demo/release_cpp.html">C++ Samples</a></li>
@@ -169,17 +166,17 @@
 <h1>Sophon Inference 安装<a class="headerlink" href="#sophon-inference" title="Permalink to this headline">¶</a></h1>
 <p>针对不同的应用场景，BITMAIN基于BM168x芯片提供了PCIE和SOC两种产品形态，对应于两种不同的运行模式：</p>
 <ul class="simple">
-<li><p>PCIE模式：SDK运行于X86平台，BM168x作为PCIE接口的深度学习计算加速卡存在；</p></li>
-<li><p>SOC模式：SDK独立运行于BM168x平台，支持通过千兆以太网与其他设备连接。</p></li>
+<li>PCIE模式：SDK运行于X86平台，BM168x作为PCIE接口的深度学习计算加速卡存在；</li>
+<li>SOC模式：SDK独立运行于BM168x平台，支持通过千兆以太网与其他设备连接。</li>
 </ul>
 <p>BMNNSDK支持以上两种运行模式，在应用接口上完全兼容，请根据产品形态和需求下载对应的BMNNSDK进行安装。
-需要注意的是，在 SOC 模式下，BMNNSDK 中不包含 BMCompiler 模块，
-您可在 PCIE 模式下使用 BMCompiler 完成模型的离线编译(不需要安装 SC3 加速卡)，
+需要注意的是，在 SOC 模式下，BMNNSDK 中不包含 Calibration_tools、BMCompiler 模块，
+您可在 PCIE 模式下使用 BMCompiler (and Calibration_tools) 完成模型的离线编译(不需要安装 SC3 加速卡)，
 编译生成的 bmodel 可以在 SOC 模式下加载并运行。</p>
 <p>目前 SophonInference 支持 PCIE 模式与SOC 模式。
 对于 SOC 模式，Sophon Inference 已经预装在 Sophon SE3 产品上，
-包含了 SAIL(cpp) 的头文件与链接库文件以及 SAIL、AutoRunner、Algokit(python3)等python模块。
-对于 PCIE 模式，我们也提供了 SAIL (cpp) 的头文件与链接库文件以及 SAIL、AutoSplit、AutoRunner、Algokit(python3) 等python模块。</p>
+包含了 SAIL(cpp) 的头文件与链接库文件以及 SAIL_python 模块。
+对于 PCIE 模式，我们也提供了 SAIL (cpp) 的头文件与链接库文件以及 SAIL_python 模块。</p>
 <div class="section" id="pcie">
 <h2>PCIE 模式<a class="headerlink" href="#pcie" title="Permalink to this headline">¶</a></h2>
 <p><strong>a).依赖</strong></p>

@@ -4,40 +4,42 @@ C++ Samples Using BMNNSDK
 VPU decode
 __________
 
-**简介**
+**Introduction**
 
-这个示例程序实现了读取本地的视频文件，
-并驱动 Sophon 深度学习加速卡上的 VPU 硬件单元对该视频文件进行解码。
+This sample program implements reading a local video file,
+and drive the VPU hardware unit on the Sophon Deep Learning Acceleration Card to decode the video file.
 
-程序源文件位于：“samples/cpp_bmnnsdk/vpu_decode/” 目录下。
+The program source file is located under: "samples/cpp_bmnnsdk/vpu_decode".
 
-**程序运行**
+**Execution**
 
     .. code-block:: shell
 
-       # -v 待解码的本地视频文件
-       # -t 需要开启的线程数量，每个线程独立解码一份视频文件的副本
-       # -i 需要使用的SC3的序号
+       # -v Local video file to be decoded.
+       # -t The number of threads that need to be opened, 
+       #    each thread independently decodes a copy of the video file.
+       # -i The serial number of the SC3 to be used on host.
        ./build/bin/vpu_decode -v $HOME/.sophon/data/fenix5plus.mp4 -t 1 -i 0
 
 run_inceptionv1
 _______________
 
-**简介**
+**Introduction**
 
-这个示例程序实现了将 inceptionv1 分类模型部署在 Sophon TPU 上。
-该 inceptionv1 来自 caffe 官方 model zoo。
-由于该程序是基于 BMNNSDK 提供的原生接口编写的，因此如果您对接口细节有疑问，
-请参考《NNToolChain用户文档》。
+This sample program implements deploying the inceptionv1 classification model on the Sophon TPU.
+The inceptionv1 comes from the caffe official model zoo.
+Since the program is written based on the native interfaces provided by BMNNSDK, 
+if you have questions about the details of the interface,
+please refer to the "NNToolChain User Documentation".
 
-程序源文件位于：“samples/cpp_bmnnsdk/run_inceptionv1” 目录下。
+The program source file is located under: "samples/cpp_bmnnsdk/run_inceptionv1".
 
-**程序运行**
+**Execution**
 
     .. code-block:: shell
 
-       # 下载并编译模型，生成 bmodel
+       # Download and convert model, generate bmodel file.
        python3 tools/download_and_convert.py googlenet
 
-       # 加载 bmodel，驱动 TPU 完成推理
+       # load bmodel，drive TPU to complete reasoning.
        ./build/bin/run_inceptionv1 $HOME/.sophon/models/googlenet_ir $HOME/.sophon/data/cls_imgs/cls_1.jpg

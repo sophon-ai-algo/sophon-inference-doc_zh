@@ -1,10 +1,9 @@
 SAIL
 ====
 
-SAIL 是 Sophon Inference 中的支撑模块，
-AutoDeploy、Algokit 以及 Samples 中的大部分代码都建立在 SAIL 的基础上。
+SAIL 是 Sophon Inference 中的核心模块，
 
-SAIL 对 BMNNSDK 中的 BMRuntime、BMDNN、BMCV、BMLib 进行了封装，
+SAIL 对 BMNNSDK 中的 BMLib、BMDecoder、BMCV、BMRuntime 进行了封装，
 将 BMNNSDK 中原有的 “加载 bmodel 并驱动 TPU 推理”、
 “驱动 TPU 做图像处理”、“驱动 VPU 做图像和视频解码”
 等功能抽象成更为简单的 C++ 接口对外提供；

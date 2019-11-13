@@ -89,9 +89,6 @@
 <li class="toctree-l1"><a class="reference internal" href="module/sail.html">SAIL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module/sail_cpp.html">SAIL C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module/sail_python.html">SAIL Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module/autosplit.html">AutoSplit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module/autorunner.html">AutoRunner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module/algokit.html">Algokit</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo/release_cpp.html">C++ Samples</a></li>
@@ -162,46 +159,45 @@
             
   <div class="section" id="sophon-inference">
 <h1>Sophon Inference 中文文档<a class="headerlink" href="#sophon-inference" title="Permalink to this headline">¶</a></h1>
-<p><strong>温馨提示</strong></p>
-<p>在使用 Sophon Inference 之前，请确保您已经安装了比特大陆 Sophon-SC3 TPU 与 软件开发包 BMNNSDK;
-并且阅读了《NNToolChain用户文档》与《BMCV 用户文档》。</p>
-<p><strong>版权声明</strong></p>
-<p>版权所有 © 2019 北京比特大陆科技有限公司，未经比特大陆事先
-书面许可，不得以任何形式或方式复制、传播本文档的任何内容。
-如需获取更多信息，请浏览比特大陆官方网站 www.sophon.ai。</p>
-<table class="docutils align-default">
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="_images/logo.png" src="_images/logo.png" style="width: 200.0px; height: 200.0px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><strong>法律声明</strong></div>
+<div class="line">版权所有 © 北京比特大陆科技有限公司 2019。 保留一切权利。</div>
+<div class="line">非经本公司书面许可，任何单位和个人不得擅自摘抄、复制本文档内容的部分或全部，并不得以任何形式传播。</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>注意</strong></div>
+<div class="line">您购买的产品、服务或特性等应受比特大陆公司商业合同和条款的约束，本文档中描述的全部或部分产品、服务或 特性可能不在您的购买或使用范围之内。除非合同另有约定，比特大陆公司对本文档内容不做任何明示或默示的声明或保证。 由于产品版本升级或其他原因，本文档内容会不定期进行更新。除非另有约定，本文档仅作为使用指导，本文档中的所有陈述、信息和建议不构成任何明示或暗示的担保。</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>技术支持</strong></div>
+<div class="line">北京比特大陆科技有限公司</div>
+<div class="line">地址：北京市海淀区黑泉路宝盛南路1号院奥北科技园25号楼</div>
+<div class="line">邮编：100192</div>
+<div class="line">网址：www.sophon.ai</div>
+<div class="line">邮箱：<a class="reference external" href="mailto:support&#46;ai&#37;&#52;&#48;bitmain&#46;com">support<span>&#46;</span>ai<span>&#64;</span>bitmain<span>&#46;</span>com</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>发布记录</strong></div>
+</div>
+<table border="1" class="colwidths-given docutils">
 <colgroup>
-<col style="width: 16%" />
-<col style="width: 24%" />
-<col style="width: 20%" />
-<col style="width: 39%" />
+<col width="20%" />
+<col width="25%" />
+<col width="55%" />
 </colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>___Date___</p></th>
-<th class="head"><p>_____Editor_____</p></th>
-<th class="head"><p>___Version___</p></th>
-<th class="head"><p>__________Remarks__________</p></th>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">版本</th>
+<th class="head">发布时间</th>
+<th class="head">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr class="row-even"><td><p>2019.06.12</p></td>
-<td><p>zhenpeng.xiao</p></td>
-<td><p>1.1.3</p></td>
-<td><p>First Version</p></td>
-</tr>
-<tr class="row-odd"><td><p>2019.07.23</p></td>
-<td><p>zhenpeng.xiao
-haipeng.wan
-hong.liu</p></td>
-<td><p>1.1.3.2</p></td>
-<td><p>For all in one</p></td>
-</tr>
-<tr class="row-even"><td><p>2019.08.28</p></td>
-<td><p>zhenpeng.xiao
-haipeng.wan
-hong.liu</p></td>
-<td><p>2.0.0</p></td>
-<td><p>BM1684 available</p></td>
+<tbody valign="top">
+<tr class="row-even"><td>V2.0.1</td>
+<td>2019.11.15</td>
+<td>第一次发布。</td>
 </tr>
 </tbody>
 </table>
@@ -210,8 +206,8 @@ hong.liu</p></td>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart/abstract.html">图解 Sophon Inference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart/abstract.html#bmnnsdk">BMNNSDK</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart/abstract.html#id1">模型部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart/abstract.html#bmnnsdk">BMNNSDK</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart/abstract.html#id2">Sophon Inference</a></li>
 </ul>
 </li>
@@ -255,22 +251,6 @@ hong.liu</p></td>
 <li class="toctree-l2"><a class="reference internal" href="module/sail_python.html#sail-bmcv">sail.Bmcv</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="module/autosplit.html">AutoSplit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module/autosplit.html#graph-infos-json">graph_infos.json</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module/autosplit.html#split">split</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module/autosplit.html#convert">convert</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module/autorunner.html">AutoRunner</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module/autorunner.html#load">load</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module/autorunner.html#infer">infer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module/algokit.html">Algokit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module/algokit.html#id1">应用介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module/algokit.html#id2">应用添加</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
@@ -284,7 +264,6 @@ hong.liu</p></td>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="demo/release_python.html">Python Samples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="demo/release_python.html#run-yolov3">Run YoloV3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/release_python.html#run-faster-rcnn-tf">Run faster rcnn tf</a></li>
 </ul>
 </li>
 </ul>

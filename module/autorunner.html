@@ -81,10 +81,10 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">图解 Sophon Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference 安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">注意事项</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/tools.html">常用工具介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">Introduction of  Sophon Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">Reminds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/tools.html">Useful Tools</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
@@ -167,68 +167,74 @@
             
   <div class="section" id="autorunner">
 <h1>AutoRunner<a class="headerlink" href="#autorunner" title="Permalink to this headline">¶</a></h1>
-<p>AutoRunner 目前只支持 FP32 精度推理。</p>
-<p>AutoRunner 提供的接口可对通过 AutoSplit 切分生成的子模型进行推理。
-AutoRunner 的源码位于 “module/auto_runner/” 目录下，目前支持 tensorflow/mxnet。
-我们在 “auto_runner.api” 中提供了两个函数：</p>
+<p>AutoRunner only supports FP32 by now.</p>
+<p>Once you use AutoSplit to split and compile model, you can do inference through AutoRunner,
+without worrying about how to write the program to drive bmodel.
+The AutoRunner source codes are located in the “module/auto_runner/” directory and currently supports tensorflow/mxnet.
+We provide two functions in “auto_runner.api”, which are:</p>
 <ul class="simple">
-<li><p>load:</p></li>
+<li>load:</li>
 </ul>
-<p>解析指定目录下的 graph_infos.json 文件，顺序加载子模型，返回一个 Runner 的实例。</p>
+<p>Parse the “graph_infos.json” file in the specified directory,
+and load the submodels sequentially, return a Runner instance.</p>
 <ul class="simple">
-<li><p>infer：</p></li>
+<li>infer：</li>
 </ul>
-<p>使用传入的 Runner 实例与输入张量进行推理，返回推理结果。</p>
-<p>通常情况下 AutoRunner 需要和 AutoSplit 一起使用，但用户也可以手动切分并编译模型，
-只要将其按照 graph_infos.json 中所规定的形式保存即可。</p>
+<p>Use given Runner instance and input tensors to do inference sequentially.</p>
+<p>Usually AutoRunner needs to be used with AutoSplit,
+but users can also manually split and compile the model,
+as long as it is saved as specified in graph_infos.json.</p>
 <div class="section" id="load">
 <h2>load<a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h2>
-<p>该函数可以根据切分后模型目录下的 graph_infos.json 文件中的信息，对切分后的模型按顺序加载，获得对应的 Runner 实例。
-主要功能通过 Runner 类实现。
-<strong>Runner</strong> 在初始化时顺序加载 graph_infos.json 中 graphs 列表中的模型。如果 device 属性为 cpu，
-那么就调用原深度学习框架中的相关 api，根据 model_info 属性加载模型；
-如果 device 属性为 tpu，
-那么就调用 SAIL 的 engine 类，根据 context_dir 属性加载模型。</p>
-<p>函数说明如下，详见模块： <strong>auto_deploy.common.base_runner</strong> 和 <strong>auto_deploy.runner</strong> 。</p>
+<p>This function can load the splitted submodels based on the information in the “graph_infos.json” file in the specified directory after splitting.
+The main function is implemented by the Runner class.
+<strong>Runner</strong> sequentially loads the submodels in the graphs list in “graph_infos.json” at initialization time.
+If the device attribute of the submodel is cpu,
+then the related api in the original deep learning framework is called,
+and the model is loaded according to the model_info attribute;
+If the device attribute of the submodel is tpu,
+then SAIL’s engine class is called, and the model is loaded according to the context_dir attribute.</p>
+<p>Description of fucntions is as follows.
+For details, refer to modules: <strong>auto_deploy.common.base_runner</strong> and <strong>auto_deploy.runner</strong>.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@exception_wrapper</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Met an Error when load model.&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">graphs_in_memory</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; load all the subgraphs in a runner.</span>
+  <span class="sd">&quot;&quot;&quot; load all the subgraphs in a runner.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">      folder: Directory path that contains splitted models and &#39;graph_infos.json&#39;.</span>
+<span class="sd">  Args:</span>
+<span class="sd">    folder: Directory path that contains splitted models and &#39;graph_infos.json&#39;.</span>
 
-<span class="sd">      Format of &#39;graph_infos.json&#39;:</span>
-<span class="sd">      {</span>
-<span class="sd">        &quot;graph_num&quot;: graph_numbmer,</span>
-<span class="sd">        &quot;platform&quot;: &quot;mxnet&quot;</span>
-<span class="sd">        &quot;layout&quot;: &quot;NCHW&quot;</span>
-<span class="sd">        &quot;dynamic&quot;: False</span>
-<span class="sd">        &quot;graphs&quot;: [</span>
-<span class="sd">          {</span>
-<span class="sd">            &quot;device&quot;: &quot;cpu&quot;,</span>
-<span class="sd">            &quot;inputs&quot;: list of input tensor names,</span>
-<span class="sd">            &quot;outputs&quot;: list of output tensor names,</span>
-<span class="sd">            &quot;model_info&quot;: {</span>
-<span class="sd">              &quot;json&quot;: json_file_path,</span>
-<span class="sd">              &quot;params&quot;: params_file_path</span>
-<span class="sd">            }</span>
+<span class="sd">    Format of &#39;graph_infos.json&#39;:</span>
+<span class="sd">    {</span>
+<span class="sd">      &quot;graph_num&quot;: graph_numbmer,</span>
+<span class="sd">      &quot;platform&quot;: &quot;mxnet&quot;</span>
+<span class="sd">      &quot;layout&quot;: &quot;NCHW&quot;</span>
+<span class="sd">      &quot;dynamic&quot;: False</span>
+<span class="sd">      &quot;graphs&quot;: [</span>
+<span class="sd">        {</span>
+<span class="sd">          &quot;device&quot;: &quot;cpu&quot;,</span>
+<span class="sd">          &quot;inputs&quot;: list of input tensor names,</span>
+<span class="sd">          &quot;outputs&quot;: list of output tensor names,</span>
+<span class="sd">          &quot;model_info&quot;: {</span>
+<span class="sd">            &quot;json&quot;: json_file_path,</span>
+<span class="sd">            &quot;params&quot;: params_file_path</span>
 <span class="sd">          }</span>
-<span class="sd">        ]</span>
-<span class="sd">        &quot;tensors&quot;: [</span>
-<span class="sd">          {</span>
-<span class="sd">            &quot;name&quot;: name,</span>
-<span class="sd">            &quot;shape&quot;: list for shape,</span>
-<span class="sd">            &quot;attr&quot;: &quot;input&quot; or &quot;output&quot; or &quot;intermediate&quot;</span>
-<span class="sd">          }</span>
-<span class="sd">        ]</span>
-<span class="sd">      }</span>
-<span class="sd">      input_tensors: Input tensors. Format: {name: value}.</span>
-<span class="sd">      graphs_in_memory: A dict of graphs which already read in memory.</span>
+<span class="sd">        }</span>
+<span class="sd">      ]</span>
+<span class="sd">      &quot;tensors&quot;: [</span>
+<span class="sd">        {</span>
+<span class="sd">          &quot;name&quot;: name,</span>
+<span class="sd">          &quot;shape&quot;: list for shape,</span>
+<span class="sd">          &quot;attr&quot;: &quot;input&quot; or &quot;output&quot; or &quot;intermediate&quot;</span>
+<span class="sd">        }</span>
+<span class="sd">      ]</span>
+<span class="sd">    }</span>
+<span class="sd">    input_tensors: Input tensors. Format: {name: value}.</span>
+<span class="sd">    graphs_in_memory: A dict of graphs which already read in memory.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">      An instance of Runner.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">  Returns:</span>
+<span class="sd">    An instance of Runner.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
