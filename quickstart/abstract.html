@@ -196,31 +196,38 @@ bmnetc(caffe)，bmnett(tensorflow)，bmnetm(mxnet)，bmnetp(pytorch)。</p>
 <p><strong>Quantization &amp; Calibration 工具</strong>
 ：是模型量化工具，它可以将您训练生成的 FP32 精度的模型量化为 INT8 精度的模型，
 可以实现上图中将 fp32_umodel 转化为 int8_umodel 的过程。</p>
+<p>在线文档链接：<a class="reference external" href="https://sophon-ai-algo.github.io/calibration_tools-doc/">https://sophon-ai-algo.github.io/calibration_tools-doc/</a></p>
 <p><strong>BMCompiler</strong>
 ：是一组模型编译工具，它能将您训练好的深度学习模型编译成可被 Sophon TPU 加载并执行的指令集合，
 并将这些指令保存到一个后缀名为 “bmodel” 的文件中。工具支持直接将 FP32 的模型编译为 bmodel，
 也支持将经过 Quantization &amp; Calibration 工具量化生成的 INT8 模型编译为 bmodel。</p>
+<p>在线文档链接：<a class="reference external" href="https://sophon-ai-algo.github.io/bmnnsdk-doc/">https://sophon-ai-algo.github.io/bmnnsdk-doc/</a></p>
 <p><strong>BMDriver</strong>
 ：是 Sophon TPU 的驱动程序，采用 “insmod” 的方式安装到您的操作系统内核中。</p>
 <p><strong>BMLib</strong>
 : 是一系列底层接口，主要管理主机内存与 TPU 内存之间的交互。</p>
+<p>在线文档链接：<a class="reference external" href="https://sophon-ai-algo.github.io/bmlib_1684-doc/">https://sophon-ai-algo.github.io/bmlib_1684-doc/</a></p>
 <p><strong>BMDecoder</strong>
 ：提供了一系列的基于 TPU 的图像、视频编解码接口。</p>
+<p>在线文档链接：<a class="reference external" href="https://sophon-ai-algo.github.io/bm_multimedia/">https://sophon-ai-algo.github.io/bm_multimedia/</a></p>
 <p><strong>BMCV</strong>
 ：提供了一系列的基于 TPU 的图像处理、张量计算接口。</p>
+<p>在线文档链接：<a class="reference external" href="https://sophon-ai-algo.github.io/bmcv_1684-doc/">https://sophon-ai-algo.github.io/bmcv_1684-doc/</a></p>
 <p><strong>BMRuntime</strong>
 ：提供的接口可以将 “bmodel” 文件加载到 Sophon TPU 上并驱动 TPU 芯片实现推理。</p>
-<p>如果您还有关于BMNNSDK的任何疑问，请参考《NNToolChain用户手册》、《BMCV用户手册》。</p>
+<p>在线文档链接：<a class="reference external" href="https://sophon-ai-algo.github.io/bmnnsdk-doc/">https://sophon-ai-algo.github.io/bmnnsdk-doc/</a></p>
 </div>
 <div class="section" id="id2">
 <h2>Sophon Inference<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>Sophon Inference 目前主要包括上图中的 SAIL 模块。
+<p>Sophon Inference 目前主要包括上图中的 SAIL(Sophon Artificial Intelligent Library) 模块。
 我们提供了python/c++的接口与示例程序，您可以根据您的需要选择合适的调用方式。</p>
 <p><strong>SAIL</strong>
-：对 BMNNSDK 中的 BMLib、BMDecoder、BMCV、BMRuntime 进行了封装，提供C++/Python接口，可用于
-a).驱动 TPU 对经过编译后的深度学习模型进行推理;
-b).使用Sophon TPU做图像、视频处理;
-模型转化以及图像、视频处理的详细介绍请参考《NNToolChain用户文档》与《BMCV用户文档》。</p>
+：对 BMNNSDK 中的 BMLib、BMDecoder、BMCV、BMRuntime 进行了封装，提供C++/Python接口，可用于</p>
+<p>a).驱动 TPU 对经过编译后的深度学习模型进行推理;</p>
+<p>b).使用Sophon TPU做图像、视频处理;</p>
+<p>在线文档链接：</p>
+<p>中文：<a class="reference external" href="https://sophon-ai-algo.github.io/sophon-inference-doc_zh/">https://sophon-ai-algo.github.io/sophon-inference-doc_zh/</a></p>
+<p>英文：<a class="reference external" href="https://sophon-ai-algo.github.io/sophon-inference-doc_en/">https://sophon-ai-algo.github.io/sophon-inference-doc_en/</a></p>
 </div>
 </div>
 

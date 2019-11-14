@@ -675,13 +675,16 @@ ___________
 
     .. code-block:: python
 
-        def bm_image_to_tensor(image, tensor):
-            """ Convert bm_image to tensor.
+        def bm_image_to_tensor(image):
+            """ Convert image to tensor.
 
             Parameters
             ----------
             image : sail.BMImage
                 BMImage instance
+
+            Returns
+            -------
             tensor : sail.Tensor
                 Tensor instance
             """
@@ -690,13 +693,16 @@ ___________
 
     .. code-block:: python
 
-        def tensor_to_bm_image(tensor, image):
-            """ Convert bm_image to tensor.
+        def tensor_to_bm_image(tensor):
+            """ Convert tensor to image.
 
             Parameters
             ----------
             tensor : sail.Tensor
                 Tensor instance
+
+            Returns
+            -------
             image : sail.BMImage
                 BMImage instance
             """
@@ -705,15 +711,13 @@ ___________
 
     .. code-block:: python
 
-        def crop_and_resize(input, output, crop_x0, crop_y0, crop_w, crop_h, resize_w, resize_h):
+        def crop_and_resize(input, crop_x0, crop_y0, crop_w, crop_h, resize_w, resize_h):
             """ Crop then resize an image.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             crop_x0 : int
                 Start point x of the crop window
             crop_y0 : int
@@ -729,23 +733,21 @@ ___________
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **5). crop**
 
     .. code-block:: python
 
-        def crop(input, output, crop_x0, crop_y0, crop_w, crop_h):
+        def crop(input, crop_x0, crop_y0, crop_w, crop_h):
             """ Crop an image with given window.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             crop_x0 : int
                 Start point x of the crop window
             crop_y0 : int
@@ -757,23 +759,21 @@ ___________
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **6). resize**
 
     .. code-block:: python
 
-        def resize(input, output, resize_w, resize_h):
+        def resize(input, resize_w, resize_h):
             """ Resize an image with interpolation of INTER_NEAREST.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             resize_w : int
                 Target width
             resize_h : int
@@ -781,23 +781,21 @@ ___________
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **7). vpp_crop_and_resize**
 
     .. code-block:: python
 
-        def vpp_crop_and_resize(input, output, crop_x0, crop_y0, crop_w, crop_h, resize_w, resize_h):
+        def vpp_crop_and_resize(input, crop_x0, crop_y0, crop_w, crop_h, resize_w, resize_h):
             """ Crop then resize an image using vpp.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             crop_x0 : int
                 Start point x of the crop window
             crop_y0 : int
@@ -813,23 +811,21 @@ ___________
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **8). vpp_crop**
 
     .. code-block:: python
 
-        def vpp_crop(input, output, crop_x0, crop_y0, crop_w, crop_h):
+        def vpp_crop(input, crop_x0, crop_y0, crop_w, crop_h):
             """ Crop an image with given window using vpp.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             crop_x0 : int
                 Start point x of the crop window
             crop_y0 : int
@@ -841,23 +837,21 @@ ___________
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **9). vpp_resize**
 
     .. code-block:: python
 
-        def vpp_resize(input, output, resize_w, resize_h):
+        def vpp_resize(input, resize_w, resize_h):
             """ Resize an image with interpolation of INTER_NEAREST using vpp.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             resize_w : int
                 Target width
             resize_h : int
@@ -865,112 +859,102 @@ ___________
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **10). warp**
 
     .. code-block:: python
 
-        def warp(input, output, matrix):
+        def warp(input, matrix):
             """ Applies an affine transformation to an image.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             matrix: 2d list
                 2x3 transformation matrix
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **11). convert_to**
 
     .. code-block:: python
 
-        def convert_to(input, output, alpha_beta):
+        def convert_to(input, alpha_beta):
             """ Applies a linear transformation to an image.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
             alpha_beta: tuple
                 (a0, b0), (a1, b1), (a2, b2) factors
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **12). yuv2bgr**
 
     .. code-block:: python
 
-        def yuv2bgr(input, output):
+        def yuv2bgr(input):
             """ Convert an image from YUV to BGR.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **13). vpp_convert**
 
     .. code-block:: python
 
-        def vpp_convert(input, output):
+        def vpp_convert(input):
             """ Convert an image to BGR PLANAR format using vpp.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **14). convert**
 
     .. code-block:: python
 
-        def convert(input, output):
+        def convert(input):
             """ Convert an image to BGR PLANAR format.
 
             Parameters
             ----------
             input : sail.BMImage
                 Input image
-            output : sail.BMImage
-                Output image
 
             Returns
             ----------
-            process_status : int
-                0 for success and others for failure
+            output : sail.BMImage
+                Output image
             """
 
 **15). rectangle**

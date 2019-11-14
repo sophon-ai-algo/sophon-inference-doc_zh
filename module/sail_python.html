@@ -836,13 +836,16 @@
 </div></blockquote>
 <p><strong>2). bm_image_to_tensor</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bm_image_to_tensor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tensor</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Convert bm_image to tensor.</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bm_image_to_tensor</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Convert image to tensor.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    image : sail.BMImage</span>
 <span class="sd">        BMImage instance</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    tensor : sail.Tensor</span>
 <span class="sd">        Tensor instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -851,13 +854,16 @@
 </div></blockquote>
 <p><strong>3). tensor_to_bm_image</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tensor_to_bm_image</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Convert bm_image to tensor.</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tensor_to_bm_image</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Convert tensor to image.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    tensor : sail.Tensor</span>
 <span class="sd">        Tensor instance</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    image : sail.BMImage</span>
 <span class="sd">        BMImage instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -866,15 +872,13 @@
 </div></blockquote>
 <p><strong>4). crop_and_resize</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crop_and_resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crop_and_resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Crop then resize an image.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    crop_x0 : int</span>
 <span class="sd">        Start point x of the crop window</span>
 <span class="sd">    crop_y0 : int</span>
@@ -890,23 +894,21 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>5). crop</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Crop an image with given window.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    crop_x0 : int</span>
 <span class="sd">        Start point x of the crop window</span>
 <span class="sd">    crop_y0 : int</span>
@@ -918,23 +920,21 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>6). resize</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Resize an image with interpolation of INTER_NEAREST.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    resize_w : int</span>
 <span class="sd">        Target width</span>
 <span class="sd">    resize_h : int</span>
@@ -942,23 +942,21 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>7). vpp_crop_and_resize</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_crop_and_resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_crop_and_resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Crop then resize an image using vpp.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    crop_x0 : int</span>
 <span class="sd">        Start point x of the crop window</span>
 <span class="sd">    crop_y0 : int</span>
@@ -974,23 +972,21 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>8). vpp_crop</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_crop</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_crop</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">crop_x0</span><span class="p">,</span> <span class="n">crop_y0</span><span class="p">,</span> <span class="n">crop_w</span><span class="p">,</span> <span class="n">crop_h</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Crop an image with given window using vpp.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    crop_x0 : int</span>
 <span class="sd">        Start point x of the crop window</span>
 <span class="sd">    crop_y0 : int</span>
@@ -1002,23 +998,21 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>9). vpp_resize</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_resize</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">resize_w</span><span class="p">,</span> <span class="n">resize_h</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Resize an image with interpolation of INTER_NEAREST using vpp.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    resize_w : int</span>
 <span class="sd">        Target width</span>
 <span class="sd">    resize_h : int</span>
@@ -1026,112 +1020,102 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>10). warp</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">warp</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">warp</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Applies an affine transformation to an image.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    matrix: 2d list</span>
 <span class="sd">        2x3 transformation matrix</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>11). convert_to</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_to</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">alpha_beta</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_to</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">alpha_beta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Applies a linear transformation to an image.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 <span class="sd">    alpha_beta: tuple</span>
 <span class="sd">        (a0, b0), (a1, b1), (a2, b2) factors</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>12). yuv2bgr</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">yuv2bgr</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">yuv2bgr</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Convert an image from YUV to BGR.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>13). vpp_convert</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_convert</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vpp_convert</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Convert an image to BGR PLANAR format using vpp.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><strong>14). convert</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Convert an image to BGR PLANAR format.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input : sail.BMImage</span>
 <span class="sd">        Input image</span>
-<span class="sd">    output : sail.BMImage</span>
-<span class="sd">        Output image</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    ----------</span>
-<span class="sd">    process_status : int</span>
-<span class="sd">        0 for success and others for failure</span>
+<span class="sd">    output : sail.BMImage</span>
+<span class="sd">        Output image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>

@@ -890,22 +890,32 @@ explicit Bmcv(Handle handle);
 </div>
 </dd>
 <dt><strong>2). bm_image_to_tensor</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert bm_image to tensor.
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert BMImage to tensor.
 
 @param img      Input image
 @param tensor   Output tensor
 
-void bm_image_to_tensor (bm_image &amp;img, Tensor &amp;tensor);
+void bm_image_to_tensor(BMImage &amp;img, Tensor &amp;tensor);
+
+
+@param img      Input image
+
+Tensor bm_image_to_tensor(BMImage &amp;img);
 </pre></div>
 </div>
 </dd>
 <dt><strong>3). tensor_to_bm_image</strong></dt>
-<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert tensor to bm_image.
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert tensor to BMImage.
 
 @param tensor   Input tensor
 @param img      Output image
 
-void tensor_to_bm_image (Tensor &amp;tensor, bm_image &amp;img);
+void tensor_to_bm_image(Tensor &amp;tensor, BMImage &amp;img);
+
+
+@param tensor   Input tensor
+
+BMImage tensor_to_bm_image(Tensor &amp;tensor);
 </pre></div>
 </div>
 </dd>
@@ -923,8 +933,27 @@ void tensor_to_bm_image (Tensor &amp;tensor, bm_image &amp;img);
 @return 0 for success and other for failure
 
 int crop_and_resize(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h,
+    int                          resize_w,
+    int                          resize_h);
+
+
+@param input    Input image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@param resize_w Target width
+@param resize_h Target height
+@return Output image
+
+BMImage crop_and_resize(
+    BMImage                      &amp;input,
     int                          crop_x0,
     int                          crop_y0,
     int                          crop_w,
@@ -946,8 +975,23 @@ int crop_and_resize(
 @return 0 for success and other for failure
 
 int crop(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h);
+
+
+@param input    Input image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@return Output image
+
+BMImage crop(
+    BMImage                      &amp;input,
     int                          crop_x0,
     int                          crop_y0,
     int                          crop_w,
@@ -965,8 +1009,19 @@ int crop(
 @return 0 for success and other for failure
 
 int resize(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    int                          resize_w,
+    int                          resize_h);
+
+
+@param input    Input image
+@param resize_w Target width
+@param resize_h Target height
+@return Output image
+
+BMImage resize(
+    BMImage                      &amp;input,
     int                          resize_w,
     int                          resize_h);
 </pre></div>
@@ -986,8 +1041,27 @@ int resize(
 @return 0 for success and other for failure
 
 int vpp_crop_and_resize(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h,
+    int                          resize_w,
+    int                          resize_h);
+
+
+@param input    Input image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@param resize_w Target width
+@param resize_h Target height
+@return Output image
+
+BMImage vpp_crop_and_resize(
+    BMImage                      &amp;input,
     int                          crop_x0,
     int                          crop_y0,
     int                          crop_w,
@@ -1009,8 +1083,22 @@ int vpp_crop_and_resize(
 @return 0 for success and other for failure
 
 int vpp_crop(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    int                          crop_x0,
+    int                          crop_y0,
+    int                          crop_w,
+    int                          crop_h);
+
+@param input    Input image
+@param crop_x0  Start point x of the crop window
+@param crop_y0  Start point y of the crop window
+@param crop_w   Width of the crop window
+@param crop_h   Height of the crop window
+@return Output image
+
+BMImage vpp_crop(
+    BMImage                      &amp;input,
     int                          crop_x0,
     int                          crop_y0,
     int                          crop_w,
@@ -1028,8 +1116,19 @@ int vpp_crop(
 @return 0 for success and other for failure
 
 int vpp_resize(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    int                          resize_w,
+    int                          resize_h);
+
+
+@param input    Input image
+@param resize_w Target width
+@param resize_h Target height
+@return Output image
+
+BMImage vpp_resize(
+    BMImage                      &amp;input,
     int                          resize_w,
     int                          resize_h);
 </pre></div>
@@ -1044,8 +1143,19 @@ int vpp_resize(
 @return 0 for success and other for failure
 
 int warp(
-    bm_image                           &amp;input,
-    bm_image                           &amp;output,
+    BMImage                            &amp;input,
+    BMImage                            &amp;output,
+    const std::pair&lt;
+      std::tuple&lt;float, float, float&gt;,
+      std::tuple&lt;float, float, float&gt;&gt; &amp;matrix);
+
+
+@param input    Input image
+@param matrix   2x3 transformation matrix
+@return Output image
+
+BMImage warp(
+    BMImage                            &amp;input,
     const std::pair&lt;
       std::tuple&lt;float, float, float&gt;,
       std::tuple&lt;float, float, float&gt;&gt; &amp;matrix);
@@ -1055,14 +1165,26 @@ int warp(
 <dt><strong>11). convert_to</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Applies a linear transformation to an image.
 
-@param input    Input image
-@param output   Output image
-@param matrix   (a0, b0), (a1, b1), (a2, b2) factors
+@param input        Input image
+@param output       Output image
+@param alpha_beta   (a0, b0), (a1, b1), (a2, b2) factors
 @return 0 for success and other for failure
 
 int convert_to(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output,
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    const std::tuple&lt;
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;&gt;   &amp;alpha_beta);
+
+
+@param input        Input image
+@param alpha_beta   (a0, b0), (a1, b1), (a2, b2) factors
+@return Output image
+
+BMImage convert_to(
+    BMImage                      &amp;input,
     const std::tuple&lt;
       std::pair&lt;float, float&gt;,
       std::pair&lt;float, float&gt;,
@@ -1078,8 +1200,13 @@ int convert_to(
 @return 0 for success and other for failure
 
 int yuv2bgr(
-    bm_image                     &amp;input,
-    bm_image                     &amp;output);
+    BMImage                      &amp;input,
+    BMImage                      &amp;output);
+
+@param input    Input image
+@return Output image
+
+BMImage yuv2bgr(BMImage  &amp;input);
 </pre></div>
 </div>
 </dd>
@@ -1091,9 +1218,15 @@ int yuv2bgr(
 @return 0 for success and other for failure
 
 int vpp_convert(
-    bm_image &amp;input,
-    bm_image &amp;output
+    BMImage  &amp;input,
+    BMImage  &amp;output
 );
+
+
+@param input    Input image
+@return Output image
+
+BMImage vpp_convert(BMImage  &amp;input);
 </pre></div>
 </div>
 </dd>
@@ -1105,9 +1238,15 @@ int vpp_convert(
 @return 0 for success and other for failure
 
 int convert(
-    bm_image &amp;input,
-    bm_image &amp;output
+    BMImage  &amp;input,
+    BMImage  &amp;output
 );
+
+
+@param input    Input image
+@return Output image
+
+BMImage convert(BMImage  &amp;input);
 </pre></div>
 </div>
 </dd>
@@ -1124,7 +1263,7 @@ int convert(
 @return 0 for success and other for failure
 
 int rectangle(
-    bm_image                        &amp;image,
+    BMImage                         &amp;image,
     int                             x0,
     int                             y0,
     int                             w,
@@ -1144,7 +1283,113 @@ int rectangle(
 
 int imwrite(
     const std::string &amp;filename,
-    bm_image          &amp;image
+    BMImage           &amp;image
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>17). get_handle</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get Handle instance.
+
+@return Handle instance
+
+Handle get_handle();
+</pre></div>
+</div>
+</dd>
+<dt><strong>11). convert_to</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Applies a linear transformation to an image.
+
+@param input        Input image
+@param output       Output image
+@param alpha_beta   (a0, b0), (a1, b1), (a2, b2) factors
+@return 0 for success and other for failure
+
+int convert_to(
+    BMImage                      &amp;input,
+    BMImage                      &amp;output,
+    const std::tuple&lt;
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;,
+      std::pair&lt;float, float&gt;&gt;   &amp;alpha_beta);
+</pre></div>
+</div>
+</dd>
+<dt><strong>12). yuv2bgr</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image from YUV to BGR.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int yuv2bgr(
+    BMImage                      &amp;input,
+    BMImage                      &amp;output);
+</pre></div>
+</div>
+</dd>
+<dt><strong>13). vpp_convert</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image to BGR PLANAR format using vpp.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int vpp_convert(
+    BMImage  &amp;input,
+    BMImage  &amp;output
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>14). convert</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Convert an image to BGR PLANAR format.
+
+@param input    Input image
+@param output   Output image
+@return 0 for success and other for failure
+
+int convert(
+    BMImage  &amp;input,
+    BMImage  &amp;output
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>15). rectangle</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Draw a rectangle on input image.
+
+@param image      Input image
+@param x0         Start point x of rectangle
+@param y0         Start point y of rectangle
+@param w          Width of rectangle
+@param h          Height of rectangle
+@param color      Color of rectangle
+@param thickness  Thickness of rectangle
+@return 0 for success and other for failure
+
+int rectangle(
+    BMImage                         &amp;image,
+    int                             x0,
+    int                             y0,
+    int                             w,
+    int                             h,
+    const std::tuple&lt;int, int, int&gt; &amp;color,
+    int                             thickness=1
+);
+</pre></div>
+</div>
+</dd>
+<dt><strong>16). imwrite</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Save the image to the specified file.
+
+@param filename   Name of the file
+@param image      Image to be saved
+@return 0 for success and other for failure
+
+int imwrite(
+    const std::string &amp;filename,
+    BMImage           &amp;image
 );
 </pre></div>
 </div>

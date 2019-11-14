@@ -79,10 +79,10 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../quickstart/abstract.html">图解 Sophon Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../quickstart/install.html">Sophon Inference 安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../quickstart/reminds.html">注意事项</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../quickstart/tools.html">常用工具介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/abstract.html">Introduction of  Sophon Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/install.html">Sophon Inference Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/reminds.html">Reminds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/tools.html">Useful Tools</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../sail.html">SAIL</a></li>
@@ -158,38 +158,38 @@
             
   <div class="section" id="sail">
 <h1>SAIL<a class="headerlink" href="#sail" title="Permalink to this headline">¶</a></h1>
-<p>SAIL 是 Sophon Inference 中的支撑模块，
-AutoDeploy、Algokit 以及 Samples 中的大部分代码都建立在 SAIL 的基础上。</p>
-<p>SAIL 对 BMNNSDK 中的 BMRuntime、BMDNN、BMCV、BMLib 进行了封装，
-将 BMNNSDK 中原有的 “加载 bmodel 并驱动 TPU 推理”、
-“驱动 TPU 做图像处理”、“驱动 VPU 做图像和视频解码”
-等功能抽象成更为简单的 C++ 接口对外提供；
-并且支持使用 pybind11 再次封装，提供简洁的 python 接口。</p>
-<p>目前，SAIL 模块中所有的类、枚举、函数都在 “sail” 名字空间下，
-本单元中的文档将深入介绍您可能用到的 SAIL 中的模块和类。
-核心的类包括：</p>
+<p>SAIL is the support module in the Sophon Inference.
+Most of the code in AutoDeploy, Algokit, and Samples is built on top of SAIL.</p>
+<p>SAIL encapsulates BMRuntime, BMDNN, BMCV, and BMLib in BMNNSDK.
+It abstracts the original functions in BMNNSDK such as “loading bmodel and driving TPU reasoning”,
+“Drive TPU for image processing”, “Drive VPU for image and video decoding” into simpler C++ interfaces for external use.
+And it re-encapsulate with pybind11, providing the most compact Python interfaces.</p>
+<p>Currently, all classes, enumerations, and functions in the SAIL module are in the “sail” namespace.
+The documentation in this module provides an in-depth look at the modules and classes in SAIL that you might use.</p>
+<p>The core classes include:</p>
 <ul class="simple">
-<li>Handle：</li>
+<li>Handle:</li>
 </ul>
-<p>BMNNSDK 中 BMLib 的 bm_handle_t 的包装类，设备句柄，上下文信息，用来和内核驱动交互信息。</p>
+<p>The wrapper class of bm_handle_t in BMLib.
+Contains device handles, contextual information, used to interact with the kernel driver information of TPU.</p>
 <ul class="simple">
-<li>Tensor：</li>
+<li>Tensor:</li>
 </ul>
-<p>BMNNSDK 中 BMLib 的包装类，封装了对 device memroy 的管理以及与 system memory 的同步。</p>
+<p>BMLib wrapper class that encapsulates management of device memroy and synchronization with system memory.</p>
 <ul class="simple">
 <li>Engine：</li>
 </ul>
-<p>BMNNSDK 中 BMRuntime 的包装类，可以加载 bmodel 并驱动 TPU 进行推理。
-一个 Engine 实例可以加载一个任意的 bmodel，
-自动地管理输入张量与输出张量对应的内存。</p>
+<p>The wrapper class of BMRuntime, which loads bmodel and drives the TPU for reasoning.
+An Instance of Engine can load an arbitrary bmodel.
+The memory corresponding to the input tensor and the output tensor is automatically managed.</p>
 <ul class="simple">
-<li>Decoder</li>
+<li>Decoder:</li>
 </ul>
-<p>使用VPU解码视频，JPU解码图像，均为硬件解码。</p>
+<p>Decoder to decode videos by VPU and images by JPU.</p>
 <ul class="simple">
 <li>Bmcv：</li>
 </ul>
-<p>BMNNSDK 中 BMCV 的包装类，封装了一系列的图像处理函数，可以驱动 TPU 进行图像处理。</p>
+<p>It encapsulates a series of image processing functions that can drive the TPU for image processing.</p>
 </div>
 
 
