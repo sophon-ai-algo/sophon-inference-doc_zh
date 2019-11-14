@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#sail-iomode">sail.IOMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-tensor">sail.Tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-engine">sail.Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sail-bmimage">sail.BMImage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-decoder">sail.Decoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-bmcv">sail.Bmcv</a></li>
 </ul>
@@ -754,7 +755,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_tensors</span><span class="p">,</span> <span class="n">input_shapes</span><span class="p">,</span> <span class="n">output_tensors</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Inference with provided input and output tensors.</span>
+    <span class="sd">&quot;&quot;&quot; Inference with provided input tensors, input shapes and output tensors.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -766,6 +767,43 @@
 <span class="sd">        Shapes of all input tensors</span>
 <span class="sd">    output_tensors : dict {str : sail.Tensor}</span>
 <span class="sd">        Output tensors managed by user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="sail-bmimage">
+<h2>sail.BMImage<a class="headerlink" href="#sail-bmimage" title="Permalink to this headline">¶</a></h2>
+<p><strong>1). BMImage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>2). width</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">width</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the img width.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    width : int</span>
+<span class="sd">       The width of img</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>2). height</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">height</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the img height.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    height : int</span>
+<span class="sd">       The height of img</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -824,13 +862,13 @@
 <p><strong>1). Bmcv</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Constructor.</span>
+    <span class="s2">&quot;&quot;&quot; Constructor.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    handle : sail.Handle</span>
-<span class="sd">        Handle instance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="s2">    Parameters</span>
+<span class="s2">    ----------</span>
+<span class="s2">    handle : sail.Handle</span>
+<span class="s2">        Handle instance</span>
+<span class="s2">    &quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>

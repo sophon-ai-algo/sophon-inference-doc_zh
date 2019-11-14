@@ -636,7 +636,7 @@ ______
 
         @param graph_name    The specified graph name
         @param input_shapes  Shapes of all input tensors
-        @param input_tensors Data pointers of all input tensors in system meory
+        @param input_tensors Data pointers of all input tensors in system memory
         @param scale         Indicator of multiply scale for input tensors or not
 
         void process(
@@ -649,8 +649,8 @@ ______
 
         @brief Inference with provided input and output tensors.
 
-        @input Input tensors
-        @output Output tensors
+        @param input  Input tensors
+        @param output Output tensors
 
         void process(
             const std::string&              graph_name,
@@ -662,9 +662,9 @@ ______
 
         @brief Inference with provided input and output tensors and input shapes.
 
-        @input        Input tensors
-        @input_shapes Real input tensor shapes
-        @output       Output tensors
+        @param input        Input tensors
+        @param input_shapes Real input tensor shapes
+        @param output       Output tensors
 
         void process(
             const std::string&                       graph_name,
@@ -672,8 +672,68 @@ ______
             std::map<std::string, std::vector<int>>& input_shapes,
             std::map<std::string, Tensor*>&          output);
 
+BMImage
+_______
+
+**1). BMImage Constructor**
+    .. code-block:: c++
+
+        @brief The default Constructor.
+
+        BMImage();
+
+
+        @brief The BMImage Constructor.
+
+        @param handle A Handle instance
+        @param h      Image width
+        @param w      Image height
+        @param format Image format
+        @param dtype  Data type
+
+        BMImage(
+            Handle&                  handle,
+            int                      h,
+            int                      w,
+            bm_image_format_ext      format,
+            bm_image_data_format_ext dtype);
+
+**2). data**
+    .. code-block:: c++
+
+        @brief Get inner bm_image
+
+        @return The inner bm_image
+
+        bm_image& data();
+
+**3). free**
+    .. code-block:: c++
+
+        @brief Get the img width.
+
+        void free();
+
+**4). width**
+    .. code-block:: c++
+
+        @brief Get the img width.
+
+        @return the width of img
+
+        int width();
+
+**4). height**
+    .. code-block:: c++
+
+        @brief Get the img height.
+
+        @return the height of img
+
+        int height();
+
 Decoder
-_____
+_______
 
 **1). Decoder Constructor**
     .. code-block:: c++

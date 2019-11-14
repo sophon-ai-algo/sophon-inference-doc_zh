@@ -593,7 +593,7 @@ ___________
             """
 
         def process(graph_name, input_tensors, input_shapes, output_tensors):
-            """ Inference with provided input and output tensors.
+            """ Inference with provided input tensors, input shapes and output tensors.
 
             Parameters
             ----------
@@ -605,6 +605,43 @@ ___________
                 Shapes of all input tensors
             output_tensors : dict {str : sail.Tensor}
                 Output tensors managed by user
+            """
+
+sail.BMImage
+___________
+
+**1). BMImage**
+
+    .. code-block:: python
+
+        def __init__():
+            """ Constructor.
+            """
+
+**2). width**
+
+    .. code-block:: python
+
+        def width():
+            """ Get the img width.
+
+            Returns
+            ----------
+            width : int
+               The width of img
+            """
+
+**2). height**
+
+    .. code-block:: python
+
+        def height():
+            """ Get the img height.
+
+            Returns
+            ----------
+            height : int
+               The height of img
             """
 
 sail.Decoder
@@ -669,7 +706,7 @@ ___________
             ----------
             handle : sail.Handle
                 Handle instance
-            """
+            ""
 
 **2). bm_image_to_tensor**
 

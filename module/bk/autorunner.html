@@ -163,11 +163,11 @@
 AutoRunner 的源码位于 “module/auto_runner/” 目录下，目前支持 tensorflow/mxnet。
 我们在 “auto_runner.api” 中提供了两个函数：</p>
 <ul class="simple">
-<li>load:</li>
+<li><p>load:</p></li>
 </ul>
 <p>解析指定目录下的 graph_infos.json 文件，顺序加载子模型，返回一个 Runner 的实例。</p>
 <ul class="simple">
-<li>infer：</li>
+<li><p>infer：</p></li>
 </ul>
 <p>使用传入的 Runner 实例与输入张量进行推理，返回推理结果。</p>
 <p>通常情况下 AutoRunner 需要和 AutoSplit 一起使用，但用户也可以手动切分并编译模型，
