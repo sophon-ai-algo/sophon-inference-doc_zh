@@ -795,7 +795,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>2). height</strong></p>
+<p><strong>3). height</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">height</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Get the img height.</span>
@@ -808,18 +808,35 @@
 </pre></div>
 </div>
 </div></blockquote>
+<p><strong>4). format</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">format</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the img format.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    format : bm_image_format_ext</span>
+<span class="sd">       The format of img</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="sail-decoder">
 <h2>sail.Decoder<a class="headerlink" href="#sail-decoder" title="Permalink to this headline">¶</a></h2>
 <p><strong>1). Decoder</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">compressed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tpu_id</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Constructor.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    file_path : str</span>
 <span class="sd">       Path or rtsp url to the video/image file</span>
+<span class="sd">    compressed : bool, default: True</span>
+<span class="sd">       Whether the format of decoded output is compressed NV12.</span>
+<span class="sd">    tpu_id: int, default: 0</span>
+<span class="sd">       ID of TPU, there may be more than one TPU for PCIE mode.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>

@@ -707,14 +707,7 @@ _______
 
         bm_image& data();
 
-**3). free**
-    .. code-block:: c++
-
-        @brief Get the img width.
-
-        void free();
-
-**4). width**
+**3). width**
     .. code-block:: c++
 
         @brief Get the img width.
@@ -732,6 +725,15 @@ _______
 
         int height();
 
+**5). format**
+    .. code-block:: c++
+
+        @brief Get the img format.
+
+        @return the format of img
+
+        bm_image_format_ext format();
+
 Decoder
 _______
 
@@ -740,9 +742,14 @@ _______
 
         @brief Constructor.
 
-        @param file_path Path or rtsp url to the video/image file.
+        @param file_path  Path or rtsp url to the video/image file.
+        @param compressed Whether the format of decoded output is compressed NV12.
+        @param tpu_id     ID of TPU, there may be more than one TPU for PCIE mode.
 
-        Decoder(const std::string& file_path);
+        Decoder(
+            const std::string& file_path,
+            bool               compressed = true,
+            int                tpu_id = 0);
 
 **2). is_opened**
     .. code-block:: c++

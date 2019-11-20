@@ -821,13 +821,7 @@ bm_image&amp; data();
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). free</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img width.
-
-void free();
-</pre></div>
-</div>
-</dd>
-<dt><strong>4). width</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img width.
+<dt><strong>3). width</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img width.
 
 @return the width of img
 
@@ -843,6 +837,14 @@ int height();
 </pre></div>
 </div>
 </dd>
+<dt><strong>5). format</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img format.
+
+@return the format of img
+
+bm_image_format_ext format();
+</pre></div>
+</div>
+</dd>
 </dl>
 </div>
 <div class="section" id="decoder">
@@ -850,9 +852,14 @@ int height();
 <dl>
 <dt><strong>1). Decoder Constructor</strong></dt><dd><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
 
-@param file_path Path or rtsp url to the video/image file.
+@param file_path  Path or rtsp url to the video/image file.
+@param compressed Whether the format of decoded output is compressed NV12.
+@param tpu_id     ID of TPU, there may be more than one TPU for PCIE mode.
 
-Decoder(const std::string&amp; file_path);
+Decoder(
+    const std::string&amp; file_path,
+    bool               compressed = true,
+    int                tpu_id = 0);
 </pre></div>
 </div>
 </dd>

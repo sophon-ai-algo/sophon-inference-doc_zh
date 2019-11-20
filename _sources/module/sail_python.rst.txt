@@ -631,7 +631,7 @@ ___________
                The width of img
             """
 
-**2). height**
+**3). height**
 
     .. code-block:: python
 
@@ -644,6 +644,19 @@ ___________
                The height of img
             """
 
+**4). format**
+
+    .. code-block:: python
+
+        def format():
+            """ Get the img format.
+
+            Returns
+            ----------
+            format : bm_image_format_ext
+               The format of img
+            """
+
 sail.Decoder
 ___________
 
@@ -651,13 +664,17 @@ ___________
 
     .. code-block:: python
 
-        def __init__(file_path):
+        def __init__(file_path, compressed=True, tpu_id=0):
             """ Constructor.
 
             Parameters
             ----------
             file_path : str
                Path or rtsp url to the video/image file
+            compressed : bool, default: True
+               Whether the format of decoded output is compressed NV12.
+            tpu_id: int, default: 0
+               ID of TPU, there may be more than one TPU for PCIE mode.
             """
 
 **2). is_opened**
