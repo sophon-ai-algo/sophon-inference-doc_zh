@@ -84,7 +84,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">图解 Sophon Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference 安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">注意事项</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/tools.html">常用工具介绍</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
@@ -95,6 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#tensor">Tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#iomode">IOMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#engine">Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmimage">BMImage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#decoder">Decoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bmcv">Bmcv</a></li>
 </ul>
@@ -803,7 +803,7 @@ void process(const std::string&amp; graph_name);
 
 @param graph_name    The specified graph name
 @param input_shapes  Shapes of all input tensors
-@param input_tensors Data pointers of all input tensors in system meory
+@param input_tensors Data pointers of all input tensors in system memory
 @param scale         Indicator of multiply scale for input tensors or not
 
 void process(
@@ -816,8 +816,8 @@ void process(
 <dt><strong>31). process</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors.
 
-@input Input tensors
-@output Output tensors
+@param input  Input tensors
+@param output Output tensors
 
 void process(
     const std::string&amp;              graph_name,
@@ -829,9 +829,9 @@ void process(
 <dt><strong>32). process</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Inference with provided input and output tensors and input shapes.
 
-@input        Input tensors
-@input_shapes Real input tensor shapes
-@output       Output tensors
+@param input        Input tensors
+@param input_shapes Real input tensor shapes
+@param output       Output tensors
 
 void process(
     const std::string&amp;                       graph_name,
@@ -843,15 +843,84 @@ void process(
 </dd>
 </dl>
 </div>
+<div class="section" id="bmimage">
+<h2>BMImage<a class="headerlink" href="#bmimage" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>1). BMImage Constructor</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief The default Constructor.
+
+BMImage();
+
+
+@brief The BMImage Constructor.
+
+@param handle A Handle instance
+@param h      Image width
+@param w      Image height
+@param format Image format
+@param dtype  Data type
+
+BMImage(
+    Handle&amp;                  handle,
+    int                      h,
+    int                      w,
+    bm_image_format_ext      format,
+    bm_image_data_format_ext dtype);
+</pre></div>
+</div>
+</dd>
+<dt><strong>2). data</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get inner bm_image
+
+@return The inner bm_image
+
+bm_image&amp; data();
+</pre></div>
+</div>
+</dd>
+<dt><strong>3). width</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img width.
+
+@return the width of img
+
+int width();
+</pre></div>
+</div>
+</dd>
+<dt><strong>4). height</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img height.
+
+@return the height of img
+
+int height();
+</pre></div>
+</div>
+</dd>
+<dt><strong>5). format</strong></dt>
+<dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Get the img format.
+
+@return the format of img
+
+bm_image_format_ext format();
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
 <div class="section" id="decoder">
 <h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>1). Decoder Constructor</strong></dt>
 <dd><div class="first last highlight-c++ notranslate"><div class="highlight"><pre><span></span>@brief Constructor.
 
-@param file_path Path or rtsp url to the video/image file.
+@param file_path  Path or rtsp url to the video/image file.
+@param compressed Whether the format of decoded output is compressed NV12.
+@param tpu_id     ID of TPU, there may be more than one TPU for PCIE mode.
 
-Decoder(const std::string&amp; file_path);
+Decoder(
+    const std::string&amp; file_path,
+    bool               compressed = true,
+    int                tpu_id = 0);
 </pre></div>
 </div>
 </dd>

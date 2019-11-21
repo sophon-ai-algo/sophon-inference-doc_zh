@@ -84,7 +84,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">图解 Sophon Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference 安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">注意事项</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/tools.html">常用工具介绍</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
@@ -96,6 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#sail-iomode">sail.IOMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-tensor">sail.Tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-engine">sail.Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sail-bmimage">sail.BMImage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-decoder">sail.Decoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sail-bmcv">sail.Bmcv</a></li>
 </ul>
@@ -754,7 +754,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_tensors</span><span class="p">,</span> <span class="n">input_shapes</span><span class="p">,</span> <span class="n">output_tensors</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Inference with provided input and output tensors.</span>
+    <span class="sd">&quot;&quot;&quot; Inference with provided input tensors, input shapes and output tensors.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -771,17 +771,71 @@
 </div>
 </div></blockquote>
 </div>
+<div class="section" id="sail-bmimage">
+<h2>sail.BMImage<a class="headerlink" href="#sail-bmimage" title="Permalink to this headline">¶</a></h2>
+<p><strong>1). BMImage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>2). width</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">width</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the img width.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    width : int</span>
+<span class="sd">       The width of img</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>3). height</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">height</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the img height.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    height : int</span>
+<span class="sd">       The height of img</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>4). format</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">format</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get the img format.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    format : bm_image_format_ext</span>
+<span class="sd">       The format of img</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 <div class="section" id="sail-decoder">
 <h2>sail.Decoder<a class="headerlink" href="#sail-decoder" title="Permalink to this headline">¶</a></h2>
 <p><strong>1). Decoder</strong></p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">compressed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tpu_id</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Constructor.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    file_path : str</span>
 <span class="sd">       Path or rtsp url to the video/image file</span>
+<span class="sd">    compressed : bool, default: True</span>
+<span class="sd">       Whether the format of decoded output is compressed NV12.</span>
+<span class="sd">    tpu_id: int, default: 0</span>
+<span class="sd">       ID of TPU, there may be more than one TPU for PCIE mode.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -824,13 +878,13 @@
 <p><strong>1). Bmcv</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Constructor.</span>
+    <span class="s2">&quot;&quot;&quot; Constructor.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    handle : sail.Handle</span>
-<span class="sd">        Handle instance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="s2">    Parameters</span>
+<span class="s2">    ----------</span>
+<span class="s2">    handle : sail.Handle</span>
+<span class="s2">        Handle instance</span>
+<span class="s2">    &quot;&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>

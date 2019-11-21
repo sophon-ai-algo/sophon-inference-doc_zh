@@ -593,7 +593,7 @@ ___________
             """
 
         def process(graph_name, input_tensors, input_shapes, output_tensors):
-            """ Inference with provided input and output tensors.
+            """ Inference with provided input tensors, input shapes and output tensors.
 
             Parameters
             ----------
@@ -607,6 +607,56 @@ ___________
                 Output tensors managed by user
             """
 
+sail.BMImage
+___________
+
+**1). BMImage**
+
+    .. code-block:: python
+
+        def __init__():
+            """ Constructor.
+            """
+
+**2). width**
+
+    .. code-block:: python
+
+        def width():
+            """ Get the img width.
+
+            Returns
+            ----------
+            width : int
+               The width of img
+            """
+
+**3). height**
+
+    .. code-block:: python
+
+        def height():
+            """ Get the img height.
+
+            Returns
+            ----------
+            height : int
+               The height of img
+            """
+
+**4). format**
+
+    .. code-block:: python
+
+        def format():
+            """ Get the img format.
+
+            Returns
+            ----------
+            format : bm_image_format_ext
+               The format of img
+            """
+
 sail.Decoder
 ___________
 
@@ -614,13 +664,17 @@ ___________
 
     .. code-block:: python
 
-        def __init__(file_path):
+        def __init__(file_path, compressed=True, tpu_id=0):
             """ Constructor.
 
             Parameters
             ----------
             file_path : str
                Path or rtsp url to the video/image file
+            compressed : bool, default: True
+               Whether the format of decoded output is compressed NV12.
+            tpu_id: int, default: 0
+               ID of TPU, there may be more than one TPU for PCIE mode.
             """
 
 **2). is_opened**
@@ -669,7 +723,7 @@ ___________
             ----------
             handle : sail.Handle
                 Handle instance
-            """
+            ""
 
 **2). bm_image_to_tensor**
 
