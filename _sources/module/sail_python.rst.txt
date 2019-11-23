@@ -4,7 +4,7 @@ SAIL Python API
 SAIL use "pybind11" to wrap python interfaces, support python3.5.
 
 Basic function
-_____
+______________
 
 .. code-block:: python
 
@@ -18,7 +18,7 @@ _____
             """
 
 Data type
-_____
+_________
 
 .. code-block:: python
 
@@ -120,7 +120,7 @@ ___________
             -------
             data : numpy.array
                 System data of the tensor, dtype can be np.float32, np.int8
-            or np.uint8 with respective to the dtype of the tensor.
+                or np.uint8 with respective to the dtype of the tensor.
             """
 
         def asnumpy(shape):
@@ -135,7 +135,7 @@ ___________
             -------
             data : numpy.array
                 System data of the tensor, dtype can be np.float32, np.int8
-            or np.uint8 with respective to the dtype of the tensor.
+                or np.uint8 with respective to the dtype of the tensor.
             """
 
 **4). update_data**
@@ -152,7 +152,56 @@ ___________
                 Data.
             """
 
-**5). dtype**
+**5). scale_from**
+
+    .. code-block:: python
+
+        def scale_from(data, scale):
+            """ Scale data to tensor in system memory.
+
+            Parameters
+            -------
+            data : numpy.array with dtype of float32
+                Data.
+            scale : float32
+                Scale value.
+            """
+
+**6). scale_to**
+
+    .. code-block:: python
+
+        def scale_from(scale):
+            """ Scale tensor to data in system memory.
+
+            Parameters
+            -------
+            scale : float32
+                Scale value.
+
+            Returns
+            -------
+            data : numpy.array with dtype of float32
+                Data.
+            """
+
+        def scale_from(scale, shape):
+            """ Scale tensor to data in system memory.
+
+            Parameters
+            -------
+            scale : float32
+                Scale value.
+            shape : tuple
+                Tensor shape want to get
+
+            Returns
+            -------
+            data : numpy.array with dtype of float32
+                Data.
+            """
+
+**7). dtype**
 
     .. code-block:: python
 
@@ -165,7 +214,7 @@ ___________
                 Data type of the tensor
             """
 
-**6). reshape**
+**8). reshape**
 
     .. code-block:: python
 
@@ -178,7 +227,7 @@ ___________
                 New shape of the tensor
             """
 
-**7). own_sys_data**
+**9). own_sys_data**
 
     .. code-block:: python
 
@@ -191,7 +240,7 @@ ___________
                 True for owns data pointer in system memory.
             """
 
-**8). own_dev_data**
+**10). own_dev_data**
 
     .. code-block:: python
 
@@ -204,7 +253,7 @@ ___________
                 True for owns data in device memory.
             """
 
-**9). sync_s2d**
+**11). sync_s2d**
 
     .. code-block:: python
 
@@ -221,7 +270,7 @@ ___________
                 Byte size to be copied
             """
 
-**10). sync_d2s**
+**12). sync_d2s**
 
     .. code-block:: python
 
@@ -254,6 +303,15 @@ ___________
                 TPU ID. You can use bm-smi to see available IDs
             """
 
+        def __init__(handle):
+            """ Constructor does not load bmodel.
+
+            Parameters
+            ----------
+            hanle : Handle
+               A Handle instance
+            """
+
         def __init__(bmodel_path, tpu_id, mode):
             """ Constructor loads bmodel from file.
 
@@ -263,6 +321,20 @@ ___________
                 Path to bmodel
             tpu_id : int
                 TPU ID. You can use bm-smi to see available IDs
+            mode : sail.IOMode
+                Specify the input/output tensors are in system memory
+                or device memory
+            """
+
+        def __init__(bmodel_path, handle, mode):
+            """ Constructor loads bmodel from file.
+
+            Parameters
+            ----------
+            bmodel_path : str
+                Path to bmodel
+            hanle : Handle
+               A Handle instance
             mode : sail.IOMode
                 Specify the input/output tensors are in system memory
                 or device memory
@@ -280,6 +352,23 @@ ___________
                 Bmodel byte size
             tpu_id : int
                 TPU ID. You can use bm-smi to see available IDs
+            mode : sail.IOMode
+                Specify the input/output tensors are in system memory
+                or device memory
+            """
+
+        def __init__(bmodel_bytes, bmodel_size, handle, mode):
+            """ Constructor using default input shapes with bmodel which
+            loaded in memory
+
+            Parameters
+            ----------
+            bmodel_bytes : bytes
+                Bytes of  bmodel in system memory
+            bmodel_size : int
+                Bmodel byte size
+            hanle : Handle
+               A Handle instance
             mode : sail.IOMode
                 Specify the input/output tensors are in system memory
                 or device memory
@@ -608,7 +697,7 @@ ___________
             """
 
 sail.BMImage
-___________
+____________
 
 **1). BMImage**
 
@@ -658,7 +747,7 @@ ___________
             """
 
 sail.Decoder
-___________
+____________
 
 **1). Decoder**
 
@@ -710,7 +799,7 @@ ___________
             """
 
 sail.Bmcv
-___________
+_________
 
 **1). Bmcv**
 

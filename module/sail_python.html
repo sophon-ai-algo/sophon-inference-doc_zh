@@ -281,7 +281,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    data : numpy.array</span>
 <span class="sd">        System data of the tensor, dtype can be np.float32, np.int8</span>
-<span class="sd">    or np.uint8 with respective to the dtype of the tensor.</span>
+<span class="sd">        or np.uint8 with respective to the dtype of the tensor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="k">def</span> <span class="nf">asnumpy</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
@@ -296,7 +296,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    data : numpy.array</span>
 <span class="sd">        System data of the tensor, dtype can be np.float32, np.int8</span>
-<span class="sd">    or np.uint8 with respective to the dtype of the tensor.</span>
+<span class="sd">        or np.uint8 with respective to the dtype of the tensor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -315,7 +315,56 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>5). dtype</strong></p>
+<p><strong>5). scale_from</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scale_from</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Scale data to tensor in system memory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : numpy.array with dtype of float32</span>
+<span class="sd">        Data.</span>
+<span class="sd">    scale : float32</span>
+<span class="sd">        Scale value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>6). scale_to</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scale_from</span><span class="p">(</span><span class="n">scale</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Scale tensor to data in system memory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -------</span>
+<span class="sd">    scale : float32</span>
+<span class="sd">        Scale value.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : numpy.array with dtype of float32</span>
+<span class="sd">        Data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">scale_from</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Scale tensor to data in system memory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -------</span>
+<span class="sd">    scale : float32</span>
+<span class="sd">        Scale value.</span>
+<span class="sd">    shape : tuple</span>
+<span class="sd">        Tensor shape want to get</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : numpy.array with dtype of float32</span>
+<span class="sd">        Data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>7). dtype</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dtype</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Get data type of the tensor.</span>
@@ -328,7 +377,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>6). reshape</strong></p>
+<p><strong>8). reshape</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Reset shape of the tensor.</span>
@@ -341,7 +390,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>7). own_sys_data</strong></p>
+<p><strong>9). own_sys_data</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">own_sys_data</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Judge if the tensor owns data pointer in system memory.</span>
@@ -354,7 +403,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>8). own_dev_data</strong></p>
+<p><strong>10). own_dev_data</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">own_dev_data</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Judge if the tensor owns data in device memory.</span>
@@ -367,7 +416,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>9). sync_s2d</strong></p>
+<p><strong>11). sync_s2d</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sync_s2d</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Copy data from system memory to device memory.</span>
@@ -384,7 +433,7 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>10). sync_d2s</strong></p>
+<p><strong>12). sync_d2s</strong></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sync_d2s</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Copy data from device memory to system memory.</span>
@@ -415,6 +464,15 @@
 <span class="sd">        TPU ID. You can use bm-smi to see available IDs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">handle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Constructor does not load bmodel.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hanle : Handle</span>
+<span class="sd">       A Handle instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
 <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">,</span> <span class="n">tpu_id</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Constructor loads bmodel from file.</span>
 
@@ -424,6 +482,20 @@
 <span class="sd">        Path to bmodel</span>
 <span class="sd">    tpu_id : int</span>
 <span class="sd">        TPU ID. You can use bm-smi to see available IDs</span>
+<span class="sd">    mode : sail.IOMode</span>
+<span class="sd">        Specify the input/output tensors are in system memory</span>
+<span class="sd">        or device memory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Constructor loads bmodel from file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bmodel_path : str</span>
+<span class="sd">        Path to bmodel</span>
+<span class="sd">    hanle : Handle</span>
+<span class="sd">       A Handle instance</span>
 <span class="sd">    mode : sail.IOMode</span>
 <span class="sd">        Specify the input/output tensors are in system memory</span>
 <span class="sd">        or device memory</span>
@@ -441,6 +513,23 @@
 <span class="sd">        Bmodel byte size</span>
 <span class="sd">    tpu_id : int</span>
 <span class="sd">        TPU ID. You can use bm-smi to see available IDs</span>
+<span class="sd">    mode : sail.IOMode</span>
+<span class="sd">        Specify the input/output tensors are in system memory</span>
+<span class="sd">        or device memory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">bmodel_bytes</span><span class="p">,</span> <span class="n">bmodel_size</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Constructor using default input shapes with bmodel which</span>
+<span class="sd">    loaded in memory</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bmodel_bytes : bytes</span>
+<span class="sd">        Bytes of  bmodel in system memory</span>
+<span class="sd">    bmodel_size : int</span>
+<span class="sd">        Bmodel byte size</span>
+<span class="sd">    hanle : Handle</span>
+<span class="sd">       A Handle instance</span>
 <span class="sd">    mode : sail.IOMode</span>
 <span class="sd">        Specify the input/output tensors are in system memory</span>
 <span class="sd">        or device memory</span>
