@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>小试牛刀：模型部署 &mdash; SophonInference  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="依赖软件安装" href="courses/install.html" />
+    <link rel="prev" title="软件安装指南" href="software/install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SophonInference
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../0_get_start.html">快速入门</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0_hardware.html">算丰硬件产品概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_software.html">算丰软件产品概览</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">小试牛刀：模型部署</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="courses/install.html">依赖软件安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="courses/convert.html">使用 bmnett 将 mobilenet 编译为 bmodel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="courses/deploy.html">使用SAIL驱动TPU加载bmodel并进行推理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../1_demo.html">示例程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_module.html">API 参考</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SophonInference</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../0_get_start.html">快速入门</a> &raquo;</li>
+        
+      <li>小试牛刀：模型部署</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/get_start/2_crash_course.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>小试牛刀：模型部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>在本章中，我们将帮助你快速地将一个由 tensorflow 训练生成的 mobilenet 部署到 Sophon SC5 加速卡上。
+在这之前，你需要准备一台安装了 Sophon SC5 加速卡的个人电脑，操作系统建议为 Ubuntu16.04。
+另外，你还需要一份 BMNNSDK 的软件包。</p>
+<p>本教程包含三个步骤。
+首先，你需要安装驱动、bmnett、和sophon-inference。
+这三个模块都在 BMNNSDK 软件包中。
+然后，我们使用 bmnett 工具将 mobilenet 转换成 bmodel。
+最后，我们使用 sophon-inference 把 bmodel 运行起来，
+对一张图片进行分类。</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="courses/install.html">依赖软件安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="courses/convert.html">使用 bmnett 将 mobilenet 编译为 bmodel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="courses/deploy.html">使用SAIL驱动TPU加载bmodel并进行推理</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="courses/install.html" class="btn btn-neutral float-right" title="依赖软件安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="software/install.html" class="btn btn-neutral float-left" title="软件安装指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sophon
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

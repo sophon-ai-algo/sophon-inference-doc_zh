@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python 代码解析 &mdash; SophonInference  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="使用SSD对图像和视频进行目标检测" href="../2_ssd.html" />
+    <link rel="prev" title="C++ 代码解析" href="cpp.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> SophonInference
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../0_get_start.html">快速入门</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../1_demo.html">示例程序</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../0_preface.html">前言</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../1_resnet50.html">使用 Resnet-50 进行图像分类</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="usage.html">运行demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp.html">C++ 代码解析</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Python 代码解析</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#case-0">Case 0: 基础示例程序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#case-1">Case 1: 单模型多线程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#case-2">Case 2: 多线程多模型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#case-3-tpu">Case 3: 多线程多 TPU 模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ssd.html">使用SSD对图像和视频进行目标检测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_yolov3.html">使用Yolov3对多路视频做目标检测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_mtcnn.html">使用MTCNN进行人脸检测</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_module.html">API 参考</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SophonInference</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../1_demo.html">示例程序</a> &raquo;</li>
+        
+          <li><a href="../1_resnet50.html">使用 Resnet-50 进行图像分类</a> &raquo;</li>
+        
+      <li>Python 代码解析</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/demo/resnet_cases/python.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python">
+<h1>Python 代码解析<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="case-0">
+<h2>Case 0: 基础示例程序<a class="headerlink" href="#case-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>在该示例程序中，我们封装了一个函数，完成图像分类的过程，如下：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inference</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">,</span> <span class="n">input_path</span><span class="p">,</span> <span class="n">loops</span><span class="p">,</span> <span class="n">tpu_id</span><span class="p">,</span> <span class="n">compare_path</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot; Do inference of a model in a thread.</span>
+
+<span class="sd">Args:</span>
+<span class="sd">  bmodel_path: Path to bmodel</span>
+<span class="sd">  input_path: Path to input image.</span>
+<span class="sd">  loops: Number of loops to run</span>
+<span class="sd">  compare_path: Path to correct result file</span>
+<span class="sd">  status: Status of comparison</span>
+
+<span class="sd">Returns:</span>
+<span class="sd">  True for success and False for failure.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>在该函数中，我们通过循环处理同一张图像来模拟真实的图像分类业务。</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># pipeline of inference</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="p">):</span>
+  <span class="c1"># read image and preprocess</span>
+  <span class="n">image</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+  <span class="c1"># inference with fp32 input and output</span>
+  <span class="c1"># data scale(input: fp32 to int8, output: int8 to fp32) is done inside</span>
+  <span class="c1"># for int8 model</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="p">{</span><span class="n">input_name</span><span class="p">:</span><span class="n">image</span><span class="p">})</span>
+  <span class="c1"># postprocess</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">postprocess</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">output_name</span><span class="p">])</span>
+  <span class="c1"># print result</span>
+  <span class="c1"># ...</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>如上代码所示，在每次循环中，我们首先使用opencv 的”imread“函数解码图片。
+然后对图像进行预处理，获取bmodel 的输入张量。
+接着驱动TPU 进行推理。最后对TPU 输出的张量进行后处理，获得最终的结果(top-5)。</p>
+<p>在该示例程序中，图片解码和预处理的实现中直接调用了opencv 的相关函数，
+同时后处理比较简单，只计算了top-5 分类结果。
+因此你可以直接参考相关代码，下面我们主要介绍模型推理部分。</p>
+<p>bmodel_path 是本例中用到的resnet50 bmodel 的路径，fp32 或int8 皆可。
+我们使用该 bmodel 初始化了一个sail.Engine 的实例，
+该实例中保存了模型的基础信息，将作为我们后续模型推理的载体。
+如果你的机器上有多个TPU，那么可以通过tpu_id 指定使用哪个TPU进行推理，编号从0 开始。</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sail</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">,</span> <span class="n">tpu_id</span><span class="p">,</span> <span class="n">sail</span><span class="o">.</span><span class="n">SYSIO</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>我们可以通过该实例提供的方法获取模型的属性，代码如下：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph_name</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_graph_names</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">input_name</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_input_names</span><span class="p">(</span><span class="n">graph_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">input_shape</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_input_shape</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_name</span><span class="p">)</span>
+<span class="n">output_name</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_output_names</span><span class="p">(</span><span class="n">graph_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">output_shape</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_output_shape</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
+<span class="n">out_dtype</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_output_dtype</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">output_name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>graph_name 代表bmodel 中我们要使用的具体模型的名称，在该示例程序中，bmodel 中只包含一个模型。
+input_name 代表我们使用的具体模型中的输入张量名称，在该模型中，只有一个输入张量。
+output_name 代表我们使用的具体模型中的输出张量名称，在该模型中，只有一个输出张量。
+input_shape 和output_shape 代表指定张量的尺寸。in_dtype 和 out_dtype 代表指定张量的数据类型。</p>
+</div></blockquote>
+</div>
+<div class="section" id="case-1">
+<h2>Case 1: 单模型多线程<a class="headerlink" href="#case-1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>在case 0 中，我们使用了bmodel 初始化了一个sail.Engine 的实例，
+模型推理的过程是在主线程中进行的。
+在case 1 中，我们将展示如果在多个线程中使用同一个sail.Engine 实例做模型推理。</p>
+<p>我们定义了一个”thread_infer“函数来实现子线程中的模型推理逻辑，如下：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">thread_infer</span><span class="p">(</span><span class="n">thread_id</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">input_path</span><span class="p">,</span> <span class="n">loops</span><span class="p">,</span> <span class="n">compare_path</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot; Do inference of a model in a thread.</span>
+
+<span class="sd">Args:</span>
+<span class="sd">  thread_id: ID of the thread</span>
+<span class="sd">  engine: An sail.Engine instance</span>
+<span class="sd">  input_path: Path to input image file</span>
+<span class="sd">  loops: Number of loops to run</span>
+<span class="sd">  compare_path: Path to correct result file</span>
+<span class="sd">  status: Status of comparison</span>
+
+<span class="sd">Returns:</span>
+<span class="sd">  None.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>在该函数中，我们也通过循环处理一张图片来模拟真实的图像分类业务，
+整体的代码逻辑与 case 0 类似，在这里不再重复介绍。</p>
+<p>case 1 与case 0 主要的区别在于对sail.Engine 实例的处理上，下面简写为engine。</p>
+<p>首先，我们在主线程中创建 engine，使用了与 case 0 不同构造函数并使用 engine 的 ”load“ 函数加载 bmodel：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sail</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">ARGS</span><span class="o">.</span><span class="n">tpu_id</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ARGS</span><span class="o">.</span><span class="n">bmodel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>不同于case 0，使用该构造函数创建engine 时，
+engine 中不会为bmodel 的输入与输入张量创建内存，
+而是需要用户额外提供输入与输出张量，即sail.Tensor 的实例。</p>
+<p>因此，在子线程中，我们根据从 engine 实例中获取的模型信息创建对应张量：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get handle to create input and output tensors</span>
+<span class="n">handle</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_handle</span><span class="p">()</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">sail</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">in_dtype</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">sail</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">output_shape</span><span class="p">,</span> <span class="n">out_dtype</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">input_tensors</span> <span class="o">=</span> <span class="p">{</span><span class="n">input_name</span><span class="p">:</span><span class="nb">input</span><span class="p">}</span>
+<span class="n">ouptut_tensors</span> <span class="o">=</span> <span class="p">{</span><span class="n">output_name</span><span class="p">:</span><span class="n">output</span><span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>而在模型推理时，也需要指定对应的张量，选择下面的重载函数即可：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">input_tensors</span><span class="p">,</span> <span class="n">ouptut_tensors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="case-2">
+<h2>Case 2: 多线程多模型<a class="headerlink" href="#case-2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>case 2 是 case 1 在模型数量上的扩展。
+在case 1 中，我们在每个线程中都是用同一个在主线程中加载的 bmodel 做推理。
+而在case 2 中，我们将会在 engine 中加载多个bmodel，如下是加载模型的子线程函数：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">thread_load</span><span class="p">(</span><span class="n">thread_id</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">bmodel_path</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot; Load a model in a thread.</span>
+
+<span class="sd">Args:</span>
+<span class="sd">  thread_id: ID of the thread.</span>
+<span class="sd">  engine: An sail.Engine instance.</span>
+<span class="sd">  bmodel_path: Path to bmodel.</span>
+
+<span class="sd">Returns:</span>
+<span class="sd">  None.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">bmodel_path</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="n">graph_name</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_graph_names</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Thread {} load {} successfully.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">thread_id</span><span class="p">,</span> <span class="n">graph_name</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>其它代码与 case 1 基本一致.</p>
+</div></blockquote>
+</div>
+<div class="section" id="case-3-tpu">
+<h2>Case 3: 多线程多 TPU 模式<a class="headerlink" href="#case-3-tpu" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>case 3 是 case 1 在 TPU 数量上的扩展。由于 engine 是与TPU 一一对应的。
+因此我们将对每个线程创建一个指定 tpu_id 的 engine，如下：</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># init Engine to load bmodel and allocate input and output tensors</span>
+<span class="c1"># one engine for one TPU</span>
+<span class="n">engines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="n">thread_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ARGS</span><span class="o">.</span><span class="n">tpu_id</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">thread_num</span><span class="p">):</span>
+  <span class="n">engines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sail</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">ARGS</span><span class="o">.</span><span class="n">bmodel</span><span class="p">,</span> <span class="n">ARGS</span><span class="o">.</span><span class="n">tpu_id</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sail</span><span class="o">.</span><span class="n">SYSIO</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>其它代码与 case 1 基本一致.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../2_ssd.html" class="btn btn-neutral float-right" title="使用SSD对图像和视频进行目标检测" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cpp.html" class="btn btn-neutral float-left" title="C++ 代码解析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sophon
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

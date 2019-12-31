@@ -80,30 +80,26 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/abstract.html">图解 Sophon Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/install.html">Sophon Inference 安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/reminds.html">注意事项</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="sail.html">SAIL</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">SAIL C++ API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#basic-function">Basic function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-type">Data type</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#handle">Handle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tensor">Tensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#iomode">IOMode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#engine">Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bmimage">BMImage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#decoder">Decoder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bmcv">Bmcv</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0_get_start.html">快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_demo.html">示例程序</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../2_module.html">API 参考</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sail.html">SAIL</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SAIL C++ API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-function">Basic function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-type">Data type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handle">Handle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tensor">Tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iomode">IOMode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#engine">Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bmimage">BMImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decoder">Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bmcv">Bmcv</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="sail_python.html">SAIL Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sail_python.html">SAIL Python API</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../demo/release_cpp.html">C++ Samples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../demo/release_python.html">Python Samples</a></li>
+</li>
 </ul>
 
             
@@ -149,6 +145,8 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
+          <li><a href="../2_module.html">API 参考</a> &raquo;</li>
+        
       <li>SAIL C++ API</li>
     
     
@@ -172,8 +170,9 @@
 <h1>SAIL C++ API<a class="headerlink" href="#sail-c-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="basic-function">
 <h2>Basic function<a class="headerlink" href="#basic-function" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). get_available_tpu_num</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/** @brief Get the number of available TPUs.</span>
+<dl class="docutils">
+<dt><strong>1). get_available_tpu_num</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/** @brief Get the number of available TPUs.</span>
 <span class="cm"> *</span>
 <span class="cm"> *  @return Number of available TPUs.</span>
 <span class="cm"> */</span>
@@ -185,8 +184,9 @@
 </div>
 <div class="section" id="data-type">
 <h2>Data type<a class="headerlink" href="#data-type" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). bm_data_type_t</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">bm_data_type_t</span> <span class="p">{</span>
+<dl class="docutils">
+<dt><strong>1). bm_data_type_t</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">bm_data_type_t</span> <span class="p">{</span>
   <span class="n">BM_FLOAT32</span><span class="p">,</span>     <span class="c1">// float32</span>
   <span class="n">BM_FLOAT16</span><span class="p">,</span>     <span class="c1">// not supported for now</span>
   <span class="n">BM_INT8</span><span class="p">,</span>        <span class="c1">// int8</span>
@@ -199,8 +199,9 @@
 </div>
 <div class="section" id="handle">
 <h2>Handle<a class="headerlink" href="#handle" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). Handle Constructor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dl class="docutils">
+<dt><strong>1). Handle Constructor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Constructor using existed bm_handle_t.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param handle A bm_handle_t</span>
@@ -216,7 +217,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>2). data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> *  @brief Get inner bm_handle_t.</span>
 <span class="cm"> *</span>
 <span class="cm"> *  @return Inner bm_handle_t</span>
@@ -229,8 +231,9 @@
 </div>
 <div class="section" id="tensor">
 <h2>Tensor<a class="headerlink" href="#tensor" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). Tensor Constructor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dl class="docutils">
+<dt><strong>1). Tensor Constructor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Common constructor.</span>
 <span class="cm"> * @detail</span>
 <span class="cm"> *  case 0: only allocate system memory</span>
@@ -261,7 +264,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). Tensor Assign Function</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>2). Tensor Assign Function</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Assignment function.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param tensor A Tensor instance</span>
@@ -271,7 +275,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). shape</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>3). shape</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get shape of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return Shape of the tensor</span>
@@ -280,7 +285,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>4). dtype</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>4). dtype</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get data type of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return Data type of the tensor</span>
@@ -289,7 +295,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>5). reshape</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>5). reshape</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Reset shape of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param shape Shape of the tensor</span>
@@ -298,7 +305,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>6). own_sys_data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>6). own_sys_data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Judge if the tensor owns data in system memory.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return True for owns data in system memory.</span>
@@ -307,7 +315,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>7). own_dev_data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>7). own_dev_data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Judge if the tensor owns data in device memory.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return True for owns data in device memory.</span>
@@ -316,7 +325,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>8). sys_data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>8). sys_data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get data pointer in system memory of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return Data pointer in system memory of the tensor</span>
@@ -325,7 +335,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>9). dev_data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>9). dev_data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get pointer to device memory of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return Pointer to device memory of the tensor</span>
@@ -334,7 +345,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>10). reset_sys_data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>10). reset_sys_data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Reset data pointer in system memory of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param data  Data pointer in system memory of the tensor</span>
@@ -346,7 +358,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>11). reset_dev_data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>11). reset_dev_data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Reset pointer to device memory of the tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param data Pointer to device memory</span>
@@ -355,7 +368,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>12). sync_s2d</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>12). sync_s2d</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Copy data from system memory to device memory.</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">sync_s2d</span><span class="p">();</span>
@@ -369,7 +383,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>13). sync_d2s</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>13). sync_d2s</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Copy data from device memory to system memory.</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">sync_d2s</span><span class="p">();</span>
@@ -383,7 +398,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>14). free</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>14). free</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Free system and device memroy of the tensor.</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">free</span><span class="p">();</span>
@@ -394,8 +410,9 @@
 </div>
 <div class="section" id="iomode">
 <h2>IOMode<a class="headerlink" href="#iomode" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). IOMode</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">IOMode</span> <span class="p">{</span>
+<dl class="docutils">
+<dt><strong>1). IOMode</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="n">IOMode</span> <span class="p">{</span>
   <span class="c1">/// Input tensors are in system memory while output tensors are</span>
   <span class="c1">/// in device memory.</span>
   <span class="n">SYSI</span><span class="p">,</span>
@@ -414,8 +431,9 @@
 </div>
 <div class="section" id="engine">
 <h2>Engine<a class="headerlink" href="#engine" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). Engine Constructor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dl class="docutils">
+<dt><strong>1). Engine Constructor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Constructor does not load bmodel.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param tpu_id TPU ID. You can use bm-smi to see available IDs.</span>
@@ -494,7 +512,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). Engine Assign Function</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>2). Engine Assign Function</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Assignment function.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param other An other Engine instance.</span>
@@ -504,7 +523,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). get_handle</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>3). get_handle</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get Handle instance.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return Handle instance</span>
@@ -513,7 +533,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>4). load</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>4). load</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Load bmodel from file.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param bmodel_path Path to bmodel</span>
@@ -536,7 +557,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>5). get_graph_names</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>5). get_graph_names</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get all graph names in the loaded bomodels.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return All graph names</span>
@@ -545,7 +567,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>6). set_io_mode</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>6). set_io_mode</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Set IOMode for a graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name The specified graph name</span>
@@ -557,7 +580,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>7). graph_is_dynamic</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>7). graph_is_dynamic</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Jugde if the graph is dynamic.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name The specified graph name</span>
@@ -567,7 +591,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>8). get_input_names</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>8). get_input_names</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get all input tensor names of the specified graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name The specified graph name</span>
@@ -577,7 +602,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>9). get_output_names</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>9). get_output_names</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get all output tensor names of the specified graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name The specified graph name</span>
@@ -587,7 +613,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>10). get_max_input_shapes</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>10). get_max_input_shapes</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get max shapes of input tensors in a graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * For static models, the max shape is fixed and it should not be changed.</span>
@@ -602,7 +629,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>11). get_input_shape</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>11). get_input_shape</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the shape of an input tensor in a graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -615,7 +643,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>12). get_max_output_shapes</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>12). get_max_output_shapes</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get max shapes of output tensors in a graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * For static models, the max shape is fixed and it should not be changed.</span>
@@ -630,7 +659,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>13). get_output_shape</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>13). get_output_shape</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the shape of an output tensor in a graph.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -643,7 +673,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>14). get_input_dtype</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>14). get_input_dtype</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get data type of an input tensor. Refer to bmdef.h as following.</span>
 <span class="cm"> *   typedef enum {</span>
 <span class="cm"> *     BM_FLOAT32 = 0,</span>
@@ -666,7 +697,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>15). get_output_dtype</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>15). get_output_dtype</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get data type of an output tensor. Refer to bmdef.h as following.</span>
 <span class="cm"> *   typedef enum {</span>
 <span class="cm"> *     BM_FLOAT32 = 0,</span>
@@ -689,7 +721,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>16). get_input_scale</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>16). get_input_scale</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get scale of an input tensor. Only used for int8 models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -702,7 +735,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>17). get_output_scale</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>17). get_output_scale</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get scale of an output tensor. Only used for int8 models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -715,7 +749,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>18). reshape</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>18). reshape</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Reshape input tensor for dynamic models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * The input tensor shapes may change when running dynamic models.</span>
@@ -731,7 +766,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>19). get_input_tensor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>19). get_input_tensor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the specified input tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -744,7 +780,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>20). get_output_tensor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>20). get_output_tensor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the specified output tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -757,7 +794,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>21). scale_input_tensor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>21). scale_input_tensor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Scale input tensor for int8 models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -771,7 +809,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>22). scale_output_tensor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>22). scale_output_tensor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Scale output tensor for int8 models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name  The specified graph name</span>
@@ -785,7 +824,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>23). scale_fp32_to_int8</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>23). scale_fp32_to_int8</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Scale data from float32 to int8. Only used for int8 models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param src   Poniter to float32 data</span>
@@ -797,7 +837,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>24). scale_int8_to_fp32</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>24). scale_int8_to_fp32</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Scale data from int8 to float32. Only used for int8 models.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param src   Poniter to int8 data</span>
@@ -809,7 +850,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>25). process</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>25). process</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Inference with builtin input and output tensors.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param graph_name The specified graph name</span>
@@ -860,8 +902,9 @@
 </div>
 <div class="section" id="bmimage">
 <h2>BMImage<a class="headerlink" href="#bmimage" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). BMImage Constructor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dl class="docutils">
+<dt><strong>1). BMImage Constructor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief The default Constructor.</span>
 <span class="cm"> */</span>
 <span class="n">BMImage</span><span class="p">();</span>
@@ -884,7 +927,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). data</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>2). data</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get inner bm_image</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return The inner bm_image</span>
@@ -893,7 +937,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). width</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>3). width</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the img width.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return the width of img</span>
@@ -902,7 +947,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>4). height</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>4). height</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the img height.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return the height of img</span>
@@ -911,7 +957,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>5). format</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>5). format</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get the img format.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return the format of img</span>
@@ -924,8 +971,9 @@
 </div>
 <div class="section" id="decoder">
 <h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). Decoder Constructor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dl class="docutils">
+<dt><strong>1). Decoder Constructor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Constructor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param file_path  Path or rtsp url to the video/image file.</span>
@@ -939,7 +987,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). is_opened</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>2). is_opened</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Judge if the source is opened successfully.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return True if the source is opened successfully</span>
@@ -948,7 +997,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). read</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>3). read</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Read a bm_image from the Decoder.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param handle A bm_handle_t instance</span>
@@ -972,8 +1022,9 @@
 </div>
 <div class="section" id="bmcv">
 <h2>Bmcv<a class="headerlink" href="#bmcv" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt><strong>1). Bmcv Constructor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dl class="docutils">
+<dt><strong>1). Bmcv Constructor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Constructor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param handle A Handle instance</span>
@@ -982,7 +1033,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>2). bm_image_to_tensor</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>2). bm_image_to_tensor</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Convert BMImage to tensor.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param img    Input image</span>
@@ -999,7 +1051,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>3). tensor_to_bm_image</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>3). tensor_to_bm_image</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Convert tensor to BMImage.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param tensor   Input tensor</span>
@@ -1016,7 +1069,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>4). crop_and_resize</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>4). crop_and_resize</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Crop then resize an image.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1062,7 +1116,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>5). crop</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>5). crop</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Crop an image with given window.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1100,7 +1155,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>6). resize</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>6). resize</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Resize an image with interpolation of INTER_NEAREST.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1130,7 +1186,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>7). vpp_crop_and_resize</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>7). vpp_crop_and_resize</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Crop then resize an image using vpp.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1176,7 +1233,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>8). vpp_crop</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>8). vpp_crop</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Crop an image with given window using vpp.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1214,7 +1272,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>9). vpp_resize</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>9). vpp_resize</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Resize an image with interpolation of INTER_NEAREST using vpp.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1244,7 +1303,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>10). warp</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>10). warp</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Applies an affine transformation to an image.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1274,7 +1334,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>11). convert_to</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>11). convert_to</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Applies a linear transformation to an image.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input        Input image</span>
@@ -1306,7 +1367,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>12). yuv2bgr</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>12). yuv2bgr</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Convert an image from YUV to BGR.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1327,7 +1389,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>13). vpp_convert</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>13). vpp_convert</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Convert an image to BGR PLANAR format using vpp.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1348,7 +1411,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>14). convert</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>14). convert</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Convert an image to BGR PLANAR format.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param input    Input image</span>
@@ -1369,7 +1433,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>15). rectangle</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>15). rectangle</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Draw a rectangle on input image.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param image      Input image</span>
@@ -1392,7 +1457,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>16). imwrite</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>16). imwrite</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Save the image to the specified file.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param filename   Name of the file</span>
@@ -1405,7 +1471,8 @@
 </pre></div>
 </div>
 </dd>
-<dt><strong>17). get_handle</strong></dt><dd><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<dt><strong>17). get_handle</strong></dt>
+<dd><div class="first last highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @brief Get Handle instance.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @return Handle instance</span>

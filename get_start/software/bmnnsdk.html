@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BMNNSDK &mdash; SophonInference  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sophon Inference" href="si.html" />
+    <link rel="prev" title="模型部署" href="deploy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> SophonInference
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../0_get_start.html">快速入门</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../0_hardware.html">算丰硬件产品概览</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../1_software.html">算丰软件产品概览</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deploy.html">模型部署</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">BMNNSDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="si.html">Sophon Inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html">软件安装指南</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../2_crash_course.html">小试牛刀：模型部署</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../1_demo.html">示例程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_module.html">API 参考</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SophonInference</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../0_get_start.html">快速入门</a> &raquo;</li>
+        
+          <li><a href="../1_software.html">算丰软件产品概览</a> &raquo;</li>
+        
+      <li>BMNNSDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/get_start/software/bmnnsdk.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bmnnsdk">
+<h1>BMNNSDK<a class="headerlink" href="#bmnnsdk" title="Permalink to this headline">¶</a></h1>
+<img alt="../../_images/sophon_inference.png" src="../../_images/sophon_inference.png" />
+<p>BMNNSDK 是比特大陆自研的软件包。
+上图中提及的所有软件模块都包含在 BMNNSDK 中，
+包括了 Quantization &amp; Calibration Tool, BMCompiler, BMDriver, BMLib, BMDecoder, BMCV, BMRuntime, Sophon Inference.</p>
+<p><strong>Quantization &amp; Calibration Tool</strong>
+:该模块可以将 FP32 精度的模型转换成 INT8 精度的模型</p>
+<p>在线文档: <a class="reference external" href="https://sophon-ai-algo.github.io/calibration_tools-doc/">https://sophon-ai-algo.github.io/calibration_tools-doc/</a></p>
+<p><strong>BMCompiler</strong>
+:目前包括了五种模型编译工具。其中，
+bmnett 可以将 tensorflow 下训练生成的模型编译成 fp32_bmodel。
+bmnetp 可以将 pytorch 下训练生成的模型编译成 fp32_bmodel。
+bmnetm 可以将 mxnet 下训练生成的模型编译成 fp32_bmodel。
+bmnetc 可以将 caffe 下训练生成的模型编译成 fp32_bmodel。
+bmnetu 可以将 Quantization &amp; Calibration Tool 下生成的 int8_umodel 编译成 int8_bmodel。</p>
+<p>在线文档: <a class="reference external" href="https://sophon-ai-algo.github.io/bmnnsdk-doc/">https://sophon-ai-algo.github.io/bmnnsdk-doc/</a></p>
+<p><strong>BMDriver</strong>
+:是算丰 TPU 的驱动程序，将会通过 insmod 的方式安装到系统内核中。</p>
+<p><strong>BMLib</strong>
+:提供了一些基础接口，用来控制 TPU 与主机的内存交互。</p>
+<p>在线文档: <a class="reference external" href="https://sophon-ai-algo.github.io/bmlib_1684-doc/">https://sophon-ai-algo.github.io/bmlib_1684-doc/</a></p>
+<p><strong>BMDecoder</strong>
+:提供了一些应用接口，用来驱动 TPU 上的硬件单元进行图像和视频的编解码。</p>
+<p>在线文档: <a class="reference external" href="https://sophon-ai-algo.github.io/bm_multimedia/">https://sophon-ai-algo.github.io/bm_multimedia/</a></p>
+<p><strong>BMCV</strong>
+:提供了一些应用接口，用来驱动 TPU 上的硬件单元进行张量计算和图像处理。</p>
+<p>在线文档: <a class="reference external" href="https://sophon-ai-algo.github.io/bmcv_1684-doc/">https://sophon-ai-algo.github.io/bmcv_1684-doc/</a></p>
+<p><strong>BMRuntime</strong>
+:提供了一些应用接口，用来驱动 TPU 加载 bmodel 并进行模型推理。</p>
+<p>在线文档: <a class="reference external" href="https://sophon-ai-algo.github.io/bmnnsdk-doc/">https://sophon-ai-algo.github.io/bmnnsdk-doc/</a></p>
+<p><strong>SAIL</strong>
+:提供了一些高级接口，主要是对 BMRuntime、BMCV、BMdecoder 等运行时模块的封装。</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="si.html" class="btn btn-neutral float-right" title="Sophon Inference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deploy.html" class="btn btn-neutral float-left" title="模型部署" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Sophon
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
